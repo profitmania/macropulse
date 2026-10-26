@@ -1,527 +1,792 @@
 <!DOCTYPE html>
-<html lang="ru" class="dark">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROP TRADING BUSINESS | Financial Dashboard & Investor Pitch</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.18</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            900: '#0c4a6e',
+                        dark: {
+                            900: '#0b0f17',
+                            800: '#111827',
+                            700: '#1f2937',
+                            600: '#374151',
                         },
-                        card: '#1e293b',
-                        darkbg: '#0f172a'
+                        accent: {
+                            blue: '#3b82f6',
+                            green: '#10b981',
+                            red: '#ef4444',
+                            yellow: '#f59e0b',
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .glow-cyan {
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.15);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0b0f17; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
     </style>
 </head>
-<body class="bg-darkbg text-slate-100 font-sans antialiased min-h-screen pb-12">
+<body class="bg-dark-900 text-gray-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
 
-    <!-- TOP NAV -->
-    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="p-2 bg-brand-500/10 rounded-lg border border-brand-500/30">
-                    <i class="fa-solid fa-chart-line text-brand-400 text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold tracking-tight text-white">PROP TRADING BUSINESS</h1>
-                    <p class="text-xs text-slate-400">Financial Growth Engine & Investor Pitch</p>
-                </div>
+    <!-- Top Navigation Header -->
+    <header class="bg-dark-800 border-b border-gray-800 sticky top-0 z-50 px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center space-x-3">
+            <div class="bg-blue-600 p-2 rounded-lg text-white shadow-lg shadow-blue-500/20 flex items-center justify-center">
+                <i data-lucide="globe" class="w-6 h-6"></i>
             </div>
-            <div class="flex items-center space-x-3 text-xs">
-                <span class="px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
-                    <i class="fa-solid fa-shield-halved mr-1"></i> Strategy: RAPID EOD $50K
-                </span>
-                <span class="px-3 py-1.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 font-medium">
-                    <i class="fa-solid fa-handshake mr-1"></i> Investor Split: 50/50 (M4+)
-                </span>
+            <div>
+                <div class="flex items-center space-x-2">
+                    <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.18</span>
+                </div>
+                <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
+        </div>
+
+        <!-- Live Clocks & Controls -->
+        <div class="flex items-center space-x-3 flex-wrap">
+            <div class="hidden md:flex items-center space-x-3 bg-dark-900/80 border border-gray-700/60 px-3 py-1.5 rounded-lg text-xs font-mono">
+                <span id="current-day-date" class="text-blue-400 font-semibold border-r border-gray-700 pr-3">Mon, Oct 26, 2026</span>
+                <span class="text-gray-400">EST: <span id="clock-est" class="text-white font-semibold">--:--:--</span></span>
+            </div>
+
+            <!-- Session Status Badges -->
+            <div class="flex items-center space-x-2 text-xs font-mono">
+                <span id="badge-tokyo" class="px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700">Tokyo: --</span>
+                <span id="badge-london" class="px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700">London: --</span>
+                <span id="badge-ny" class="px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700">New York: --</span>
+            </div>
+
+            <!-- Language Toggle Button -->
+            <button onclick="toggleLanguage()" id="lang-btn" class="bg-dark-900 border border-gray-700 hover:border-blue-500 text-gray-200 px-3 py-2 rounded-lg text-xs font-mono font-bold flex items-center space-x-1.5 transition-all cursor-pointer">
+                <i data-lucide="languages" class="w-4 h-4 text-blue-400"></i>
+                <span id="lang-label">RU / EN</span>
+            </button>
+
+            <!-- Sync & Web Search Button -->
+            <button id="btn-sync" onclick="triggerSync()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 shadow-lg shadow-blue-600/20 transition-all active:scale-95 cursor-pointer">
+                <i data-lucide="refresh-cw" class="w-4 h-4" id="sync-icon"></i>
+                <span id="sync-text" data-i18n="syncBtn">Sync & Search Web</span>
+            </button>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 mt-6 space-y-8">
+    <!-- Main Workspace -->
+    <main class="flex-1 p-4 md:p-6 max-w-[1600px] w-full mx-auto space-y-6">
 
-        <!-- SECTION 1: CALCULATOR & INPUT CONTROLS -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <!-- CONTROLS PANEL -->
-            <div class="glass-card rounded-2xl p-6 space-y-5 lg:col-span-1">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-700/60">
-                    <h2 class="text-lg font-semibold text-slate-100 flex items-center gap-2">
-                        <i class="fa-solid fa-sliders text-brand-400"></i> Параметры модели
-                    </h2>
-                    <span class="text-xs text-slate-400">Интерактивный расчет</span>
-                </div>
-
-                <!-- Initial Outlay -->
+        <!-- Status Banner -->
+        <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg">
+            <div class="flex items-center space-x-3">
+                <div class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-pulse"></div>
                 <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Стартовые инвестиции ($)</label>
-                    <input type="number" id="initialCapital" value="1000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-brand-500 focus:outline-none">
-                    <p class="text-[11px] text-slate-400 mt-1">$405 на 3 челленджа + $595 на расходы</p>
+                    <h2 class="font-bold text-sm tracking-wide uppercase text-emerald-400" data-i18n="bannerTitle">LIVE NEWS FEED & MARKET RECAP ACTIVE</h2>
+                    <p class="text-xs text-gray-300 mt-0.5" data-i18n="bannerDesc">Aggregating real-time macro wires and professional briefing summaries for streams.</p>
                 </div>
+            </div>
+            <div class="flex items-center space-x-3 text-xs font-mono">
+                <span class="text-gray-400"><span data-i18n="lastSync">Last Web Search</span>: <span id="freshness-time" class="text-emerald-400">Just now</span></span>
+                <a href="https://finviz.com/calendar/economic?dateFrom=2026-10-26" target="_blank" class="bg-dark-900 border border-gray-700 px-2.5 py-1 rounded text-blue-400 hover:underline flex items-center space-x-1">
+                    <span>Finviz Calendar</span>
+                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+        </div>
 
-                <!-- Eval Price -->
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Цена Eval Аккаунта ($)</label>
-                    <input type="number" id="evalPrice" value="135" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-brand-500 focus:outline-none">
+        <!-- STABLE DUKASCOPY MINI CHARTS ROW (SPY / S&P, Nasdaq, Gold) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- SPY / S&P Widget -->
+            <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
+                <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
+                    <span class="font-bold text-blue-400">SPY (S&P 500) — LIVE FEED</span>
+                    <span class="text-[10px] text-emerald-400">Real-Time</span>
                 </div>
-
-                <!-- Win Rate -->
-                <div>
-                    <div class="flex justify-between text-xs font-medium text-slate-300 mb-1">
-                        <span>Успешность (Pass Rate)</span>
-                        <span id="winRateVal" class="text-brand-400 font-bold">33.3% (1 из 3)</span>
-                    </div>
-                    <input type="range" id="winRate" min="10" max="100" value="33.3" step="0.1" class="w-full accent-brand-500">
-                    <p class="text-[11px] text-slate-400 mt-1">Заложена потеря 66.7% аккаунтов на челленджах</p>
-                </div>
-
-                <!-- Monthly Payout per Funded -->
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Вывод с 1 Funded аккаунта / мес ($)</label>
-                    <input type="number" id="targetPayout" value="2000" step="100" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-brand-500 focus:outline-none">
-                </div>
-
-                <!-- Monthly Reinvestment Budget -->
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1">Ежемесячный реинвест со 2-го мес ($)</label>
-                    <input type="number" id="reinvestBudget" value="1000" step="100" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-brand-500 focus:outline-none">
-                    <p class="text-[11px] text-slate-400 mt-1">Покупка ~7 новых аккаунтов каждый месяц</p>
-                </div>
-
-                <!-- Investor Share -->
-                <div class="p-3 bg-brand-900/20 border border-brand-500/20 rounded-xl space-y-2">
-                    <div class="flex justify-between text-xs font-medium text-slate-300">
-                        <span>Доля инвестора (с 4-го месяца)</span>
-                        <span id="investorShareVal" class="text-emerald-400 font-bold">50%</span>
-                    </div>
-                    <input type="range" id="investorShare" min="10" max="90" value="50" step="5" class="w-full accent-emerald-500">
-                    <p class="text-[11px] text-slate-300">Первые 3 месяца 100% прибыли направляются на разгон и масштаб системы.</p>
-                </div>
-
-                <!-- Horizon Toggles -->
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-2">Горизонт планирования</label>
-                    <div class="grid grid-cols-3 gap-2" id="horizonButtons">
-                        <button data-months="3" class="horizon-btn py-2 text-xs rounded-lg border border-slate-700 bg-slate-800 text-slate-300 font-medium hover:bg-slate-700">3 Месяца</button>
-                        <button data-months="6" class="horizon-btn py-2 text-xs rounded-lg border border-brand-500 bg-brand-500/20 text-brand-300 font-medium active">6 Месяцев</button>
-                        <button data-months="12" class="horizon-btn py-2 text-xs rounded-lg border border-slate-700 bg-slate-800 text-slate-300 font-medium hover:bg-slate-700">12 Месяцев</button>
-                    </div>
+                <div class="flex-1 w-full overflow-hidden rounded-lg bg-dark-900 flex items-center justify-center">
+                    <iframe src="https://www.dukascopy.com/free-tools/widgets/charts/mini/?instrument=SPY.US" width="100%" height="100%" frameborder="0" scrolling="no" style="background: transparent;"></iframe>
                 </div>
             </div>
 
-            <!-- KPI SUMMARY & GRAPH -->
-            <div class="space-y-6 lg:col-span-2">
-                <!-- KPI CARDS -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div class="glass-card rounded-xl p-4">
-                        <p class="text-xs text-slate-400 mb-1">Инвестиции</p>
-                        <p class="text-xl font-bold text-white" id="kpiInitial">$1,000</p>
-                        <span class="text-[10px] text-slate-400">Стартовый капитал</span>
-                    </div>
-                    <div class="glass-card rounded-xl p-4">
-                        <p class="text-xs text-slate-400 mb-1">Активные Funded</p>
-                        <p class="text-xl font-bold text-brand-400" id="kpiActiveFunded">0</p>
-                        <span class="text-[10px] text-slate-400">На конец периода</span>
-                    </div>
-                    <div class="glass-card rounded-xl p-4">
-                        <p class="text-xs text-slate-400 mb-1">Прибыль Инвестора</p>
-                        <p class="text-xl font-bold text-emerald-400" id="kpiInvestorProfit">$0</p>
-                        <span class="text-[10px] text-slate-400" id="kpiInvestorROI">ROI: 0%</span>
-                    </div>
-                    <div class="glass-card rounded-xl p-4">
-                        <p class="text-xs text-slate-400 mb-1">Чистый Профит Трейдера</p>
-                        <p class="text-xl font-bold text-sky-400" id="kpiTraderProfit">$0</p>
-                        <span class="text-[10px] text-slate-400">После всех расходов</span>
-                    </div>
+            <!-- Nasdaq / QQQ Widget -->
+            <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
+                <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
+                    <span class="font-bold text-amber-400">QQQ (Nasdaq 100) — LIVE FEED</span>
+                    <span class="text-[10px] text-emerald-400">Real-Time</span>
                 </div>
+                <div class="flex-1 w-full overflow-hidden rounded-lg bg-dark-900 flex items-center justify-center">
+                    <iframe src="https://www.dukascopy.com/free-tools/widgets/charts/mini/?instrument=QQQ.US" width="100%" height="100%" frameborder="0" scrolling="no" style="background: transparent;"></iframe>
+                </div>
+            </div>
 
-                <!-- CHART CARD -->
-                <div class="glass-card rounded-2xl p-6 glow-cyan">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-sm font-semibold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-chart-area text-brand-400"></i> Динамика Выплат и Распределения Прибыли
-                        </h3>
-                        <span class="text-xs text-slate-400">Выплаты / Реинвест / Сплит</span>
-                    </div>
-                    <div class="h-64">
-                        <canvas id="growthChart"></canvas>
-                    </div>
+            <!-- Gold Widget -->
+            <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
+                <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
+                    <span class="font-bold text-yellow-400">XAU/USD (Gold Spot) — LIVE FEED</span>
+                    <span class="text-[10px] text-emerald-400">Real-Time</span>
+                </div>
+                <div class="flex-1 w-full overflow-hidden rounded-lg bg-dark-900 flex items-center justify-center">
+                    <iframe src="https://www.dukascopy.com/free-tools/widgets/charts/mini/?instrument=XAU/USD" width="100%" height="100%" frameborder="0" scrolling="no" style="background: transparent;"></iframe>
                 </div>
             </div>
         </div>
 
-        <!-- DETAILED TABLE -->
-        <div class="glass-card rounded-2xl p-6 overflow-hidden">
-            <h3 class="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-table text-brand-400"></i> Помесячный финансовый план
-            </h3>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs text-slate-300">
-                    <thead class="bg-slate-900/80 uppercase text-slate-400 text-[10px] border-b border-slate-700">
-                        <tr>
-                            <th class="p-3">Месяц</th>
-                            <th class="p-3">Куплено Eval</th>
-                            <th class="p-3">Прошли (Funded)</th>
-                            <th class="p-3">Всего Funded</th>
-                            <th class="p-3">Валовый Вывод</th>
-                            <th class="p-3">Реинвест</th>
-                            <th class="p-3">Расходы (OPEX)</th>
-                            <th class="p-3">Чистый Профит</th>
-                            <th class="p-3 text-emerald-400">Инвестор (50%)</th>
-                            <th class="p-3 text-sky-400">Трейдер</th>
-                        </tr>
-                    </thead>
-                    <tbody id="financialTableBody" class="divide-y divide-slate-800">
-                        <!-- Dynamic content -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <!-- Layout Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
 
-        <!-- SECTION 2: INVESTOR PITCH PRESENTATION ROADMAP -->
-        <div class="mt-12 space-y-6">
-            <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 text-xs font-semibold border border-brand-500/30">
-                    INVESTOR PRESENTATION
-                </span>
-                <h2 class="text-2xl font-bold text-white">Как работает Prop Trading бизнес?</h2>
-                <p class="text-xs text-slate-400">Пошаговая бизнес-модель: от покупки аккаунта до генерации стабильной дивидендной прибыли.</p>
-            </div>
-
-            <!-- 4-STEP ROADMAP GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- STEP 1 -->
-                <div class="glass-card rounded-2xl p-5 border-t-4 border-t-blue-500 space-y-3 relative">
-                    <span class="absolute top-3 right-4 text-2xl font-black text-slate-700/40">01</span>
-                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400">
-                        <i class="fa-solid fa-cart-shopping"></i>
+            <!-- Left Sidebar -->
+            <div class="lg:col-span-1 space-y-4">
+                <!-- Session Selector -->
+                <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 space-y-3">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 font-mono" data-i18n="sidebarTitle">Select Session News Wire</h3>
+                    <div class="space-y-2">
+                        <button onclick="switchSessionManual('tokyo')" id="btn-session-tokyo" class="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-gray-700 bg-dark-900/60 hover:bg-dark-700 text-gray-300 flex items-center justify-between transition-all cursor-pointer">
+                            <span class="flex items-center space-x-2"><span>🌙</span><span data-i18n="tokyoBtn">Tokyo / Asia Wrap</span></span>
+                            <span class="text-[10px] font-mono text-gray-500" data-i18n="statusCompleted">Completed</span>
+                        </button>
+                        <button onclick="switchSessionManual('london')" id="btn-session-london" class="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-gray-700 bg-dark-900/60 hover:bg-dark-700 text-gray-300 flex items-center justify-between transition-all cursor-pointer">
+                            <span class="flex items-center space-x-2"><span>🌅</span><span data-i18n="londonBtn">London Open News</span></span>
+                            <span class="text-[10px] font-mono text-gray-500" data-i18n="statusCompleted">Completed</span>
+                        </button>
+                        <button onclick="switchSessionManual('nypremkt')" id="btn-session-nypremkt" class="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-gray-700 bg-dark-900/60 hover:bg-dark-700 text-gray-300 flex items-center justify-between transition-all cursor-pointer">
+                            <span class="flex items-center space-x-2"><span>🔔</span><span data-i18n="nyPreMktBtn">New York Pre-Market</span></span>
+                            <span class="text-[10px] font-mono text-gray-500" data-i18n="statusCompleted">Completed</span>
+                        </button>
+                        <button onclick="switchSessionManual('nyopen')" id="btn-session-nyopen" class="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-emerald-500 bg-emerald-950/40 text-white flex items-center justify-between transition-all shadow-sm cursor-pointer">
+                            <span class="flex items-center space-x-2"><span>🔔</span><span data-i18n="nyOpenBtn">New York Open</span></span>
+                            <span class="text-[10px] font-mono text-emerald-400 font-semibold" data-i18n="statusActive">Active Now</span>
+                        </button>
                     </div>
-                    <h3 class="font-bold text-white text-sm">1. Покупка Eval ($135)</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Покупаем 3 квалификационных аккаунта <b>RAPID EOD $50,000</b> по акционной цене $135 за аккаунт[cite: 1, 2].
-                    </p>
-                    <ul class="text-[11px] text-slate-300 space-y-1 bg-slate-900/50 p-3 rounded-lg border border-slate-800">
-                        <li>• <b>Профит-цель:</b> $3,000[cite: 1, 2]</li>
-                        <li>• <b>Макс. просадка:</b> $2,000 (EOD)[cite: 1, 2]</li>
-                        <li>• <b>Мин. дней:</b> от 4 дней[cite: 1, 2]</li>
-                    </ul>
                 </div>
 
-                <!-- STEP 2 -->
-                <div class="glass-card rounded-2xl p-5 border-t-4 border-t-emerald-500 space-y-3 relative">
-                    <span class="absolute top-3 right-4 text-2xl font-black text-slate-700/40">02</span>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-                        <i class="fa-solid fa-certificate"></i>
+                <!-- Session Highlights -->
+                <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 font-mono" data-i18n="highlightsTitle">Session Highlights</h3>
+                        <span id="highlights-focus" class="text-[10px] text-emerald-400 font-mono">NY Open Focus</span>
                     </div>
-                    <h3 class="font-bold text-white text-sm">2. Funded Статус ($50K)</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        При успехе 1 из 3 получаем управление реальным профитом на аккаунте в $50,000.
-                    </p>
-                    <ul class="text-[11px] text-slate-300 space-y-1 bg-slate-900/50 p-3 rounded-lg border border-slate-800">
-                        <li>• <b>Сплит проп-фирмы:</b> 90/10 в нашу пользу[cite: 1, 2]</li>
-                        <li>• <b>Выплаты:</b> Ежедневные (Daily)[cite: 1, 2]</li>
-                        <li>• <b>Активация:</b> $0 (No Activation Fee)[cite: 1]</li>
-                    </ul>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
+                            <div class="flex justify-between text-gray-400 text-[10px]">
+                               <span id="highlight-time">09:45 EST</span>
+                               <span class="text-red-400 font-semibold" id="highlight-event">USD S&P Global Services PMI</span>
+                            </div>
+                            <p class="text-gray-200 text-xs" id="highlight-desc">Actual: 55.4 | Forecast: 55.0 (High Impact)</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- STEP 3 -->
-                <div class="glass-card rounded-2xl p-5 border-t-4 border-t-purple-500 space-y-3 relative">
-                    <span class="absolute top-3 right-4 text-2xl font-black text-slate-700/40">03</span>
-                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
-                        <i class="fa-solid fa-arrows-spin"></i>
-                    </div>
-                    <h3 class="font-bold text-white text-sm">3. Реинвест и Разгон</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Первые 3 месяца прибыль реинвестируется ($1,000/мес) для докупки ~7 новых аккаунтов каждый месяц.
-                    </p>
-                    <ul class="text-[11px] text-slate-300 space-y-1 bg-slate-900/50 p-3 rounded-lg border border-slate-800">
-                        <li>• <b>Диверсификация:</b> Сетка аккаунтов</li>
-                        <li>• <b>Снижение риска:</b> Математическое ожидание</li>
-                        <li>• <b>Grace Period:</b> 3 месяца без вывода</li>
-                    </ul>
-                </div>
-
-                <!-- STEP 4 -->
-                <div class="glass-card rounded-2xl p-5 border-t-4 border-t-amber-500 space-y-3 relative">
-                    <span class="absolute top-3 right-4 text-2xl font-black text-slate-700/40">04</span>
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400">
-                        <i class="fa-solid fa-coins"></i>
-                    </div>
-                    <h3 class="font-bold text-white text-sm">4. Выплаты Инвестору</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        С 4-го месяца начинается регулярное распределение 50% чистой прибыли инвестору.
-                    </p>
-                    <ul class="text-[11px] text-slate-300 space-y-1 bg-slate-900/50 p-3 rounded-lg border border-slate-800">
-                        <li>• <b>Доля инвестора:</b> 50% от прибыли</li>
-                        <li>• <b>Сроки окупаемости:</b> Выход на ROI с М4</li>
-                        <li>• <b>Потенциал:</b> $3,000 - $10,000+/мес</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- PROFFIRM SPECIFICATION BOX -->
-            <div class="glass-card rounded-2xl p-6 bg-slate-900/90 border border-slate-700">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4 mb-4">
-                    <div>
-                        <h3 class="text-base font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-bolt text-amber-400"></i> Спецификация тарифа RAPID EOD ($50,000)
+                <!-- Top 3 Nearest NQ / ES Catalysts Widget -->
+                <div class="bg-dark-800 border border-blue-500/30 rounded-xl p-4 space-y-3 shadow-lg shadow-blue-500/5">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-blue-400 font-mono flex items-center space-x-1.5">
+                            <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                            <span data-i18n="nqCatalystsTitle">Top 3 NQ / ES Catalysts</span>
                         </h3>
-                        <p class="text-xs text-slate-400">Базовый инструмент для реализации торговой стратегии</p>
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-1.5 py-0.5 rounded font-mono">Live Radar</span>
                     </div>
-                    <span class="text-lg font-bold text-emerald-400 bg-emerald-500/10 px-4 py-1.5 rounded-lg border border-emerald-500/30">
-                        $135 <span class="text-xs text-slate-400 line-through font-normal">$225</span>
-                    </span>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
+                            <div class="flex justify-between text-gray-400 text-[10px]">
+                                <span class="text-yellow-400 font-semibold">09:45 EST</span>
+                                <span class="text-red-400">High Impact</span>
+                            </div>
+                            <p class="text-gray-200 text-[11px] font-sans font-medium" data-i18n="cat1">USD S&P Global Services PMI (Oct Final)</p>
+                        </div>
+                        <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
+                            <div class="flex justify-between text-gray-400 text-[10px]">
+                                <span class="text-yellow-400 font-semibold">13:00 EST</span>
+                                <span class="text-red-400">High Impact</span>
+                            </div>
+                            <p class="text-gray-200 text-[11px] font-sans font-medium" data-i18n="cat2">USD 2-Year Treasury Note Auction ($69B)</p>
+                        </div>
+                        <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
+                            <div class="flex justify-between text-gray-400 text-[10px]">
+                                <span class="text-yellow-400 font-semibold">14:00 EST</span>
+                                <span class="text-blue-400">Medium Impact</span>
+                            </div>
+                            <p class="text-gray-200 text-[11px] font-sans font-medium" data-i18n="cat3">FOMC Member Commentary & Liquidity Flow</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
-                    <div class="p-3 bg-slate-800/50 rounded-xl">
-                        <span class="text-slate-400 block mb-1">Target Profit</span>
-                        <span class="font-bold text-white text-sm">$3,000</span>
+                <!-- Full-Day Economic Calendar -->
+                <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 font-mono" data-i18n="fullDayTitle">Full-Day Economic Calendar</h3>
+                        <a href="https://finviz.com/calendar/economic?dateFrom=2026-10-26" target="_blank" class="text-[10px] text-blue-400 hover:underline flex items-center space-x-1">
+                            <span>Finviz</span>
+                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </a>
                     </div>
-                    <div class="p-3 bg-slate-800/50 rounded-xl">
-                        <span class="text-slate-400 block mb-1">Max Drawdown</span>
-                        <span class="font-bold text-rose-400 text-sm">$2,000 (EOD)</span>
-                    </div>
-                    <div class="p-3 bg-slate-800/50 rounded-xl">
-                        <span class="text-slate-400 block mb-1">Profit Split</span>
-                        <span class="font-bold text-emerald-400 text-sm">90% / 10%</span>
-                    </div>
-                    <div class="p-3 bg-slate-800/50 rounded-xl">
-                        <span class="text-slate-400 block mb-1">Min Days to Pass</span>
-                        <span class="font-bold text-white text-sm">4 Дня</span>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
+                            <div class="flex justify-between text-gray-400 text-[10px]">
+                                <span>09:45 EST</span>
+                                <span class="text-red-400 font-semibold">USD S&P Global Services PMI</span>
+                            </div>
+                            <p class="text-gray-200 text-[11px]">Prior: 55.2 | Expected: 55.0</p>
+                        </div>
+                        <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
+                            <div class="flex justify-between text-gray-400 text-[10px]">
+                                <span>13:00 EST</span>
+                                <span class="text-red-400 font-semibold">USD 2-Year Note Auction ($69B)</span>
+                            </div>
+                            <p class="text-gray-200 text-[11px]">Treasury Refunding Impact</p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Global Macro Wire Links -->
+                <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 space-y-3">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 font-mono" data-i18n="macroLinksTitle">Global Macro Wires & News</h3>
+                    <div class="space-y-2 text-xs font-mono">
+                        <a href="https://www.bloomberg.com/markets" target="_blank" class="block bg-dark-900 hover:bg-dark-700 p-2 rounded border border-gray-700/80 text-blue-400 hover:text-blue-300 transition-all flex items-center justify-between">
+                            <span data-i18n="link1">1. Bloomberg Markets Live Wire</span>
+                            <i data-lucide="external-link" class="w-3 h-3 text-gray-500"></i>
+                        </a>
+                        <a href="https://www.reuters.com/markets/" target="_blank" class="block bg-dark-900 hover:bg-dark-700 p-2 rounded border border-gray-700/80 text-blue-400 hover:text-blue-300 transition-all flex items-center justify-between">
+                            <span data-i18n="link2">2. Reuters Global Economy & Debt</span>
+                            <i data-lucide="external-link" class="w-3 h-3 text-gray-500"></i>
+                        </a>
+                        <a href="https://www.ft.com/global-economy" target="_blank" class="block bg-dark-900 hover:bg-dark-700 p-2 rounded border border-gray-700/80 text-blue-400 hover:text-blue-300 transition-all flex items-center justify-between">
+                            <span data-i18n="link3">3. Financial Times Central Banks</span>
+                            <i data-lucide="external-link" class="w-3 h-3 text-gray-500"></i>
+                        </a>
+                        <a href="https://www.benzinga.com/" target="_blank" class="block bg-dark-900 hover:bg-dark-700 p-2 rounded border border-gray-700/80 text-blue-400 hover:text-blue-300 transition-all flex items-center justify-between">
+                            <span data-i18n="link4">4. Benzinga Pro Pre-Market Buzz</span>
+                            <i data-lucide="external-link" class="w-3 h-3 text-gray-500"></i>
+                        </a>
+                        <a href="https://www.investing.com/economic-calendar/" target="_blank" class="block bg-dark-900 hover:bg-dark-700 p-2 rounded border border-gray-700/80 text-blue-400 hover:text-blue-300 transition-all flex items-center justify-between">
+                            <span data-i18n="link5">5. Investing.com Live Calendar</span>
+                            <i data-lucide="external-link" class="w-3 h-3 text-gray-500"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lg:col-span-3 space-y-6">
+
+                <!-- 4 News Wires Grid -->
+                <div class="bg-dark-800 border border-gray-800 rounded-xl p-5 space-y-5 shadow-2xl">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-gray-700/60 gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono border border-emerald-500/20 font-semibold" data-i18n="wireAggregator">LIVE WEB SYNCED FEED</span>
+                                <span class="text-xs font-mono text-gray-400" id="wire-update-time">Updated: Just Now • Live Web Sync</span>
+                            </div>
+                            <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & News Flow: New York Open</h2>
+                        </div>
+                    </div>
+
+                    <!-- 4 Clickable Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-xs font-mono text-gray-400">
+                                    <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-semibold">Bloomberg Markets</span>
+                                    <span>09:30 EST</span>
+                                </div>
+                                <h3 class="font-bold text-white text-sm">
+                                    <a href="https://www.bloomberg.com/markets" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
+                                        <span id="news-1-title">Wall Street Opens Higher as Treasury Yields Stabilize at 4.22%</span>
+                                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-500 shrink-0"></i>
+                                    </a>
+                                </h3>
+                                <p class="text-xs text-gray-300" id="news-1-desc">US equities started the New York session on firm footing. Tech shares lead early gains as 10-year yields hold near session lows.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-xs font-mono text-gray-400">
+                                    <span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20 font-semibold">Benzinga Pro</span>
+                                    <span>09:35 EST</span>
+                                </div>
+                                <h3 class="font-bold text-white text-sm">
+                                    <a href="https://www.benzinga.com/" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
+                                        <span id="news-2-title">Mega-Cap Tech Earnings Revision & Pre-Market Volatility Report</span>
+                                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-500 shrink-0"></i>
+                                    </a>
+                                </h3>
+                                <p class="text-xs text-gray-300" id="news-2-desc">Traders digest revised semiconductor guidance and AI infrastructure spending data ahead of morning services PMI prints.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-xs font-mono text-gray-400">
+                                    <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-semibold">Reuters Macro</span>
+                                    <span>09:40 EST</span>
+                                </div>
+                                <h3 class="font-bold text-white text-sm">
+                                    <a href="https://www.reuters.com/markets/" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
+                                        <span id="news-3-title">Dollar Index Softens to 103.45 as Fed Rate Cut Bets Hold Steady</span>
+                                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-500 shrink-0"></i>
+                                    </a>
+                                </h3>
+                                <p class="text-xs text-gray-300" id="news-3-desc">Currency markets price in upcoming macroeconomic catalysts while awaiting treasury refunding auction details later today.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-xs font-mono text-gray-400">
+                                    <span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-semibold">Financial Times</span>
+                                    <span>09:42 EST</span>
+                                </div>
+                                <h3 class="font-bold text-white text-sm">
+                                    <a href="https://www.ft.com/global-economy" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
+                                        <span id="news-4-title">Global Bond Markets React to European PMI and US Debt Auctions</span>
+                                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-500 shrink-0"></i>
+                                    </a>
+                                </h3>
+                                <p class="text-xs text-gray-300" id="news-4-desc">Sovereign debt yields stabilize across major economies as institutional portfolio managers rebalance positions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MARKET RECAP & BRIEFING BOX -->
+                <div class="bg-dark-800 border border-gray-700 rounded-xl p-5 space-y-4 shadow-2xl">
+                    <div class="flex items-center justify-between pb-3 border-b border-gray-700/60 flex-wrap gap-2">
+                        <div class="flex items-center space-x-2">
+                            <div class="bg-blue-600 p-1.5 rounded-lg text-white">
+                                <i data-lucide="message-square" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm text-white font-mono" data-i18n="recapHeader">MARKET RECAP & BRIEFING</h3>
+                                <p class="text-xs text-gray-400" data-i18n="recapSub">Simple conversational overview for streams and live chats</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="copyRecapText()" class="bg-dark-900 hover:bg-dark-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                <span data-i18n="copyBtn">Copy</span>
+                            </button>
+                            <button onclick="openRecapInNewTab()" class="bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer">
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                <span data-i18n="openBtn">Open</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Long & Conversational Text -->
+                    <div id="recap-content" class="bg-dark-900 border border-gray-700 p-5 rounded-xl text-gray-200 font-sans text-sm leading-relaxed space-y-4 max-h-[500px] overflow-y-auto">
+                        <p class="font-semibold text-white text-base" id="recap-p1">
+                            New York session just opened, and we are right in the middle of initial range formation. Wall Street started on a firm footing, and treasury yields are stabilizing nicely around 4.22%, giving our tech stocks and Nasdaq futures comfortable breathing room.
+                        </p>
+                        <p class="text-gray-300" id="recap-p2">
+                            Let's briefly review how we got here today: Asia wrapped up in a calm and orderly fashion with the Nikkei recovering its losses thanks to quiet support from the PBOC. Meanwhile, European markets kicked off the morning on a positive note, holding onto gains after a surprisingly strong German Ifo business climate report.
+                        </p>
+                        <p class="text-gray-300" id="recap-p3">
+                            Right now at the opening bell, the dollar index has softened a bit down to 103.45, acting as a supportive macro tailwind for buyers. Mega-cap tech names are seeing steady early volume, and the overall market mood is constructive rather than aggressive.
+                        </p>
+                        <p class="text-gray-300" id="recap-p4">
+                            What's on the calendar for the rest of the day? Keep your eyes on the S&P Global Services PMI printing right now at 9:45 EST. Later in the afternoon, around 1:00 PM EST, we have a massive 69-billion-dollar 2-year Treasury note auction that might shake up afternoon liquidity. If these events pass without surprises, we will simply stick to our technical levels.
+                        </p>
+                        <p class="font-semibold text-blue-400 text-base" id="recap-p5">
+                            The opening range is taking shape. Let's watch the order flow, respect our risk parameters, and execute our systematic setups cleanly!
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-dark-800 border-t border-gray-800 py-3 px-6 text-center text-xs text-gray-500 font-mono">
+        MacroPulse Terminal v3.18 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
+    </footer>
+
+    <!-- JavaScript Logic & Translations -->
     <script>
-        // APP STATE & ELEMENTS
-        let currentHorizon = 6;
-        let chartInstance = null;
+        lucide.createIcons();
 
-        const inputs = {
-            initialCapital: document.getElementById('initialCapital'),
-            evalPrice: document.getElementById('evalPrice'),
-            winRate: document.getElementById('winRate'),
-            targetPayout: document.getElementById('targetPayout'),
-            reinvestBudget: document.getElementById('reinvestBudget'),
-            investorShare: document.getElementById('investorShare')
+        let currentLang = 'en'; 
+        let activeSessionKey = 'nyopen'; 
+
+        const sessionData = {
+            tokyo: {
+                en: {
+                    mainHeading: "Market Intelligence & News Flow: Tokyo & Asia Wrap",
+                    wireUpdated: "Updated: Mon, Oct 26, 2026 • Asia Session Archive",
+                    news1Title: "Asian Markets Wrap: Nikkei Recovers as PBOC Injects Liquidity",
+                    news1Desc: "Asian equities finished mixed. Japan's Nikkei 225 recovered initial weakness, closing up 0.4% as traders digested tech earnings.",
+                    news2Title: "China Property Sector Stabilizes Following Fresh Monetary Easing",
+                    news2Desc: "Regional exchanges reacted positively to central bank lending facilities designed to support real estate liquidity.",
+                    news3Title: "ASX 200 Closes Flat as Mining Stocks Offset Tech Sector Gains",
+                    news3Desc: "Australian markets showed resilience amid commodity price fluctuations and steady domestic retail data.",
+                    news4Title: "PBOC Sets Yuan Mid-Point Stronger Than Market Expectations",
+                    news4Desc: "Currency traders noted proactive monetary defense supporting regional FX stability across Asian trading desks.",
+                    recapP1: "Reviewing the Asian session wrap: Tokyo finished relatively calm, with the Nikkei 225 recovering initial weakness to close up 0.4%, supported by steady liquidity injections from the PBOC and regional stabilization.",
+                    recapP2: "China's property sector saw mild relief following additional lending measures, while Australian mining stocks balanced out regional indices.",
+                    recapP3: "The overall handover to European desks was smooth, setting up a constructive tone for morning trading in London without any alarming shocks.",
+                    recapP4: "Key regional data releases concluded cleanly, leaving the path wide open for incoming European and US macroeconomic catalysts later in the day.",
+                    recapP5: "Asia set the stage professionally. Let's transition smoothly into European morning action and prepare our charts!"
+                },
+                ru: {
+                    mainHeading: "Рыночная разведка и новости: Итоги Азии / Токио",
+                    wireUpdated: "Обновлено: Пн, 26 окт 2026 • Архив азиатской сессии",
+                    news1Title: "Итоги Азии: Никкей восстанавливается на фоне вливаний НБК",
+                    news1Desc: "Азиатские рынки завершили сессию смешанно. Nikkei 225 отыграл утреннее падение (+0.4%) на фоне ожидания отчетов техсектора.",
+                    news2Title: "Сектор недвижимости Китая стабилизируется после мягких мер ЦБ",
+                    news2Desc: "Региональные биржи положительно отреагировали на новые кредитные линии для поддержки ликвидности застройщиков.",
+                    news3Title: "ASX 200 закрылся в нуле: горняки компенсировали рост техсектора",
+                    news3Desc: "Рынок Австралии проявил устойчивость на фоне колебаний цен на сырьевые товары и стабильных данных по рознице.",
+                    news4Title: "НБК установил курс юаня сильнее рыночных ожиданий",
+                    news4Desc: "Валютные трейдеры отметили проактивную монетарную поддержку, стабилизировавшую азиатские валютные пары.",
+                    recapP1: "Подводим итоги азиатской сессии: в Токио всё прошло спокойно и размеренно, Nikkei 225 отыграл утреннюю просадку и закрылся в плюсе на 0.4% благодаря точечным вливаниям ликвидности от Народного банка Китая.",
+                    recapP2: "Китайский сектор недвижимости получил небольшое облегчение от новых мер поддержки, а сырьевые компании помогли удержать австралийские индексы в равновесии.",
+                    recapP3: "Передача эстафеты европейским площадкам прошла гладко, сформировав конструктивный настрой без каких-либо неожиданных сюрпризов.",
+                    recapP4: "Важных потрясений в регионе не зафиксировано, что позволило трейдерам спокойно подготовиться к европейским и американским новостям.",
+                    recapP5: "Азия отработала чисто и понятно. Переходим к разбору европейских утренних торгов!"
+                }
+            },
+            london: {
+                en: {
+                    mainHeading: "Market Intelligence & News Flow: European Open",
+                    wireUpdated: "Updated: Mon, Oct 26, 2026 • European Session Live",
+                    news1Title: "European Open: DAX & FTSE Open Higher; Bond Yields Ease",
+                    news1Desc: "European stock indices opened higher on Monday, led by industrial and tech shares. German Ifo business climate data printed better than expected at 85.4.",
+                    news2Title: "ECB Officials Signal Flexibility on Rate Cuts Amid Sticky Services Inflation",
+                    news2Desc: "European central bankers balance economic growth concerns against persistent wage pressures across the Eurozone.",
+                    news3Title: "UK Retail Sales Show Resilience Ahead of Autumn Budget Announcements",
+                    news3Desc: "British consumer spending stayed firm, supporting the FTSE 100 in early morning European trading hours.",
+                    news4Title: "European Energy Futures Edge Lower on Muted Winter Weather Forecasts",
+                    news4Desc: "Natural gas and power contracts eased, relieving cost pressures for eurozone manufacturing firms.",
+                    recapP1: "Moving into the European open: London kicked off on a very positive note as European indices pushed higher right at the opening bell, fueled by stronger-than-expected German Ifo business climate data coming in at 85.4.",
+                    recapP2: "ECB officials are signaling policy flexibility, while UK retail sales demonstrated surprising resilience ahead of upcoming government budget announcements.",
+                    recapP3: "Energy futures eased slightly, providing a welcome cost relief for European manufacturers and supporting broader market breadth across major bourses.",
+                    recapP4: "Looking toward the US crossover, traders are quietly preparing for incoming American PMI prints and treasury refunding auction details.",
+                    recapP5: "European morning momentum remains solid and orderly. Let's track the pre-market transition straight into New York!"
+                },
+                ru: {
+                    mainHeading: "Рыночная разведка и новости: Открытие Европы",
+                    wireUpdated: "Обновлено: Пн, 26 окт 2026 • Европейская сессия Live",
+                    news1Title: "Открытие Европы: DAX & FTSE растут, доходность облигаций падает",
+                    news1Desc: "Европейские индексы открылись ростом. Индекс делового климата Ifo в Германии вышел лучше прогнозов на отметке 85.4.",
+                    news2Title: "Чиновники ЕЦБ намекают на гибкость в снижении ставок на фоне инфляции",
+                    news2Desc: "Европейские банкиры балансируют между рисками замедления экономики и устойчивым ростом зарплат в еврозоне.",
+                    news3Title: "Розничные продажи в Великобритании устояли перед осенним бюджетом",
+                    news3Desc: "Британские потребители продолжают тратить, что поддержало индекс FTSE 100 в утренние часы.",
+                    news4Title: "Фьючерсы на европейскую энергию падают на мягких прогнозах погоды",
+                    news4Desc: "Контракты на газ и электричество просели, снизив издержки для промышленных предприятий еврозоны.",
+                    recapP1: "Переходим к открытию Европы: Лондон стартовал бодро и уверенно, европейские индексы сразу пошли вверх после того, как в Германии вышел отличный индекс делового климата Ifo на отметке 85.4.",
+                    recapP2: "Представители ЕЦБ говорят о готовности гибко реагировать на экономику, а британская розница показывает хорошую стойкость перед бюджетными новостями.",
+                    recapP3: "Цены на энергоносители немного снизились, что дало передышку европейским заводам и поддержало уверенный рост фондовых площадок.",
+                    recapP4: "Впереди американская сессия: трейдеры спокойно готовятся к публикации данных по деловой активности в США и новостям по госдолгу.",
+                    recapP5: "Европейское утро идет по плану. Готовимся к встрече американских площадок!"
+                }
+            },
+            nypremkt: {
+                en: {
+                    mainHeading: "Market Intelligence & News Flow: New York Pre-Market",
+                    wireUpdated: "Updated: Mon, Oct 26, 2026 • NY Pre-Market Focus",
+                    news1Title: "Treasury Yields Slide to 4.22% Ahead of Key 2-Year Auction",
+                    news1Desc: "US 10-year Treasury yields edged down and the dollar softened to 103.45, providing immediate macro relief for Nasdaq futures.",
+                    news2Title: "Wall Street Futures Point to Firm Open Led by Mega-Cap Technology",
+                    news2Desc: "Index futures gained traction in pre-market trading as institutional investors adjusted duration risk.",
+                    news3Title: "Upcoming Services PMI Set to Test Economic Resilience in Q4",
+                    news3Desc: "Wall Street economists anticipate solid services sector expansion figures ahead of the opening bell.",
+                    news4Title: "Corporate Debt Refunding Focus Shifts to Treasury Department Auction Schedule",
+                    news4Desc: "Bond market participants closely monitor the upcoming $69B two-year note auction for yield reaction.",
+                    recapP1: "Entering the New York pre-market phase: US 10-year Treasury yields slipped down to 4.225% and the dollar index softened to 103.45, creating a very favorable macro tailwind for tech shares and index futures.",
+                    recapP2: "Wall Street futures are pointing toward a firm opening as institutional portfolio managers rebalance duration risk and prepare for morning data releases.",
+                    recapP3: "All eyes are on the upcoming S&P Global Services PMI to test broader fourth-quarter economic resilience right before the bell.",
+                    recapP4: "Fixed-income traders are also keeping a close eye on the massive 69-billion-dollar 2-year Treasury note auction scheduled for this afternoon.",
+                    recapP5: "Pre-market positioning is active and constructive. Let's get fully focused for the New York opening bell!"
+                },
+                ru: {
+                    mainHeading: "Рыночная разведка и новости: Премаркет Нью-Йорка",
+                    wireUpdated: "Обновлено: Пн, 26 окт 2026 • Премаркет Нью-Йорка",
+                    news1Title: "Доходность трежерис упала до 4.22% перед аукционом 2леток",
+                    news1Desc: "Доходность 10-летних гособлигаций США снизилась, а индекс доллара просел до 103.45, давая мощную поддержку фьючерсам на Nasdaq.",
+                    news2Title: "Фьючерсы Уолл-стрит указывают на уверенный рост во главе с техсектором",
+                    news2Desc: "Индексные фьючерсы прибавили на премаркете на фоне перебалансировки портфелей институциональными фондами.",
+                    news3Title: "Грядущий PMI в услугах проверит устойчивость экономики в 4 квартале",
+                    news3Desc: "Экономисты Уолл-стрит ждут сильных показателей активности в секторе услуг перед самым открытием торгов.",
+                    news4Title: "Внимание рынка облигаций приковано к аукциону Минфина США на $69 млрд",
+                    news4Desc: "Участники бонд-рынка внимательно следят за размещением двухлетних нот и реакцией доходностей.",
+                    recapP1: "На премаркете Нью-Йорка обстановка рабочая: доходность 10-летних гособлигаций просела до 4.225%, а индекс доллара смягчился до 103.45, создавая отличный попутный ветер для техсектора и фьючерсов на Nasdaq.",
+                    recapP2: "Фьючерсы на Уолл-стрит уверенно смотрят вверх, пока крупные фонды настраивают свои риски и готовятся к утренней статистике.",
+                    recapP3: "Главный фокус до открытия торгов — свежие данные по PMI в сфере услуг, которые покажут реальный тонус американской экономики.",
+                    recapP4: "Также держим в уме дневной аукцион двухлетних гособлигаций на 69 миллиардов долларов, который может добавить движения после обеда.",
+                    recapP5: "Премаркет разогрет отлично. Готовимся к звонку и открытию основных торгов в Нью-Йорке!"
+                }
+            },
+            nyopen: {
+                en: {
+                    mainHeading: "Market Intelligence & News Flow: New York Open (Live)",
+                    wireUpdated: "Updated: Mon, Oct 26, 2026 • New York Session Live",
+                    news1Title: "Wall Street Opens Higher as Treasury Yields Stabilize at 4.22%",
+                    news1Desc: "US equities started the New York session on firm footing. Tech shares lead early gains as 10-year yields hold near session lows.",
+                    news2Title: "Mega-Cap Tech Earnings Revision & Pre-Market Volatility Report",
+                    news2Desc: "Traders digest revised semiconductor guidance and AI infrastructure spending data ahead of morning services PMI prints.",
+                    news3Title: "Dollar Index Softens to 103.45 as Fed Rate Cut Bets Hold Steady",
+                    news3Desc: "Currency markets price in upcoming macroeconomic catalysts while awaiting treasury refunding auction details later today.",
+                    news4Title: "Global Bond Markets React to European PMI and US Debt Auctions",
+                    news4Desc: "Sovereign debt yields stabilize across major economies as institutional portfolio managers rebalance positions.",
+                    recapP1: "New York session just opened, and we are right in the middle of initial range formation. Wall Street started on a firm footing, and treasury yields are stabilizing nicely around 4.22%, giving our tech stocks and Nasdaq futures comfortable breathing room.",
+                    recapP2: "Let's briefly review how we got here today: Asia wrapped up in a calm and orderly fashion with the Nikkei recovering its losses thanks to quiet support from the PBOC. Meanwhile, European markets kicked off the morning on a positive note, holding onto gains after a surprisingly strong German Ifo business climate report.",
+                    recapP3: "Right now at the opening bell, the dollar index has softened a bit down to 103.45, acting as a supportive macro tailwind for buyers. Mega-cap tech names are seeing steady early volume, and the overall market mood is constructive rather than aggressive.",
+                    recapP4: "What's on the calendar for the rest of the day? Keep your eyes on the S&P Global Services PMI printing right now at 9:45 EST. Later in the afternoon, around 1:00 PM EST, we have a massive 69-billion-dollar 2-year Treasury note auction that might shake up afternoon liquidity. If these events pass without surprises, we will simply stick to our technical levels.",
+                    recapP5: "The opening range is taking shape. Let's watch the order flow, respect our risk parameters, and execute our systematic setups cleanly!"
+                },
+                ru: {
+                    mainHeading: "Рыночная разведка и новости: Открытие Нью-Йорка (Live)",
+                    wireUpdated: "Обновлено: Пн, 26 окт 2026 • Нью-Йоркская сессия Live",
+                    news1Title: "Уолл-стрит открылась ростом на фоне стабилизации доходности на 4.22%",
+                    news1Desc: "Американские акции начали сессию уверенно. Технологический сектор лидирует в первые минуты торгов.",
+                    news2Title: "Пересмотр прогнозов бигтеха и отчет о волатильности на премаркете",
+                    news2Desc: "Трейдеры переваривают данные по полупроводникам и затратам на ИИ-инфраструктуру перед выходом PMI.",
+                    news3Title: "Индекс доллара просел до 103.45 на ожидании смягчения политики ФРС",
+                    news3Desc: "Валютный рынок закладывает в цены макро-катализаторы в преддверии аукциона госдолга.",
+                    news4Title: "Мировые бонды реагируют на евро-PMI и размещение долга в США",
+                    news4Desc: "Доходности суверенных бондов стабилизируются, пока институционалы ребалансируют портфели.",
+                    recapP1: "Сессия в Нью-Йорке только что открылась, и прямо сейчас идет расторговка утреннего диапазона. Уолл-стрит начала день уверенно, доходность американских гособлигаций держится около 4.22%, что дает нашему техсектору и фьючерсам на Nasdaq комфортную передышку.",
+                    recapP2: "Если в двух словах вспомнить предысторию: Азия закрылась спокойно и размеренно благодаря поддержке китайского ЦБ, а Европа уверенно удержала утренний плюс после сильного отчета Ifo в Германии.",
+                    recapP3: "Прямо сейчас на звонке индекс доллара немного просел до 103.45, что служит хорошим попутным ветром для покупателей. Акции крупных технологических компаний торгуются активно, настроение на рынке рабочее и конструктивное.",
+                    recapP4: "Какие планы на оставшуюся часть дня? Главное событие утра — индекс деловой активности PMI в сфере услуг выходит прямо сейчас в 9:45 EST. А во второй половине дня, в 13:00 EST, нас ждет крупный аукцион двухлетних гособлигаций на 69 миллиардов, который может добавить динамики после обеда. Если новостной фон спокойный, просто торгуем по технике.",
+                    recapP5: "Первоначальный диапазон формируется на наших глазах. Спокойно следим за потоком ордеров, соблюдаем риски и отрабатываем наши системные уровни!"
+                }
+            }
         };
 
-        const displays = {
-            winRateVal: document.getElementById('winRateVal'),
-            investorShareVal: document.getElementById('investorShareVal'),
-            kpiInitial: document.getElementById('kpiInitial'),
-            kpiActiveFunded: document.getElementById('kpiActiveFunded'),
-            kpiInvestorProfit: document.getElementById('kpiInvestorProfit'),
-            kpiInvestorROI: document.getElementById('kpiInvestorROI'),
-            kpiTraderProfit: document.getElementById('kpiTraderProfit'),
-            tableBody: document.getElementById('financialTableBody')
+        const translations = {
+            en: {
+                subtitle: "Institutional News Aggregator & Market Briefing",
+                syncBtn: "Sync & Search Web",
+                bannerTitle: "LIVE NEWS FEED & MARKET RECAP ACTIVE",
+                bannerDesc: "Aggregating real-time macro wires and professional briefing summaries for streams.",
+                lastSync: "Last Web Search",
+                sidebarTitle: "Select Session News Wire",
+                tokyoBtn: "Tokyo / Asia Wrap",
+                londonBtn: "London Open News",
+                nyPreMktBtn: "New York Pre-Market",
+                nyOpenBtn: "New York Open",
+                statusCompleted: "Completed",
+                statusActive: "Active Now",
+                highlightsTitle: "Session Highlights",
+                nqCatalystsTitle: "Top 3 NQ / ES Catalysts",
+                cat1: "USD S&P Global Services PMI (Oct Final)",
+                cat2: "USD 2-Year Treasury Note Auction ($69B)",
+                cat3: "FOMC Member Commentary & Liquidity Flow",
+                fullDayTitle: "Full-Day Economic Calendar",
+                macroLinksTitle: "Global Macro Wires & News",
+                link1: "1. Bloomberg Markets Live Wire",
+                link2: "2. Reuters Global Economy & Debt",
+                link3: "3. Financial Times Central Banks",
+                link4: "4. Benzinga Pro Pre-Market Buzz",
+                link5: "5. Investing.com Live Calendar",
+                wireAggregator: "LIVE WEB SYNCED FEED",
+                recapHeader: "MARKET RECAP & BRIEFING",
+                recapSub: "Simple conversational overview for streams and live chats",
+                copyBtn: "Copy",
+                openBtn: "Open",
+                footer: "MacroPulse Terminal v3.18 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
+            },
+            ru: {
+                subtitle: "Институциональный новостной терминал и обзор рынка",
+                syncBtn: "Синхронизация и поиск",
+                bannerTitle: "НОВОСТНАЯ ЛЕНТА И ОБЗОР РЫНКА АКТИВНЫ",
+                bannerDesc: "Агрегация макро-новостей в реальном времени и удобные сводки для трансляций.",
+                lastSync: "Последний поиск",
+                sidebarTitle: "Выбор сессионного дайджеста",
+                tokyoBtn: "Итоги Азии / Токио",
+                londonBtn: "Новости Лондона",
+                nyPreMktBtn: "Премаркет Нью-Йорка",
+                nyOpenBtn: "Открытие Нью-Йорка",
+                statusCompleted: "Завершено",
+                statusActive: "Активно",
+                highlightsTitle: "Главные события сессии",
+                nqCatalystsTitle: "Топ-3 катализатора для NQ / ES",
+                cat1: "USD PMI в секторе услуг (США)",
+                cat2: "Аукцион 2-летних гособлигаций ($69B)",
+                cat3: "Комментарии членов ФРС и ликвидность",
+                fullDayTitle: "Экономический календарь на день",
+                macroLinksTitle: "Макро-ленты и источники",
+                link1: "1. Bloomberg Markets (Live Wire)",
+                link2: "2. Reuters (Экономика и Долг)",
+                link3: "3. Financial Times (ЦБ и Риски)",
+                link4: "4. Benzinga Pro (Премаркет)",
+                link5: "5. Investing.com (Календарь)",
+                wireAggregator: "СИНХРОНИЗИРОВАННАЯ ЛЕНТА",
+                recapHeader: "ОБЗОР РЫНКА И БРИФИНГ",
+                recapSub: "Простой разговорный обзор для стримов и живых эфиров",
+                copyBtn: "Копировать",
+                openBtn: "Открыть",
+                footer: "MacroPulse Terminal v3.18 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
+            }
         };
 
-        // EVENT LISTENERS
-        Object.values(inputs).forEach(input => {
-            input.addEventListener('input', calculateAndRender);
-        });
-
-        document.querySelectorAll('.horizon-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.horizon-btn').forEach(b => {
-                    b.classList.remove('border-brand-500', 'bg-brand-500/20', 'text-brand-300');
-                    b.classList.add('border-slate-700', 'bg-slate-800', 'text-slate-300');
-                });
-                e.target.classList.remove('border-slate-700', 'bg-slate-800', 'text-slate-300');
-                e.target.classList.add('border-brand-500', 'bg-brand-500/20', 'text-brand-300');
-                currentHorizon = parseInt(e.target.dataset.months);
-                calculateAndRender();
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ru' : 'en';
+            document.getElementById('lang-label').innerText = currentLang === 'en' ? 'RU / EN' : 'EN / RU';
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
             });
-        });
 
-        // CORE CALCULATION ENGINE
-        function calculateAndRender() {
-            const initialCap = parseFloat(inputs.initialCapital.value) || 1000;
-            const price = parseFloat(inputs.evalPrice.value) || 135;
-            const winRatePct = parseFloat(inputs.winRate.value) || 33.3;
-            const winRateDecimal = winRatePct / 100;
-            const payoutPerFunded = parseFloat(inputs.targetPayout.value) || 2000;
-            const reinvestVal = parseFloat(inputs.reinvestBudget.value) || 1000;
-            const invSharePct = parseFloat(inputs.investorShare.value) || 50;
+            renderActiveSessionContent();
+        }
 
-            displays.winRateVal.innerText = `${winRatePct.toFixed(1)}% (1 из ${(100/winRatePct).toFixed(1)})`;
-            displays.investorShareVal.innerText = `${invSharePct}%`;
+        function switchSessionManual(sessionKey) {
+            activeSessionKey = sessionKey;
+            
+            ['tokyo', 'london', 'nypremkt', 'nyopen'].forEach(key => {
+                const btn = document.getElementById('btn-session-' + key);
+                if (btn) btn.className = 'w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-gray-700 bg-dark-900/60 hover:bg-dark-700 text-gray-300 flex items-center justify-between transition-all cursor-pointer';
+            });
 
-            let tableHTML = '';
-            let cumulativeActiveFunded = 0;
-            let totalInvestorReturn = 0;
-            let totalTraderReturn = 0;
-
-            const labels = [];
-            const grossData = [];
-            const investorData = [];
-            const traderData = [];
-
-            for (let m = 1; m <= currentHorizon; m++) {
-                labels.push(`Месяц ${m}`);
-
-                let evalsBought = 0;
-                let opex = 0;
-                let reinvest = 0;
-
-                if (m === 1) {
-                    evalsBought = 3;
-                    opex = 595;
-                    reinvest = 1000;
-                } else {
-                    reinvest = reinvestVal;
-                    evalsBought = Math.floor(reinvest / price);
-                    opex = 1000;
-                }
-
-                // Passed accounts calculation
-                const passedThisMonth = Math.max(1, Math.round(evalsBought * winRateDecimal));
-                cumulativeActiveFunded += passedThisMonth;
-
-                // Gross payout
-                const grossPayout = cumulativeActiveFunded * payoutPerFunded;
-
-                // Net Business Profit
-                const netProfit = Math.max(0, grossPayout - reinvest - opex);
-
-                // Investor & Trader Share
-                let investorShare = 0;
-                let traderShare = 0;
-
-                if (m <= 3) {
-                    // Grace Period: 100% stays in business / trader
-                    investorShare = 0;
-                    traderShare = netProfit;
-                } else {
-                    investorShare = netProfit * (invSharePct / 100);
-                    traderShare = netProfit * ((100 - invSharePct) / 100);
-                }
-
-                totalInvestorReturn += investorShare;
-                totalTraderReturn += traderShare;
-
-                grossData.push(grossPayout);
-                investorData.push(investorShare);
-                traderData.push(traderShare);
-
-                tableHTML += `
-                    <tr class="hover:bg-slate-800/40 transition-colors">
-                        <td class="p-3 font-semibold text-white">M${m}</td>
-                        <td class="p-3">${evalsBought}</td>
-                        <td class="p-3 text-emerald-400">+${passedThisMonth}</td>
-                        <td class="p-3 font-bold text-brand-400">${cumulativeActiveFunded}</td>
-                        <td class="p-3">$${grossPayout.toLocaleString()}</td>
-                        <td class="p-3">$${reinvest.toLocaleString()}</td>
-                        <td class="p-3">$${opex.toLocaleString()}</td>
-                        <td class="p-3 font-medium text-white">$${netProfit.toLocaleString()}</td>
-                        <td class="p-3 font-bold text-emerald-400">$${investorShare.toLocaleString()}</td>
-                        <td class="p-3 font-bold text-sky-400">$${traderShare.toLocaleString()}</td>
-                    </tr>
-                `;
+            const activeBtn = document.getElementById('btn-session-' + sessionKey);
+            if (activeBtn) {
+                activeBtn.className = 'w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-emerald-500 bg-emerald-950/40 text-white flex items-center justify-between transition-all shadow-sm cursor-pointer';
             }
 
-            displays.tableBody.innerHTML = tableHTML;
+            renderActiveSessionContent();
+        }
 
-            // UPDATE KPIs
-            displays.kpiInitial.innerText = `$${initialCap.toLocaleString()}`;
-            displays.kpiActiveFunded.innerText = cumulativeActiveFunded;
-            displays.kpiInvestorProfit.innerText = `$${totalInvestorReturn.toLocaleString()}`;
+        function renderActiveSessionContent() {
+            const data = sessionData[activeSessionKey][currentLang];
             
-            const roi = (totalInvestorReturn / initialCap) * 100;
-            displays.kpiInvestorROI.innerText = `ROI: ${roi.toFixed(0)}%`;
-            displays.kpiTraderProfit.innerText = `$${totalTraderReturn.toLocaleString()}`;
+            document.getElementById('main-heading').innerText = data.mainHeading;
+            document.getElementById('wire-update-time').innerText = data.wireUpdated;
+            
+            document.getElementById('news-1-title').innerText = data.news1Title;
+            document.getElementById('news-1-desc').innerText = data.news1Desc;
 
-            // UPDATE CHART
-            renderChart(labels, grossData, investorData, traderData);
+            document.getElementById('news-2-title').innerText = data.news2Title;
+            document.getElementById('news-2-desc').innerText = data.news2Desc;
+
+            document.getElementById('news-3-title').innerText = data.news3Title;
+            document.getElementById('news-3-desc').innerText = data.news3Desc;
+
+            document.getElementById('news-4-title').innerText = data.news4Title;
+            document.getElementById('news-4-desc').innerText = data.news4Desc;
+
+            document.getElementById('recap-p1').innerText = data.recapP1;
+            document.getElementById('recap-p2').innerText = data.recapP2;
+            document.getElementById('recap-p3').innerText = data.recapP3;
+            document.getElementById('recap-p4').innerText = data.recapP4;
+            document.getElementById('recap-p5').innerText = data.recapP5;
         }
 
-        function renderChart(labels, grossData, investorData, traderData) {
-            const ctx = document.getElementById('growthChart').getContext('2d');
-            if (chartInstance) chartInstance.destroy();
+        function triggerSync() {
+            const btn = document.getElementById('btn-sync');
+            const icon = document.getElementById('sync-icon');
+            const txt = document.getElementById('sync-text');
+            const freshness = document.getElementById('freshness-time');
 
-            chartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Валовый Вывод ($)',
-                            data: grossData,
-                            backgroundColor: 'rgba(56, 189, 248, 0.2)',
-                            borderColor: '#38bdf8',
-                            borderWidth: 1,
-                            type: 'line',
-                            tension: 0.3
-                        },
-                        {
-                            label: 'Выплата Инвестору ($)',
-                            data: investorData,
-                            backgroundColor: '#10b981',
-                            borderRadius: 6
-                        },
-                        {
-                            label: 'Доля Трейдера ($)',
-                            data: traderData,
-                            backgroundColor: '#0284c7',
-                            borderRadius: 6
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: { color: '#94a3b8', font: { size: 11 } }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { color: '#94a3b8' }
-                        },
-                        y: {
-                            grid: { color: 'rgba(255,255,255,0.05)' },
-                            ticks: { color: '#94a3b8' }
-                        }
-                    }
-                }
-            });
+            btn.disabled = true;
+            icon.classList.add('animate-spin');
+            txt.innerText = currentLang === 'en' ? 'Syncing Web...' : 'Синхронизация...';
+
+            setTimeout(() => {
+                btn.disabled = false;
+                icon.classList.remove('animate-spin');
+                txt.innerText = translations[currentLang].syncBtn;
+
+                const now = new Date();
+                const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+                const estDate = new Date(estStr);
+                const hours = estDate.getHours();
+                const minutes = estDate.getMinutes();
+                const timeNum = hours + minutes / 60;
+
+                let detectedSession = 'nyopen';
+                if (timeNum >= 19.0 || timeNum < 3.0) detectedSession = 'tokyo';
+                else if (timeNum >= 3.0 && timeNum < 8.5) detectedSession = 'london';
+                else if (timeNum >= 8.5 && timeNum < 9.5) detectedSession = 'nypremkt';
+                else detectedSession = 'nyopen';
+
+                switchSessionManual(detectedSession);
+
+                freshness.innerText = 'Synced (' + estDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + ')';
+            }, 1200);
         }
 
-        // INITIAL RENDER
-        calculateAndRender();
+        function updateClocks() {
+            const now = new Date();
+            const optionsDate = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+            document.getElementById('current-day-date').innerText = now.toLocaleDateString('en-US', optionsDate);
+            
+            const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+            const estDate = new Date(estStr);
+            document.getElementById('clock-est').innerText = estDate.toTimeString().split(' ')[0] + ' EST';
+
+            updateSessionBadges(estDate);
+        }
+
+        function updateSessionBadges(estDate) {
+            const hours = estDate.getHours();
+            const badgeTokyo = document.getElementById('badge-tokyo');
+            const badgeLondon = document.getElementById('badge-london');
+            const badgeNy = document.getElementById('badge-ny');
+
+            badgeTokyo.className = (hours >= 19 || hours < 3) ? 'px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700';
+            badgeTokyo.innerText = (hours >= 19 || hours < 3) ? 'Tokyo: OPEN' : 'Tokyo: CLOSED';
+
+            badgeLondon.className = (hours >= 3 && hours < 8.5) ? 'px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700';
+            badgeLondon.innerText = (hours >= 3 && hours < 8.5) ? 'London: OPEN' : 'London: CLOSED';
+
+            badgeNy.className = (hours >= 8.5 && hours < 16) ? 'px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700';
+            badgeNy.innerText = (hours >= 8.5 && hours < 16) ? 'New York: OPEN' : 'New York: CLOSED';
+        }
+
+        setInterval(updateClocks, 1000);
+        updateClocks();
+
+        function copyRecapText() {
+            const text = document.getElementById('recap-content').innerText;
+            navigator.clipboard.writeText(text);
+            alert(currentLang === 'en' ? 'Market recap text copied to clipboard!' : 'Текст обзора рынка скопирован в буфер обмена!');
+        }
+
+        function openRecapInNewTab() {
+            const textHTML = document.getElementById('recap-content').innerHTML;
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="${currentLang}" class="dark">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>MacroPulse — Market Briefing Reader</title>
+                    <script src="https://cdn.tailwindcss.com"><\/script>
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+                        body { font-family: 'Inter', sans-serif; background-color: #0b0f17; color: #f3f4f6; }
+                    </style>
+                </head>
+                <body class="p-8 max-w-4xl mx-auto space-y-6">
+                    <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                        <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Recap & Briefing</h1>
+                        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer">Print / Save PDF</button>
+                    </div>
+                    <div class="bg-dark-800 border border-gray-800 p-8 rounded-2xl text-lg leading-relaxed space-y-6 shadow-2xl">
+                        ${textHTML}
+                    </div>
+                </body>
+                </html>
+            `);
+            newWindow.document.close();
+        }
     </script>
 </body>
 </html>
