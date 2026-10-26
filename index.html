@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.18</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.19</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -50,7 +50,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.18</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.19</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -105,38 +105,83 @@
             </div>
         </div>
 
-        <!-- STABLE DUKASCOPY MINI CHARTS ROW (SPY / S&P, Nasdaq, Gold) -->
+        <!-- STABLE TRADINGVIEW MINI CHARTS ROW (SPY, QQQ, Gold) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- SPY / S&P Widget -->
+            <!-- SPY Chart Widget -->
             <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
                 <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
-                    <span class="font-bold text-blue-400">SPY (S&P 500) — LIVE FEED</span>
-                    <span class="text-[10px] text-emerald-400">Real-Time</span>
+                    <span class="font-bold text-blue-400">SPY (S&P 500 ETF) — LIVE</span>
+                    <span class="text-[10px] text-emerald-400">1D Chart</span>
                 </div>
-                <div class="flex-1 w-full overflow-hidden rounded-lg bg-dark-900 flex items-center justify-center">
-                    <iframe src="https://www.dukascopy.com/free-tools/widgets/charts/mini/?instrument=SPY.US" width="100%" height="100%" frameborder="0" scrolling="no" style="background: transparent;"></iframe>
+                <div class="tradingview-widget-container flex-1 w-full">
+                    <div class="tradingview-widget-container__widget h-full"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                    {
+                    "symbol": "AMEX:SPY",
+                    "width": "100%",
+                    "height": "100%",
+                    "locale": "en",
+                    "dateRange": "1D",
+                    "colorTheme": "dark",
+                    "trendLineColor": "#3b82f6",
+                    "underLineColor": "rgba(59, 130, 246, 0.1)",
+                    "underLineBottomColor": "rgba(59, 130, 246, 0)",
+                    "isTransparent": true,
+                    "autosize": true
+                    }
+                    </script>
                 </div>
             </div>
 
-            <!-- Nasdaq / QQQ Widget -->
+            <!-- QQQ Chart Widget -->
             <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
                 <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
-                    <span class="font-bold text-amber-400">QQQ (Nasdaq 100) — LIVE FEED</span>
-                    <span class="text-[10px] text-emerald-400">Real-Time</span>
+                    <span class="font-bold text-amber-400">QQQ (Nasdaq 100) — LIVE</span>
+                    <span class="text-[10px] text-emerald-400">1D Chart</span>
                 </div>
-                <div class="flex-1 w-full overflow-hidden rounded-lg bg-dark-900 flex items-center justify-center">
-                    <iframe src="https://www.dukascopy.com/free-tools/widgets/charts/mini/?instrument=QQQ.US" width="100%" height="100%" frameborder="0" scrolling="no" style="background: transparent;"></iframe>
+                <div class="tradingview-widget-container flex-1 w-full">
+                    <div class="tradingview-widget-container__widget h-full"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                    {
+                    "symbol": "NASDAQ:QQQ",
+                    "width": "100%",
+                    "height": "100%",
+                    "locale": "en",
+                    "dateRange": "1D",
+                    "colorTheme": "dark",
+                    "trendLineColor": "#f59e0b",
+                    "underLineColor": "rgba(245, 158, 11, 0.1)",
+                    "underLineBottomColor": "rgba(245, 158, 11, 0)",
+                    "isTransparent": true,
+                    "autosize": true
+                    }
+                    </script>
                 </div>
             </div>
 
-            <!-- Gold Widget -->
+            <!-- Gold (XAUUSD) Chart Widget -->
             <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
                 <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
-                    <span class="font-bold text-yellow-400">XAU/USD (Gold Spot) — LIVE FEED</span>
-                    <span class="text-[10px] text-emerald-400">Real-Time</span>
+                    <span class="font-bold text-yellow-400">XAUUSD (Gold Spot) — LIVE</span>
+                    <span class="text-[10px] text-emerald-400">1D Chart</span>
                 </div>
-                <div class="flex-1 w-full overflow-hidden rounded-lg bg-dark-900 flex items-center justify-center">
-                    <iframe src="https://www.dukascopy.com/free-tools/widgets/charts/mini/?instrument=XAU/USD" width="100%" height="100%" frameborder="0" scrolling="no" style="background: transparent;"></iframe>
+                <div class="tradingview-widget-container flex-1 w-full">
+                    <div class="tradingview-widget-container__widget h-full"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                    {
+                    "symbol": "OANDA:XAUUSD",
+                    "width": "100%",
+                    "height": "100%",
+                    "locale": "en",
+                    "dateRange": "1D",
+                    "colorTheme": "dark",
+                    "trendLineColor": "#eab308",
+                    "underLineColor": "rgba(234, 179, 8, 0.1)",
+                    "underLineBottomColor": "rgba(234, 179, 8, 0)",
+                    "isTransparent": true,
+                    "autosize": true
+                    }
+                    </script>
                 </div>
             </div>
         </div>
@@ -409,7 +454,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark-800 border-t border-gray-800 py-3 px-6 text-center text-xs text-gray-500 font-mono">
-        MacroPulse Terminal v3.18 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
+        MacroPulse Terminal v3.19 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
     </footer>
 
     <!-- JavaScript Logic & Translations -->
@@ -489,7 +534,7 @@
                     recapP2: "Представители ЕЦБ говорят о готовности гибко реагировать на экономику, а британская розница показывает хорошую стойкость перед бюджетными новостями.",
                     recapP3: "Цены на энергоносители немного снизились, что дало передышку европейским заводам и поддержало уверенный рост фондовых площадок.",
                     recapP4: "Впереди американская сессия: трейдеры спокойно готовятся к публикации данных по деловой активности в США и новостям по госдолгу.",
-                    recapP5: "Европейское утро идет по плану. Готовимся к встрече американских площадок!"
+                    recapP5: "Европейское утро идет по плану. Готовимся к встрече европейских площадок!"
                 }
             },
             nypremkt: {
@@ -597,7 +642,7 @@
                 recapSub: "Simple conversational overview for streams and live chats",
                 copyBtn: "Copy",
                 openBtn: "Open",
-                footer: "MacroPulse Terminal v3.18 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.19 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
             },
             ru: {
                 subtitle: "Институциональный новостной терминал и обзор рынка",
@@ -629,7 +674,7 @@
                 recapSub: "Простой разговорный обзор для стримов и живых эфиров",
                 copyBtn: "Копировать",
                 openBtn: "Открыть",
-                footer: "MacroPulse Terminal v3.18 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.19 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
             }
         };
 
@@ -727,7 +772,7 @@
             const optionsDate = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
             document.getElementById('current-day-date').innerText = now.toLocaleDateString('en-US', optionsDate);
             
-            const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+            5const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
             const estDate = new Date(estStr);
             document.getElementById('clock-est').innerText = estDate.toTimeString().split(' ')[0] + ' EST';
 
