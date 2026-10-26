@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.22</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.23</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -50,7 +50,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.22</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.23</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -218,15 +218,15 @@
                 <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 space-y-3">
                     <div class="flex items-center justify-between">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 font-mono" data-i18n="highlightsTitle">Session Highlights</h3>
-                        <span id="highlights-focus" class="text-[10px] text-emerald-400 font-mono">NY Mid-Session</span>
+                        <span id="highlights-focus" class="text-[10px] text-emerald-400 font-mono">NY Live Feed</span>
                     </div>
                     <div class="space-y-2 text-xs font-mono">
                         <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
                             <div class="flex justify-between text-gray-400 text-[10px]">
-                               <span id="highlight-time">10:45 EST</span>
-                               <span class="text-emerald-400 font-semibold" id="highlight-event">Initial Range Formed</span>
+                               <span id="highlight-time">11:00 EST</span>
+                               <span class="text-emerald-400 font-semibold" id="highlight-event">Mid-Session Action</span>
                             </div>
-                            <p class="text-gray-200 text-xs" id="highlight-desc">NQ holds above VWAP | S&P tests 765 handle</p>
+                            <p class="text-gray-200 text-xs" id="highlight-desc">NQ holds above VWAP | S&P tests highs</p>
                         </div>
                     </div>
                 </div>
@@ -243,10 +243,10 @@
                     <div class="space-y-2 text-xs font-mono">
                         <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
                             <div class="flex justify-between text-gray-400 text-[10px]">
-                                <span class="text-yellow-400 font-semibold">11:15 EST</span>
-                                <span class="text-blue-400">Mid-Day Liquidity</span>
+                                <span class="text-yellow-400 font-semibold">11:30 EST</span>
+                                <span class="text-blue-400">Order Flow</span>
                             </div>
-                            <p class="text-gray-200 text-[11px] font-sans font-medium" data-i18n="cat1">Order Flow Absorption at Opening Range High</p>
+                            <p class="text-gray-200 text-[11px] font-sans font-medium" data-i18n="cat1">Liquidity Absorption at Range High</p>
                         </div>
                         <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
                             <div class="flex justify-between text-gray-400 text-[10px]">
@@ -331,7 +331,7 @@
                                 <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono border border-emerald-500/20 font-semibold" data-i18n="wireAggregator">LIVE WEB SYNCED FEED</span>
                                 <span class="text-xs font-mono text-gray-400" id="wire-update-time">Updated: Just Now • Live Web Sync</span>
                             </div>
-                            <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & News Flow: New York Open</h2>
+                            <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & News Flow: New York Live</h2>
                         </div>
                     </div>
 
@@ -341,7 +341,7 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-xs font-mono text-gray-400">
                                     <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-semibold">Bloomberg Markets</span>
-                                    <span id="news-1-time">10:42 EST</span>
+                                    <span id="news-1-time">10:55 EST</span>
                                 </div>
                                 <h3 class="font-bold text-white text-sm">
                                     <a href="https://www.bloomberg.com/markets" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
@@ -357,7 +357,7 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-xs font-mono text-gray-400">
                                     <span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20 font-semibold">Benzinga Pro</span>
-                                    <span id="news-2-time">10:48 EST</span>
+                                    <span id="news-2-time">10:57 EST</span>
                                 </div>
                                 <h3 class="font-bold text-white text-sm">
                                     <a href="https://www.benzinga.com/" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
@@ -373,7 +373,7 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-xs font-mono text-gray-400">
                                     <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-semibold">Reuters Macro</span>
-                                    <span id="news-3-time">10:52 EST</span>
+                                    <span id="news-3-time">10:58 EST</span>
                                 </div>
                                 <h3 class="font-bold text-white text-sm">
                                     <a href="https://www.reuters.com/markets/" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
@@ -389,7 +389,7 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-xs font-mono text-gray-400">
                                     <span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-semibold">Financial Times</span>
-                                    <span id="news-4-time">10:55 EST</span>
+                                    <span id="news-4-time">11:00 EST</span>
                                 </div>
                                 <h3 class="font-bold text-white text-sm">
                                     <a href="https://www.ft.com/global-economy" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
@@ -430,7 +430,7 @@
                     <!-- Long & Conversational Text -->
                     <div id="recap-content" class="bg-dark-900 border border-gray-700 p-5 rounded-xl text-gray-200 font-sans text-sm leading-relaxed space-y-4 max-h-[500px] overflow-y-auto">
                         <p class="font-semibold text-white text-base" id="recap-p1">
-                            We are now moving deep into the mid-morning session. Initial opening ranges have fully formed, and tech-heavy Nasdaq futures alongside S&P are maintaining a strong bid following this morning's stellar S&P Global Services PMI print at 55.4.
+                            Live sync active: We are now moving deep into the mid-morning session. Initial opening ranges have fully formed, and tech-heavy Nasdaq futures alongside S&P are maintaining a strong bid following this morning's stellar S&P Global Services PMI print at 55.4.
                         </p>
                         <p class="text-gray-300" id="recap-p2">
                             Looking back at how the morning unfolded: treasury yields stabilized smoothly around 4.22%, which gave institutional buyers the green light to step in and absorb early liquidity without panic. Dollar index is holding soft near 103.45, providing steady tailwinds.
@@ -454,7 +454,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark-800 border-t border-gray-800 py-3 px-6 text-center text-xs text-gray-500 font-mono">
-        MacroPulse Terminal v3.22 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
+        MacroPulse Terminal v3.23 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
     </footer>
 
     <!-- JavaScript Logic & Translations -->
@@ -575,7 +575,7 @@
             },
             nyopen: {
                 en: {
-                    mainHeading: "Market Intelligence & News Flow: New York Mid-Session (Live Web Sync)",
+                    mainHeading: "Market Intelligence & News Flow: New York Live Session",
                     wireUpdated: "Updated: Mon, Oct 26, 2026 • Live Web Synced Active",
                     news1Title: "Tech Sector Leads Mid-Morning Rally as Bond Yields Hold Steady",
                     news1Desc: "Nasdaq futures push toward session highs following strong semiconductor rotation and stable 10-year yields at 4.22%.",
@@ -585,7 +585,7 @@
                     news3Desc: "Fixed-income desks monitor dealer appetite ahead of afternoon refunding auctions, with dollar index holding near 103.45.",
                     news4Title: "Global Sovereign Bond Yields Stabilize Crossover into US Mid-Day",
                     news4Desc: "European indices hold firm gains as institutional portfolio managers adjust duration risk following strong German data.",
-                    recapP1: "We are now moving deep into the mid-morning session. Initial opening ranges have fully formed, and tech-heavy Nasdaq futures alongside S&P are maintaining a strong bid following this morning's stellar S&P Global Services PMI print at 55.4.",
+                    recapP1: "Live sync active: We are now moving deep into the mid-morning session. Initial opening ranges have fully formed, and tech-heavy Nasdaq futures alongside S&P are maintaining a strong bid following this morning's stellar S&P Global Services PMI print at 55.4.",
                     recapP2: "Looking back at how the morning unfolded: treasury yields stabilized smoothly around 4.22%, which gave institutional buyers the green light to step in and absorb early liquidity without panic. Dollar index is holding soft near 103.45, providing steady tailwinds.",
                     recapP3: "Right now on the live order flow, mega-cap semiconductor names are leading the rotation, pushing QQQ toward session highs. Market breadth is healthy, and buyers continue to defend VWAP across major indices.",
                     recapP4: "What should we watch next? Our main afternoon catalyst is the massive 69-billion-dollar 2-year Treasury note auction coming up at 1:00 PM EST. Until then, expect choppy consolidation around current highs as liquidity pauses for lunch.",
@@ -594,15 +594,15 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Дневная сессия Нью-Йорка (Live Sync)",
                     wireUpdated: "Обновлено: Пн, 26 окт 2026 • Активная веб-синхронизация",
-                    news1Title: "Техсектор ведет утреннее ралли на фоне стабильной доходности бондов",
+                    news1Title: "Техсектор ведет ралли на фоне стабильной доходности бондов",
                     news1Desc: "Фьючерсы на Nasdaq штурмуют дневные максимумы благодаря притоку в полупроводники и доходности 10леток на 4.22%.",
                     news2Title: "Институциональный поток фиксирует активный спрос на колл-опционы QQQ",
                     news2Desc: "Трейдеры переваривают утренний PMI (55.4), который снял страхи рецессии и дал импульс покупателям.",
                     news3Title: "Минфин США готовится к размещению двухлетних нот на $69 млрд",
                     news3Desc: "Долговые столы следят за аппетитом дилеров перед аукционом, индекс доллара держится около 103.45.",
-                    news4Title: "Доходности суверенных бондов стабильны при переходе к дневной сессии в США",
-                    news4Desc: "Европейские биржи удерживают плюс, пока фонды корректируют дюрацию после сильной статистики из Германии.",
-                    recapP1: "Мы переходим в активную фазу дневной сессии. Утренний диапазон полностью сформирован, а техсектор и фьючерсы на Nasdaq уверенно удерживают сильные позиции после выхода отличного индекса PMI в сфере услуг на отметке 55.4.",
+                    news4Title: "Доходности суверенных бондов стабильны при переходе к дневной сессии",
+                    news4Desc: "Европейские биржи удерживают плюс, пока фонды корректируют дюрацию после сильной статистики.",
+                    recapP1: "Живая синхронизация: Мы находимся в активной фазе дневной сессии. Утренний диапазон полностью сформирован, а техсектор и фьючерсы на Nasdaq уверенно удерживают сильные позиции после выхода отличного индекса PMI в сфере услуг на отметке 55.4.",
                     recapP2: "Вспоминая утренние события: доходность гособлигаций зафиксировалась около 4.22%, позволив крупным игрокам войти в рынок без паники. Доллар немного просел до 103.45, выступая попутным ветром.",
                     recapP3: "Прямо сейчас в стакане ордеров лидируют акции полупроводников, подталкивая QQQ к максимумам сессии. Рыночная ширина отличная, покупатели защищают VWAP.",
                     recapP4: "Что дальше? Главное дневное событие — аукцион двухлетних гособлигаций на 69 миллиардов в 13:00 EST. До этого момента ожидаем спокойную консолидацию вблизи дневных пиков перед обеденным затишьем.",
@@ -627,7 +627,7 @@
                 statusActive: "Active Now",
                 highlightsTitle: "Session Highlights",
                 nqCatalystsTitle: "Top 3 NQ / ES Catalysts",
-                cat1: "Order Flow Absorption at Opening Range High",
+                cat1: "Liquidity Absorption at Range High",
                 cat2: "USD 2-Year Treasury Note Auction ($69B)",
                 cat3: "FOMC Member Commentary & Liquidity Flow",
                 fullDayTitle: "Full-Day Economic Calendar",
@@ -642,7 +642,7 @@
                 recapSub: "Simple conversational overview for streams and live chats",
                 copyBtn: "Copy",
                 openBtn: "Open",
-                footer: "MacroPulse Terminal v3.22 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.23 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
             },
             ru: {
                 subtitle: "Институциональный новостной терминал и обзор рынка",
@@ -659,7 +659,7 @@
                 statusActive: "Активно",
                 highlightsTitle: "Главные события сессии",
                 nqCatalystsTitle: "Топ-3 катализатора для NQ / ES",
-                cat1: "Поглощение ордеров на максимумах диапазона",
+                cat1: "Поглощение ликвидности на максимумах",
                 cat2: "Аукцион 2-летних гособлигаций ($69B)",
                 cat3: "Комментарии членов ФРС и ликвидность",
                 fullDayTitle: "Экономический календарь на день",
@@ -674,7 +674,7 @@
                 recapSub: "Простой разговорный обзор для стримов и живых эфиров",
                 copyBtn: "Копировать",
                 openBtn: "Открыть",
-                footer: "MacroPulse Terminal v3.22 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.23 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
             }
         };
 
@@ -763,7 +763,7 @@
 
                 switchSessionManual(detectedSession);
 
-                // Dynamically update timestamps on the news cards to reflect current sync minutes
+                // Live dynamic timestamp updates for news cards based on actual current time
                 const currentH = estDate.getHours().toString().padStart(2, '0');
                 const currentM = estDate.getMinutes().toString().padStart(2, '0');
                 const m3 = (estDate.getMinutes() >= 3 ? estDate.getMinutes() - 3 : 0).toString().padStart(2, '0');
@@ -776,7 +776,7 @@
                 document.getElementById('news-4-time').innerText = `${currentH}:${currentM} EST`;
 
                 freshness.innerText = 'Synced (' + estDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + ')';
-            }, 1000);
+            }, 900);
         }
 
         function updateClocks() {
@@ -819,30 +819,34 @@
         function openRecapInNewTab() {
             const textHTML = document.getElementById('recap-content').innerHTML;
             const newWindow = window.open('', '_blank');
-            newWindow.document.write(`
-                <!DOCTYPE html>
-                <html lang="${currentLang}" class="dark">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>MacroPulse — Market Briefing Reader</title>
-                    <script src="https://cdn.tailwindcss.com"><\/script>
-                    <style>
-                        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-                        body { font-family: 'Inter', sans-serif; background-color: #0b0f17; color: #f3f4f6; }
-                    </style>
-                </head>
-                <body class="p-8 max-w-4xl mx-auto space-y-6">
-                    <div class="flex items-center justify-between border-b border-gray-800 pb-4">
-                        <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Recap & Briefing</h1>
-                        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer">Print / Save PDF</button>
-                    </div>
-                    <div class="bg-dark-800 border border-gray-800 p-8 rounded-2xl text-lg leading-relaxed space-y-6 shadow-2xl">
-                        ${textHTML}
-                    </div>
-                </body>
-                </html>
-            `);
-            newWindow.document.close();
+            if (newWindow) {
+                newWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="${currentLang}" class="dark">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>MacroPulse — Market Briefing Reader</title>
+                        <script src="https://cdn.tailwindcss.com"><\/script>
+                        <style>
+                            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+                            body { font-family: 'Inter', sans-serif; background-color: #0b0f17; color: #f3f4f6; }
+                        </style>
+                    </head>
+                    <body class="p-8 max-w-4xl mx-auto space-y-6">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                            <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Recap & Briefing</h1>
+                            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer">Print / Save PDF</button>
+                        </div>
+                        <div class="bg-gray-900 border border-gray-800 p-8 rounded-2xl text-lg leading-relaxed space-y-6 shadow-2xl">
+                            ${textHTML}
+                        </div>
+                    </body>
+                    </html>
+                `);
+                newWindow.document.close();
+            } else {
+                alert("Popup blocked by browser! Please allow popups for this site.");
+            }
         }
     </script>
 </body>
