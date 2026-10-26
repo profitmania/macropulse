@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.24</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.25</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -37,6 +37,20 @@
         ::-webkit-scrollbar-track { background: #0b0f17; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+        /* Smooth Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-ticker {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 <body class="bg-dark-900 text-gray-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -50,7 +64,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.24</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.25</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -102,6 +116,25 @@
                     <span>Finviz Calendar</span>
                     <i data-lucide="external-link" class="w-3 h-3"></i>
                 </a>
+            </div>
+        </div>
+
+        <!-- LIVE MARQUEE NEWS TICKER (NEW FEATURE) -->
+        <div class="bg-dark-800/90 border border-blue-500/30 rounded-xl overflow-hidden shadow-lg flex items-center py-2.5 px-4 relative">
+            <div class="flex items-center space-x-2 shrink-0 bg-blue-600/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-lg text-xs font-mono font-bold z-10 mr-3">
+                <i data-lucide="radio" class="w-3.5 h-3.5 animate-pulse"></i>
+                <span data-i18n="tickerLabel">LIVE WIRE</span>
+            </div>
+            <div class="overflow-hidden whitespace-nowrap flex-1 relative flex items-center">
+                <div class="animate-ticker text-xs font-mono text-gray-200 space-x-8" id="ticker-content">
+                    <span>🔴 <strong class="text-emerald-400">GLOBEX EVENING SESSION ACTIVE</strong> • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST • Institutional Order Flow Positive</span>
+                    <span class="text-blue-400">|</span>
+                    <span>⚡ <strong class="text-amber-400">MACRO BRIEFING</strong> • S&P Services PMI Printed 55.4 Strong • 2Y Note Auction ($69B) Absorbed Successfully • Stay Systematic & Manage Risk</span>
+                    <span class="text-blue-400">|</span>
+                    <span>🔴 <strong class="text-emerald-400">GLOBEX EVENING SESSION ACTIVE</strong> • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST • Institutional Order Flow Positive</span>
+                    <span class="text-blue-400">|</span>
+                    <span>⚡ <strong class="text-amber-400">MACRO BRIEFING</strong> • S&P Services PMI Printed 55.4 Strong • 2Y Note Auction ($69B) Absorbed Successfully • Stay Systematic & Manage Risk</span>
+                </div>
             </div>
         </div>
 
@@ -447,7 +480,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark-800 border-t border-gray-800 py-3 px-6 text-center text-xs text-gray-500 font-mono">
-        MacroPulse Terminal v3.24 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
+        MacroPulse Terminal v3.25 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
     </footer>
 
     <!-- JavaScript Logic & Translations -->
@@ -462,6 +495,7 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: Evening Globex & Asia Session",
                     wireUpdated: "Updated: Mon, Oct 26, 2026 • Evening Globex Live",
+                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST • Institutional Order Flow Positive",
                     news1Title: "US Index Futures Open Higher as Overnight Globex Session Commences",
                     news1Desc: "MNQ and ES futures hold onto day session gains following stable 2-year Treasury note auction results and resilient tech shares.",
                     news2Title: "Asian Markets Prepare for Tokyo Open Amid Soft Dollar Tone at 103.45",
@@ -479,6 +513,7 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Вечерняя сессия Globex и Азия",
                     wireUpdated: "Обновлено: Пн, 26 окт 2026 • Вечерняя сессия Globex Live",
+                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX АКТИВНА • Фьючерсы MNQ и ES стабильны после аукциона • Доходность 10леток: 4.22% • Индекс доллара: 103.45 • В фокусе: Открытие Токио в 19:00 EST • Институциональный поток позитивный",
                     news1Title: "Фьючерсы на индексы США открылись ростом с началом сессии Globex",
                     news1Desc: "Фьючерсы MNQ и ES удерживают дневной прирост после успешного размещения двухлетних гособлигаций на $69 млрд.",
                     news2Title: "Азиатские рынки готовятся к открытию Токио на фоне мягкого доллара",
@@ -498,6 +533,7 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: European Session Prep",
                     wireUpdated: "Updated: Mon, Oct 26, 2026 • European Watch",
+                    tickerText: "🌅 EUROPEAN SESSION PREP ACTIVE • DAX & FTSE Futures Steady • ECB Policy Expectations Anchored • UK Gilt Yields Calm • London Open in Progress",
                     news1Title: "European Index Futures Prepare for London Overnight Handover",
                     news1Desc: "DAX and FTSE futures hold steady in early electronic trading as global macro desks await European economic releases.",
                     news2Title: "ECB Rate Path Expectations Remain Anchored Amid Stable Inflation",
@@ -515,6 +551,7 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Подготовка к европейской сессии",
                     wireUpdated: "Обновлено: Пн, 26 окт 2026 • Европа Наблюдение",
+                    tickerText: "🌅 ПОДГОТОВКА К ЕВРОПЕЙСКОЙ СЕССИИ • Фьючерсы DAX и FTSE стабильны • Ставки ЕЦБ под контролем • Доходность британских гильтов спокойна",
                     news1Title: "Фьючерсы на евро-индексы готовятся к ночному переходу в Лондон",
                     news1Desc: "Фьючерсы DAX и FTSE держатся стабильно в электронной сессии в ожидании макроданных.",
                     news2Title: "Ожидания по ставке ЕЦБ остаются якорем на фоне стабильной инфляции",
@@ -534,6 +571,7 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Pre-Market Prep",
                     wireUpdated: "Updated: Mon, Oct 26, 2026 • Pre-Market Watch",
+                    tickerText: "🔔 NEW YORK PRE-MARKET PREP • US Index Futures Show Early Strength • Bond Yields Hover Near 4.22% • Dollar Index at 103.45 • Opening Bell Approaching",
                     news1Title: "US Futures Point to Early Strength Ahead of New York Bell",
                     news1Desc: "Index futures rebound in early morning electronic trading as bond yields hover near 4.22%.",
                     news2Title: "Corporate Earnings and Macro Calendar in Focus for US Equities",
@@ -551,6 +589,7 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Подготовка к премаркету США",
                     wireUpdated: "Обновлено: Пн, 26 окт 2026 • Премаркет Наблюдение",
+                    tickerText: "🔔 ПРЕБАРКЕТ НЬЮ-ЙОРКА • Фьючерсы США показывают силу • Доходность бондов на 4.22% • Индекс доллара: 103.45 • Подготовка к открытию бирж",
                     news1Title: "Фьючерсы США показывают утренний рост перед звонком в Нью-Йорке",
                     news1Desc: "Индексные фьючерсы отскакивают на утренних торгах, доходность бондов держится на 4.22%.",
                     news2Title: "Корпоративные отчеты и макрокалендарь в фокусе для акций США",
@@ -570,6 +609,7 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Day Session",
                     wireUpdated: "Updated: Mon, Oct 26, 2026 • New York Session Live",
+                    tickerText: "🟢 NEW YORK DAY SESSION ACTIVE • Technology Sector Leading Volume • S&P 500 & Nasdaq Breadth Healthy • VWAP Defense Active Across Major Indices",
                     news1Title: "Wall Street Equities Trade Constructively During Day Session",
                     news1Desc: "Major stock indices maintain firm footing with technology sector leading volume and price action.",
                     news2Title: "Treasury Auctions and Macro Wires Keep Fixed Income Active",
@@ -587,6 +627,7 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Дневная сессия Нью-Йорка",
                     wireUpdated: "Обновлено: Пн, 26 окт 2026 • Дневная сессия Нью-Йорка Live",
+                    tickerText: "🟢 ДНЕВНАЯ СЕССИЯ НЬЮ-ЙОРКА АКТИВНА • Технологический сектор лидирует по объемам • Ширина рынка S&P 500 и Nasdaq в норме • Покупатели защищают VWAP",
                     news1Title: "Акции Уолл-стрит торгуются конструктивно в течение дня",
                     news1Desc: "Основные индексы удерживают уверенные позиции, технологический сектор лидирует по объемам.",
                     news2Title: "Аукционы трежерис и макроленты поддерживают активность бондов",
@@ -610,6 +651,7 @@
                 syncBtn: "Sync & Search Web",
                 bannerTitle: "LIVE NEWS FEED & MARKET RECAP ACTIVE",
                 bannerDesc: "Aggregating real-time macro wires and professional briefing summaries for streams.",
+                tickerLabel: "LIVE WIRE",
                 lastSync: "Last Web Search",
                 sidebarTitle: "Select Session News Wire",
                 tokyoBtn: "Tokyo / Globex Evening",
@@ -635,13 +677,14 @@
                 recapSub: "Simple conversational overview for streams and live chats",
                 copyBtn: "Copy",
                 openBtn: "Open",
-                footer: "MacroPulse Terminal v3.24 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.25 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
             },
             ru: {
                 subtitle: "Институциональный новостной терминал и обзор рынка",
                 syncBtn: "Синхронизация и поиск",
                 bannerTitle: "НОВОСТНАЯ ЛЕНТА И ОБЗОР РЫНКА АКТИВНЫ",
                 bannerDesc: "Агрегация макро-новостей в реальном времени и удобные сводки для трансляций.",
+                tickerLabel: "ЛЕНТА НОВОСТЕЙ",
                 lastSync: "Последний поиск",
                 sidebarTitle: "Выбор сессионного дайджеста",
                 tokyoBtn: "Токио / Вечерний Globex",
@@ -667,7 +710,7 @@
                 recapSub: "Простой разговорный обзор для стримов и живых эфиров",
                 copyBtn: "Копировать",
                 openBtn: "Открыть",
-                footer: "MacroPulse Terminal v3.24 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.25 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
             }
         };
 
@@ -717,6 +760,10 @@
             document.getElementById('main-heading').innerText = data.mainHeading;
             document.getElementById('wire-update-time').innerText = data.wireUpdated;
             
+            // Update Ticker text inside both duplicate parts of the marquee for infinite looping
+            const tickerHtml = `<span>${data.tickerText}</span><span class="text-blue-400">|</span><span>${data.tickerText}</span><span class="text-blue-400">|</span>`;
+            document.getElementById('ticker-content').innerHTML = tickerHtml;
+
             document.getElementById('news-1-title').innerText = data.news1Title;
             document.getElementById('news-1-desc').innerText = data.news1Desc;
 
@@ -758,16 +805,14 @@
                 const minutes = estDate.getMinutes();
                 const timeNum = hours + minutes / 60;
 
-                // Smart session detection based on actual time of day (EST)
                 let detectedSession = 'tokyo';
-                if (timeNum >= 18.0 || timeNum < 3.0) detectedSession = 'tokyo';      // Evening Globex & Asia
-                else if (timeNum >= 3.0 && timeNum < 8.5) detectedSession = 'london'; // London open / prep
-                else if (timeNum >= 8.5 && timeNum < 9.5) detectedSession = 'nypremkt'; // NY pre-market
-                else detectedSession = 'nyopen';                                      // NY day session
+                if (timeNum >= 18.0 || timeNum < 3.0) detectedSession = 'tokyo';
+                else if (timeNum >= 3.0 && timeNum < 8.5) detectedSession = 'london';
+                else if (timeNum >= 8.5 && timeNum < 9.5) detectedSession = 'nypremkt';
+                else detectedSession = 'nyopen';
 
                 switchSessionManual(detectedSession);
 
-                // Dynamically update timestamps on news cards to match current sync time
                 const currentH = estDate.getHours().toString().padStart(2, '0');
                 const currentM = estDate.getMinutes().toString().padStart(2, '0');
                 const m3 = (estDate.getMinutes() >= 3 ? estDate.getMinutes() - 3 : 0).toString().padStart(2, '0');
@@ -801,17 +846,14 @@
             const badgeLondon = document.getElementById('badge-london');
             const badgeNy = document.getElementById('badge-ny');
 
-            // Tokyo / Globex evening session: open from 18:00 (6 PM) to 04:00 EST
             const isTokyoGlobexOpen = (hours >= 18 || hours < 4);
             badgeTokyo.className = isTokyoGlobexOpen ? 'px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold animate-pulse' : 'px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700';
             badgeTokyo.innerText = isTokyoGlobexOpen ? 'Tokyo/Globex: OPEN' : 'Tokyo/Globex: CLOSED';
 
-            // London open: 03:00 to 12:00 EST
             const isLondonOpen = (hours >= 3 && hours < 12);
             badgeLondon.className = isLondonOpen ? 'px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold' : 'px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700';
             badgeLondon.innerText = isLondonOpen ? 'London: OPEN' : 'London: CLOSED';
 
-            // New York cash open: 08:30 to 16:00 EST
             const isNyOpen = (hours >= 8.5 && hours < 16);
             badgeNy.className = isNyOpen ? 'px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold' : 'px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700';
             badgeNy.innerText = isNyOpen ? 'New York: OPEN' : 'New York: CLOSED';
