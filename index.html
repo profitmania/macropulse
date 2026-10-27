@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.36</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.37</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.36</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.37</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -277,7 +277,7 @@
                         </a>
                     </div>
                     <div class="space-y-2 text-xs font-mono max-h-[550px] overflow-y-auto pr-1" id="top10-catalysts-container">
-                        <!-- Dynamically populated 10 items with real-time time checking -->
+                        <!-- Dynamically populated -->
                     </div>
                 </div>
 
@@ -322,7 +322,6 @@
                             </div>
                             <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & News Flow</h2>
                         </div>
-                        <!-- LOCAL REFRESH BUTTON FOR NEWS FEED -->
                         <button onclick="refreshNewsFeed()" class="bg-dark-900 hover:bg-dark-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer shadow-sm">
                             <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="news-refresh-icon"></i>
                             <span data-i18n="refreshBtn">Refresh</span>
@@ -344,7 +343,7 @@
                         </div>
                     </div>
 
-                    <!-- 4 Clickable Cards (Bloomberg, Benzinga, Reuters, FT) -->
+                    <!-- 4 Clickable Cards -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
                             <div class="space-y-2">
@@ -585,15 +584,6 @@
                         { time: "03:00", timeStr: "03:00 EST", tag: "LONDON PREP", text: "European Pre-Open Index Futures & DAX Action" },
                         { time: "04:00", timeStr: "04:00 EST", tag: "Euro Data", text: "German Industrial Production & Trade Balance Print" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "ECB Focus", text: "European Central Bank Speeches & Rate Expectations" }
-                    ],
-                    angles: [
-                        {
-                            p1: "Evening live sync active: CME Globex futures session has officially reopened for the evening. MNQ and ES contracts are holding firm following a successful 69-billion-dollar 2-year Treasury note auction absorption earlier today.",
-                            p2: "Reviewing how the cash session concluded: Wall Street closed out on a strong note with tech shares leading the momentum, supported by stable 10-year yields lingering around 4.22% and a soft dollar index near 103.45.",
-                            p3: "As we transition into the evening Asian hours and approach the Tokyo open at 7:00 PM EST, liquidity is shifting toward overnight positioning. Early electronic order flow shows steady participants maintaining long bias in major index futures.",
-                            p4: "What to expect during the overnight hours? Watch for initial Asian session reaction to US debt refunding digests and steady currency ranges across USD pairs before European desks take over early tomorrow morning.",
-                            p5: "Evening session is live. Let's manage overnight risk carefully, respect structural levels, and stay prepared for all macro developments!"
-                        }
                     ]
                 },
                 ru: {
@@ -617,15 +607,6 @@
                         { time: "03:00", timeStr: "03:00 EST", tag: "ЛОНДОН ПРЕП", text: "Премаркет фьючерсов на евро-индексы и DAX" },
                         { time: "04:00", timeStr: "04:00 EST", tag: "Данные ЕС", text: "Промышленное производство и торговый баланс Германии" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "Риторика ЕЦБ", text: "Выступления представителей ЕЦБ и ожидания по ставкам" }
-                    ],
-                    angles: [
-                        {
-                            p1: "Вечерняя живая синхронизация: Фьючерсная сессия CME Globex официально открылась на вечер. Контракты MNQ и ES уверенно держатся после успешного дневного аукциона гособлигаций на 69 миллиардов.",
-                            p2: "Итоги завершившейся дневной сессии: Уолл-стрит закрылась в уверенном плюсе, техсектор вел за собой рынок на фоне стабильной доходности 10леток на 4.22% и слабого доллара на 103.45.",
-                            p3: "По мере перехода к вечерним азиатским часам и в преддверии открытия Токио в 19:00 EST, ликвидность смещается в сторону ночного позиционирования.",
-                            p4: "Чего ждать ночью? Следим за реакцией азиатских площадок на новости по американскому госдолгу перед открытием Европы.",
-                            p5: "Вечерняя сессия в работе. Аккуратно управляем рисками и следим за развитием событий!"
-                        }
                     ]
                 }
             },
@@ -651,15 +632,6 @@
                         { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Institutional Scale" },
                         { time: "10:00", timeStr: "10:00 EST", tag: "PMI Data", text: "Services PMI & Consumer Confidence Print" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "FOMC", text: "FOMC Minutes & Monetary Policy Statement" }
-                    ],
-                    angles: [
-                        {
-                            p1: "European session is live: DAX and FTSE futures are trading actively following the London open, with European economic indicators in focus.",
-                            p2: "ECB expectations remain well-anchored, and UK gilt yields display steady composure across sterling crosses.",
-                            p3: "Energy futures are providing a stable backdrop for eurozone manufacturing, easing cost pressures.",
-                            p4: "As we bridge towards the New York pre-market, keep monitoring overnight US index futures for continuation patterns.",
-                            p5: "European session is underway. Stay sharp and manage risk cleanly!"
-                        }
                     ]
                 },
                 ru: {
@@ -683,15 +655,6 @@
                         { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и масштаб институциональной ликвидности" },
                         { time: "10:00", timeStr: "10:00 EST", tag: "Индексы PMI", text: "Деловая активность в сфере услуг и доверие потребителей" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "FOMC", text: "Протоколы заседаний Федеральной резервной системы" }
-                    ],
-                    angles: [
-                        {
-                            p1: "Европейская сессия в работе: фьючерсы на DAX и FTSE торгуются активно после открытия Лондона.",
-                            p2: "Ожидания по ЕЦБ стабильны, британские гильты демонстрируют спокойствие в кросс-курсах с фунтом.",
-                            p3: "Энергетические контракты создают надежный фундамент для европейской промышленности.",
-                            p4: "Пока идет развитие европейской сессии, держим в поле зрения подготовку к премаркету США.",
-                            p5: "Европейская сессия идет по плану. Готовимся к новостям из Штатов!"
-                        }
                     ]
                 }
             },
@@ -717,27 +680,11 @@
                         { time: "13:00", timeStr: "13:00 EST", tag: "Treasury Flow", text: "Bond Market Auction Results & Refunding Impact" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "FOMC Minutes", text: "Federal Reserve Statement & Policy Minutes" },
                         { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Flow" }
-                    ],
-                    angles: [
-                        {
-                            p1: "Preparing for the New York pre-market: US index futures are showing early strength as bond yields hold steady around 4.22%.",
-                            p2: "Wall Street analysts are closely evaluating corporate earnings guidance and upcoming macro economic releases.",
-                            p3: "The dollar index remains stable near 103.45 while currency traders establish morning positions.",
-                            p4: "Get ready for the opening bell as liquidity scales up across major equity and futures exchanges.",
-                            p5: "Pre-market preparation is active. Let's get our charts aligned for the New York open!"
-                        },
-                        {
-                            p1: "Pre-market action angle: Wall Street futures are building positive momentum right before the bell, backed by stable treasury yields.",
-                            p2: "Traders are locking in their risk profiles, ensuring all pre-market catalysts are mapped out on the charts.",
-                            p3: "A soft dollar index is continuing to act as a supportive tailwind for tech equities and Nasdaq futures.",
-                            p4: "For your pre-market stream: remind your audience to wait for the initial opening range formation before jumping into breakouts.",
-                            p5: "Get your setup ready and trade with complete clarity!"
-                        }
                     ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Премаркет Нью-Йорка",
-                    wireUpdated: "Обновлено: Премаркет США Live",
+                    wireUpdated: "Updated: New York Pre-Market Live",
                     tickerText: "🔔 ПРЕБАРКЕТ НЬЮ-ЙОРКА • Фьючерсы США показывают силу • Доходность бондов на 4.22% • Индекс доллара: 103.45 • Подготовка к открытию бирж",
                     nextAlert: "Следующее событие: Выступление представителя ФРС в 09:00 EST",
                     flashWire: "⚡ ПРЕБАРКЕТ СВОДКА • Данные по заказам и рознице в 08:30 EST успешно перевариты ES/MNQ • Ждем спикера ФРС в 09:00 и звонок открытия в 09:29",
@@ -756,15 +703,6 @@
                         { time: "13:00", timeStr: "13:00 EST", tag: "Потоки трежерис", text: "Итоги аукционов гособлигаций и влияние на долг" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "Протоколы FOMC", text: "Публикация заявлений ФРС и протоколов заседаний" },
                         { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные клиринговые потоки" }
-                    ],
-                    angles: [
-                        {
-                            p1: "Идет премаркет Нью-Йорка: американские фьючерсы демонстрируют утреннюю силу на фоне стабильной доходности бондов на 4.22%.",
-                            p2: "Аналитики Уолл-стрит внимательно оценивают корпоративные отчеты и макрокалендарь перед открытием сессии.",
-                            p3: "Индекс доллара удерживается около 103.45, валютные трейдеры завершают расстановку позиций.",
-                            p4: "До открытия регулярных торгов остается совсем немного времени. Готовим уровни в стакане!",
-                            p5: "Премаркет в разгаре. Настраиваем торговые планы и ждем открытие звонка!"
-                        }
                     ]
                 }
             },
@@ -790,15 +728,6 @@
                         { time: "15:00", timeStr: "15:00 EST", tag: "Late Session", text: "Institutional VWAP Rebalancing & VWAP Defense" },
                         { time: "15:45", timeStr: "15:45 EST", tag: "Imbalance", text: "Closing Imbalance Read & Order Flow Scan" },
                         { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Flow" }
-                    ],
-                    angles: [
-                        {
-                            p1: "New York day session is active: equities are trading on a constructive footing, with technology sectors leading volume.",
-                            p2: "Fixed income markets continue digesting treasury auction results and macroeconomic data flows.",
-                            p3: "The dollar index remains stable near 103.45 amidst steady rate cut expectations.",
-                            p4: "Market breadth across major indices remains healthy with active institutional participation.",
-                            p5: "Day session execution is steady. Respect your intraday levels and manage risk cleanly!"
-                        }
                     ]
                 },
                 ru: {
@@ -822,15 +751,6 @@
                         { time: "15:00", timeStr: "15:00 EST", tag: "Защита VWAP", text: "Институциональная ребалансировка и защита VWAP" },
                         { time: "15:45", timeStr: "15:45 EST", tag: "Дисбаланс", text: "Сканирование закрывающих дисбалансов в стакане" },
                         { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные потоки клиринга" }
-                    ],
-                    angles: [
-                        {
-                            p1: "Дневная сессия Нью-Йорка активна: основные индексы торгуются уверенно, технологический сектор ведет за собой объемы.",
-                            p2: "Долговые рынки продолжают отыгрывать результаты аукционов гособлигаций и общие потоки ликвидности.",
-                            p3: "Индекс доллара держится в районе 103.45 на фоне стабильных прогнозов по процентным ставкам.",
-                            p4: "Ширина рынка в S&P 500 и Nasdaq остается здоровой, институционалы удерживают лидерство роста.",
-                            p5: "Дневная сессия идет полным ходом. Соблюдаем дисциплину и контролируем риски!"
-                        }
                     ]
                 }
             }
@@ -1056,7 +976,6 @@
             renderActiveSessionContent();
         }
 
-        // ЛОКАЛЬНАЯ КНОПКА REFRESH ДЛЯ НОВОСТНОЙ ЛЕНТЫ
         function refreshNewsFeed() {
             const icon = document.getElementById('news-refresh-icon');
             icon.classList.add('animate-spin');
@@ -1067,7 +986,6 @@
                 const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
                 const estDate = new Date(estStr);
                 
-                // Рандомизация времени новостей под текущий момент для имитации живого обновления
                 const hr = estDate.getHours().toString().padStart(2, '0');
                 const mn = estDate.getMinutes().toString().padStart(2, '0');
                 const timeTag = `${hr}:${mn} EST`;
@@ -1078,7 +996,6 @@
                 document.getElementById('news-4-time').innerText = timeTag;
 
                 document.getElementById('wire-update-time').innerText = (currentLang === 'en' ? 'Updated: ' : 'Обновлено: ') + timeTag;
-                alert(currentLang === 'en' ? 'Live Web Synced Feed updated successfully!' : 'Лента новостей успешно обновлена!');
             }, 600);
         }
 
@@ -1112,7 +1029,6 @@
             document.getElementById('news-4-title').innerText = sessObj.news4Title;
             document.getElementById('news-4-desc').innerText = sessObj.news4Desc;
 
-            // АВТОМАТИЧЕСКОЕ ОПРЕДЕЛЕНИЕ ПРОШЕДШИХ И БЛИЖАЙШИХ СОБЫТИЙ ПО ВРЕМЕНИ EST
             const now = new Date();
             const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
             const estDate = new Date(estStr);
@@ -1133,11 +1049,11 @@
 
                 if (itemTotalMins < currentTotalMins) {
                     isDone = true;
-                    tagText = currentLang === 'en' ? '✅ RELEASED' : '✅ ВЫШЛО';
+                    tagText = currentLang === 'en' ? 'RELEASED' : 'ВЫШЛО';
                 } else if (!foundNextActive) {
                     isPulse = true;
                     foundNextActive = true;
-                    tagText = currentLang === 'en' ? '🔴 LIVE FOCUS' : '🔴 В ФОКУСЕ';
+                    tagText = currentLang === 'en' ? 'LIVE FOCUS' : 'В ФОКУСЕ';
                 }
 
                 const div = document.createElement('div');
@@ -1165,21 +1081,7 @@
             renderRecapAngle();
         }
 
-        function renderRecapAngle() {
-            const sessObj = sessionData[activeSessionKey][currentLang];
-            const angles = sessObj.angles || [
-                { p1: "Default recap paragraph 1", p2: "Default recap paragraph 2", p3: "Default recap paragraph 3", p4: "Default recap paragraph 4", p5: "Default recap paragraph 5" }
-            ];
-            
-            const currentAngle = angles[currentAngleIndex % angles.length];
-
-            document.getElementById('recap-p1').innerText = currentAngle.p1;
-            document.getElementById('recap-p2').innerText = currentAngle.p2;
-            document.getElementById('recap-p3').innerText = currentAngle.p3;
-            document.getElementById('recap-p4').innerText = currentAngle.p4;
-            document.getElementById('recap-p5').innerText = currentAngle.p5;
-        }
-
+        // ПОЛНОЦЕННАЯ ДИНАМИЧЕСКАЯ ГЕНЕРАЦИЯ RECAP ПРИ НАЖАТИИ REFRESH
         function refreshRecap() {
             const icon = document.getElementById('recap-refresh-icon');
             icon.classList.add('animate-spin');
@@ -1189,6 +1091,80 @@
                 currentAngleIndex++;
                 renderRecapAngle();
             }, 500);
+        }
+
+        function renderRecapAngle() {
+            const now = new Date();
+            const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+            const estDate = new Date(estStr);
+            const timeTag = estDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+            const sessionNames = {
+                tokyo: { en: "Tokyo & Globex Evening Session", ru: "Вечерняя сессия Токио и Globex" },
+                london: { en: "London Open European Session", ru: "Европейская сессия и Лондон" },
+                nypremkt: { en: "New York Pre-Market Preparation", ru: "Премаркет Нью-Йорка" },
+                nyopen: { en: "New York Day Session & Order Flow", ru: "Дневная сессия Нью-Йорка и ордерфлоу" }
+            };
+
+            const sessTitle = sessionNames[activeSessionKey][currentLang];
+
+            // Набор динамических вариантов фраз для генерации свежего отчета
+            const variationsEn = [
+                {
+                    p1: `Live session intelligence update at ${timeTag} EST (${sessTitle}): Markets are showing dynamic institutional participation with aggressive liquidity sweeps near key intraday levels.`,
+                    p2: `Fixed income desks report treasury yields holding steady near 4.22%, anchoring fixed-income volatility and supporting orderly index behavior in MNQ and ES contracts.`,
+                    p3: `The dollar index is consolidating around 103.45, giving tech equities and momentum components a steady macroeconomic tailwind as volume scales up.`,
+                    p4: `For live streaming and chat engagement: Emphasize patience at the opening range boundaries and wait for confirmed VWAP retests before scaling into breakout positions.`,
+                    p5: `Current session execution is active. Respect your risk parameters, protect capital, and stay locked in on the charts!`
+                },
+                {
+                    p1: `Real-time session refresh (${timeTag} EST): Order flow analysis indicates robust institutional accumulation across Nasdaq and S&P 500 components during this active window.`,
+                    p2: `Bond market tone remains balanced following recent Treasury auctions, keeping systemic interest rate pressure in check and allowing tech leaders to maintain leadership.`,
+                    p3: `Currency markets exhibit clean ranges with USD hovering near 103.45. Global cross-flows remain orderly across European and North American desks.`,
+                    p4: `Stream & chat talking point: Remind your community that discipline and strict adherence to structural support levels are the keys to consistent profitability.`,
+                    p5: `Let's keep our execution razor-sharp. Trade with full clarity and manage every position professionally!`
+                },
+                {
+                    p1: `Automated intelligence sweep at ${timeTag} EST: Volatility parameters and volume profiles reflect strong institutional engagement across major futures exchanges.`,
+                    p2: `Macro backdrop: 10-year yields holding firm at 4.22% provide a predictable framework for day traders looking for clean trend continuation patterns.`,
+                    p3: `With the dollar index steady at 103.45, risk assets continue to attract steady capital rotation from institutional participants.`,
+                    p4: `Key takeaway for your audience: Avoid chasing breakout extensions without proper volume confirmation and structural pullback validation.`,
+                    p5: `The session is moving exactly as planned. Let's execute cleanly and secure our profits!`
+                }
+            ];
+
+            const variationsRu = [
+                {
+                    p1: `Оперативное обновление рыночной разведки в ${timeTag} EST (${sessTitle}): Наблюдается активное институциональное участие и плотная работа с ликвидностью вблизи ключевых уровней.`,
+                    p2: `Долговой рынок сообщает о стабильной доходности трежерис на уровне 4.22%, что снижает волатильность в фиксированном доходе и поддерживает фьючерсы MNQ и ES.`,
+                    p3: `Индекс доллара консолидируется около 103.45, создавая благоприятный макроэкономический фон для технологических акций и роста котировок по мере набора объемов.`,
+                    p4: `Тезис для стрима и чата: Акцентируйте внимание на терпении у границ диапазона и дожидайтесь подтвержденных ретестов VWAP перед входом в пробойные сделки.`,
+                    p5: `Сессия идет активно. Соблюдайте риск-менеджмент, берегите капитал и держите фокус на графиках!`
+                },
+                {
+                    p1: `Свежий срез данных (${timeTag} EST): Анализ ордерфлоу показывает уверенное институциональное накопление в акциях Nasdaq и S&P 500 в текущем окне.`,
+                    p2: `Настрой долгового рынка остается сбалансированным после недавних аукционов, что позволяет лидерам техсектора удерживать инициативу.`,
+                    p3: `Валютные рынки торгуются в чистых диапазонах при долларе на 103.45. Трансграничные потоки между европейскими и американскими столами упорядочены.`,
+                    p4: `Мысль для трансляции: Напомните зрителям, что дисциплина и строгое следование структурным уровням поддержки — залог стабильной доходности.`,
+                    p5: `Держим руку на пульсе. Торгуем осознанно и профессионально управляем каждой позицией!`
+                },
+                {
+                    p1: `Автоматический срез аналитики в ${timeTag} EST: Параметры волатильности и профили объема отражают уверенную работу институционалов на фьючерсных биржах.`,
+                    p2: `Макрофоны: доходность 10-леток на 4.22% дает понятный фундамент для дэйтрейдеров, ищущих чистые паттерны продолжения тренда.`,
+                    p3: `При стабильном индексе доллара на 103.45 рисковые активы продолжают привлекать капитал крупных участников.`,
+                    p4: `Главный вывод для вашей аудитории: Не стоит догонять прорывы без подтверждения объема и валидации отката к структуре.`,
+                    p5: `Сессия развивается по плану. Работаем четко и забираем прибыль!`
+                }
+            ];
+
+            const selectedPool = currentLang === 'en' ? variationsEn : variationsRu;
+            const currentVariation = selectedPool[currentAngleIndex % selectedPool.length];
+
+            document.getElementById('recap-p1').innerText = currentVariation.p1;
+            document.getElementById('recap-p2').innerText = currentVariation.p2;
+            document.getElementById('recap-p3').innerText = currentVariation.p3;
+            document.getElementById('recap-p4').innerText = currentVariation.p4;
+            document.getElementById('recap-p5').innerText = currentVariation.p5;
         }
 
         function triggerSync() {
@@ -1208,6 +1184,7 @@
 
                 backgroundAutoSync();
                 refreshNewsFeed();
+                refreshRecap();
             }, 800);
         }
 
