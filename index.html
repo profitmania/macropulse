@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.27</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.28</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -38,7 +38,6 @@
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
 
-        /* Smooth Ticker Animation */
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
@@ -64,7 +63,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.27</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.28</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -83,6 +82,12 @@
                 <span id="badge-london" class="px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700">London: --</span>
                 <span id="badge-ny" class="px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700">New York: --</span>
             </div>
+
+            <!-- Admin Settings Button (Visible only when unlocked) -->
+            <button id="admin-badge-btn" onclick="toggleAdminPanel()" class="hidden bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3 py-2 rounded-lg text-xs font-mono font-bold flex items-center space-x-1.5 transition-all cursor-pointer">
+                <i data-lucide="shield" class="w-4 h-4"></i>
+                <span>Admin AI</span>
+            </button>
 
             <!-- Language Toggle Button -->
             <button onclick="toggleLanguage()" id="lang-btn" class="bg-dark-900 border border-gray-700 hover:border-blue-500 text-gray-200 px-3 py-2 rounded-lg text-xs font-mono font-bold flex items-center space-x-1.5 transition-all cursor-pointer">
@@ -130,6 +135,47 @@
                     <span>🔴 <strong class="text-emerald-400">GLOBEX EVENING SESSION ACTIVE</strong> • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST • Institutional Order Flow Positive</span>
                     <span class="text-blue-400">|</span>
                     <span>⚡ <strong class="text-amber-400">MACRO BRIEFING</strong> • S&P Services PMI Printed 55.4 Strong • 2Y Note Auction ($69B) Absorbed Successfully • Stay Systematic & Manage Risk</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN AI SCRIPT GENERATOR BOX (HIDDEN BY DEFAULT, UNLOCKED VIA ?admin=gina71) -->
+        <div id="admin-ai-panel" class="hidden bg-gradient-to-r from-dark-800 via-dark-800 to-amber-950/20 border border-amber-500/40 rounded-xl p-5 space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between pb-3 border-b border-amber-500/20 flex-wrap gap-2">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-amber-500 p-1.5 rounded-lg text-gray-950 font-bold">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-amber-400 font-mono">AUTHOR AI SCRIPT GENERATOR (ADMIN ONLY)</h3>
+                        <p class="text-xs text-gray-400">Create custom read-aloud scripts for YouTube & TikTok based on live market context</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="password" id="gemini-key-input" placeholder="Enter Gemini API Key" class="bg-dark-900 border border-gray-700 text-xs text-gray-200 px-3 py-1.5 rounded-lg w-48 font-mono focus:border-amber-500 outline-none">
+                    <button onclick="saveApiKey()" class="bg-amber-600 hover:bg-amber-500 text-gray-950 font-bold px-3 py-1.5 rounded-lg text-xs transition-all cursor-pointer">Save Key</button>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <div class="flex gap-2">
+                    <input type="text" id="script-prompt-input" placeholder="e.g., What's happening with oil markets and how does it affect MNQ futures today?" class="flex-1 bg-dark-900 border border-gray-700 text-xs text-gray-200 px-3.5 py-2.5 rounded-lg font-sans focus:border-amber-500 outline-none">
+                    <button onclick="generateCustomScript()" id="btn-gen-script" class="bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold px-5 py-2.5 rounded-lg text-xs flex items-center space-x-2 shadow-md transition-all cursor-pointer shrink-0">
+                        <i data-lucide="wand-2" class="w-4 h-4" id="gen-icon"></i>
+                        <span>Generate Script</span>
+                    </button>
+                </div>
+
+                <!-- Output Script Box -->
+                <div id="generated-script-output" class="hidden bg-dark-900 border border-amber-500/30 p-4 rounded-xl text-gray-200 font-sans text-sm leading-relaxed space-y-3 relative">
+                    <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                        <span class="text-xs font-mono text-amber-400 font-semibold">Generated Stream / TikTok Script:</span>
+                        <button onclick="copyGeneratedScript()" class="bg-dark-800 hover:bg-dark-700 text-gray-200 border border-gray-700 px-2.5 py-1 rounded text-xs flex items-center space-x-1 cursor-pointer">
+                            <i data-lucide="copy" class="w-3 h-3"></i>
+                            <span>Copy Script</span>
+                        </button>
+                    </div>
+                    <div id="script-text-content" class="text-gray-200 space-y-2 whitespace-pre-line"></div>
                 </div>
             </div>
         </div>
@@ -439,7 +485,7 @@
                     </div>
                 </div>
 
-                <!-- MARKET RECAP & BRIEFING BOX WITH NEW REFRESH BUTTON -->
+                <!-- MARKET RECAP & BRIEFING BOX -->
                 <div class="bg-dark-800 border border-gray-700 rounded-xl p-5 space-y-4 shadow-2xl">
                     <div class="flex items-center justify-between pb-3 border-b border-gray-700/60 flex-wrap gap-2">
                         <div class="flex items-center space-x-2">
@@ -452,7 +498,6 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <!-- NEW DEDICATED REFRESH RECAP BUTTON -->
                             <button onclick="refreshRecap()" class="bg-dark-900 hover:bg-dark-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer" title="Refresh Recap Angle">
                                 <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="recap-refresh-icon"></i>
                                 <span data-i18n="refreshBtn">Refresh</span>
@@ -495,7 +540,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark-800 border-t border-gray-800 py-3 px-6 text-center text-xs text-gray-500 font-mono">
-        MacroPulse Terminal v3.27 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
+        MacroPulse Terminal v3.28 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
     </footer>
 
     <!-- JavaScript Logic & Translations -->
@@ -505,6 +550,95 @@
         let currentLang = 'en'; 
         let activeSessionKey = 'tokyo'; 
         let currentAngleIndex = 0;
+
+        // ADMIN ACCESS CHECK ON LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('admin') === 'gina71') {
+                localStorage.setItem('mp_admin_unlocked', 'true');
+            }
+            if (localStorage.getItem('mp_admin_unlocked') === 'true') {
+                document.getElementById('admin-ai-panel').classList.remove('hidden');
+                document.getElementById('admin-badge-btn').classList.remove('hidden');
+            }
+            
+            // Load saved Gemini Key if exists
+            const savedKey = localStorage.getItem('mp_gemini_key');
+            if (savedKey) {
+                document.getElementById('gemini-key-input').value = savedKey;
+            }
+        });
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById('admin-ai-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        function saveApiKey() {
+            const key = document.getElementById('gemini-key-input').value.trim();
+            if (key) {
+                localStorage.setItem('mp_gemini_key', key);
+                alert("Gemini API Key saved securely in your browser!");
+            } else {
+                alert("Please enter a valid API key.");
+            }
+        }
+
+        async function generateCustomScript() {
+            const prompt = document.getElementById('script-prompt-input').value.trim();
+            const apiKey = localStorage.getItem('mp_gemini_key');
+            
+            if (!apiKey) {
+                alert("Please enter and save your Gemini API Key first (top right of Admin panel).");
+                return;
+            }
+            if (!prompt) {
+                alert("Please enter a topic or question for the script.");
+                return;
+            }
+
+            const btn = document.getElementById('btn-gen-script');
+            const icon = document.getElementById('gen-icon');
+            const outputBox = document.getElementById('generated-script-output');
+            const textContent = document.getElementById('script-text-content');
+
+            btn.disabled = true;
+            icon.classList.add('animate-spin');
+            outputBox.classList.remove('hidden');
+            textContent.innerText = "Generating script using live market context and Gemini AI...";
+
+            const systemContext = `You are a professional financial trading mentor and streamer (Live Market Coach). Write a high-energy, ready-to-read script for a YouTube video or TikTok based on the user's prompt. Current market context: MNQ/ES futures, 10-year yield at 4.22%, Dollar index 103.45, evening Globex session active. Keep it engaging, direct, and practical.`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [
+                            { role: "user", parts: [{ text: systemContext + "\n\nUser Prompt: " + prompt }] }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    textContent.innerText = data.candidates[0].content.parts[0].text;
+                } else {
+                    textContent.innerText = "Error generating script. Check your API key or quota.";
+                }
+            } catch (err) {
+                textContent.innerText = "Network error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                icon.classList.remove('animate-spin');
+            }
+        }
+
+        function copyGeneratedScript() {
+            const text = document.getElementById('script-text-content').innerText;
+            navigator.clipboard.writeText(text);
+            alert("Script copied to clipboard!");
+        }
 
         const sessionData = {
             tokyo: {
@@ -534,13 +668,6 @@
                             p3: "On the order flow side, overnight participants are eyeing the upcoming Tokyo open. Semiconductor leadership from the cash session is spilling over into electronic Asian sentiment.",
                             p4: "For your TikTok or live streams, highlight this: overnight ranges are clean, but patience is required until European liquidity enters the book. Don't chase early noise.",
                             p5: "Stay disciplined, keep your risk parameters tight, and let the market show its hand before placing overnight orders!"
-                        },
-                        {
-                            p1: "Streamer briefing angle: The transition from the New York cash close to the evening Globex session is moving exactly as anticipated. Tech strength and stable bond yields are setting a constructive tone.",
-                            p2: "Traders are digesting the stellar 55.4 services PMI from earlier alongside the debt auction results. There's no panic, just steady institutional duration adjustment.",
-                            p3: "As we head toward the Tokyo handover, keep an eye on how key support levels on MNQ hold. Buyers are clearly defending opening structural boundaries.",
-                            p4: "Actionable takeaway for tonight: Use quiet consolidation periods to map out your pre-market levels for tomorrow's London session. Preparation beats reaction every time.",
-                            p5: "Trade smart, protect your capital, and let's capture those clean moves together!"
                         }
                     ]
                 },
@@ -570,13 +697,6 @@
                             p3: "В стакане ордеров перед открытием Токио наблюдается спокойный переток ликвидности. Никаких признаков паники или агрессивного шорта нет.",
                             p4: "Что сказать зрителям на TikTok? Ночные рынки любят тишину и уважение к уровням. Не гонитесь за шумом, ждите подтверждений от институциональных зон.",
                             p5: "Торгуем системно, бережем депозит и готовимся к новому продуктивному дню!"
-                        },
-                        {
-                            p1: "Практический фокус брифинга: Мы плавно перешагнули из американской кассовой сессии в вечерний Globex. Основные индексы удерживают завоеванные позиции.",
-                            p2: "Утренний сильный PMI в сфере услуг (55.4) и стабильный доллар продолжают оказывать психологическую поддержку быкам в преддверии азиатских торгов.",
-                            p3: "Обратите внимание на защиту балансовых зон по MNQ: покупатели контролируют инициативу вблизи ключевых скользящих средних.",
-                            p4: "Совет для стрима: используйте вечернее время для глубокой подготовки уровней, чтобы на утренней сессии действовать на опережение, а не догонять рынок.",
-                            p5: "Дисциплина и холодный расчет — главные ключи к успешному трейдингу. Поехали дальше!"
                         }
                     ]
                 }
@@ -601,13 +721,6 @@
                             p3: "Energy futures are providing a stable backdrop for eurozone manufacturing, easing cost pressures.",
                             p4: "As we bridge the gap towards the London open, keep monitoring overnight US index futures for continuation patterns.",
                             p5: "European session prep is underway. Stay sharp for the early morning London bell!"
-                        },
-                        {
-                            p1: "Alternative London angle: European bourses are gearing up for a balanced open. Bond yields across the continent reflect calm policy expectations.",
-                            p2: "Sterling and euro pairs are consolidating in tight ranges, waiting for fresh inflation and business climate prints.",
-                            p3: "For your morning streams, emphasize that European pre-market action is setting a stable bridge from the Asian overnight close.",
-                            p4: "Keep your charts focused on key Frankfurt and London opening ranges before the New York pre-market kicks in.",
-                            p5: "Plan your trades carefully and execute with confidence!"
                         }
                     ]
                 },
@@ -630,13 +743,6 @@
                             p3: "Энергетические контракты создают надежный фундамент для европейской промышленности.",
                             p4: "Пока идет переход к лондонскому открытию, держим в поле зрения ночную динамику индексов США.",
                             p5: "Подготовка к Европе идет по плану. Готовимся к утреннему звонку в Лондоне!"
-                        },
-                        {
-                            p1: "Альтернативный ракурс для Лондона: европейские площадки открываются в спокойной обстановке без лишних потрясений.",
-                            p2: "Валютные пары с фунтом и евро зажаты в узких каналах, трейдеры ждут выхода локальных индексов.",
-                            p3: "Отличный момент для утреннего эфира: объясните зрителям, как европейские фьючерсы влияют на американские индексы.",
-                            p4: "Следим за открытием британской биржи и ждем европейский позитив.",
-                            p5: "Успешного торгового утра и чистых сделок!"
                         }
                     ]
                 }
@@ -661,13 +767,6 @@
                             p3: "The dollar index remains stable near 103.45 while currency traders establish morning positions.",
                             p4: "Get ready for the opening bell as liquidity scales up across major equity and futures exchanges.",
                             p5: "Pre-market preparation is active. Let's get our charts aligned for the New York open!"
-                        },
-                        {
-                            p1: "Pre-market action angle: Wall Street futures are building positive momentum right before the bell, backed by stable treasury yields.",
-                            p2: "Traders are locking in their risk profiles, ensuring all pre-market catalysts are mapped out on the charts.",
-                            p3: "A soft dollar index is continuing to act as a supportive tailwind for tech equities and Nasdaq futures.",
-                            p4: "For your pre-market stream: remind your audience to wait for the initial opening range formation before jumping into breakouts.",
-                            p5: "Get your setup ready and trade with complete clarity!"
                         }
                     ]
                 },
@@ -690,13 +789,6 @@
                             p3: "Индекс доллара стабилен у отметки 103.45, валютные трейдеры формируют утренние позиции.",
                             p4: "Готовимся к открытию звонка по мере роста ликвидности на площадках.",
                             p5: "Подготовка к премаркету активна. Настраиваем графики к открытию Нью-Йорка!"
-                        },
-                        {
-                            p1: "Ракурс премаркета: американские площадки готовятся открыть торги в зеленой зоне на фоне спокойного долгового рынка.",
-                            p2: "Крупные игроки завершают оценку рисков, а слабый доллар помогает фьючерсам на технологические компании.",
-                            p3: "Идеальный совет для зрителей стрима: не спешите открывать сделки на самом открытии, дайте сформироваться первичному диапазону.",
-                            p4: "Следим за ключевыми уровнями и действуем строго по торговому плану.",
-                            p5: "Отличного премаркета и профитных сделок!"
                         }
                     ]
                 }
@@ -721,13 +813,6 @@
                             p3: "The dollar index remains stable around 103.45 amidst steady rate cut expectations.",
                             p4: "Market breadth across major indices remains healthy with active institutional participation.",
                             p5: "Day session execution is steady. Respect your intraday levels and manage risk cleanly!"
-                        },
-                        {
-                            p1: "Live session focus: Regular trading hours are fully underway with robust participation in semiconductor and mega-cap tech shares.",
-                            p2: "Buyers continue to aggressively defend VWAP across major indices, demonstrating healthy underlying momentum.",
-                            p3: "Fixed income desks remain focused on yield stability following recent Treasury debt schedules.",
-                            p4: "Streamer note: Highlight how structural opening ranges are holding up against midday tests.",
-                            p5: "Execute cleanly, manage your risk, and trade like a professional!"
                         }
                     ]
                 },
@@ -750,13 +835,6 @@
                             p3: "Индекс доллара держится около 103.45 на фоне стабильных ожиданий по политике ФРС.",
                             p4: "Ширина рынка в основных индексах остается здоровой при активном участии фондов.",
                             p5: "Дневная сессия идет стабильно. Уважаем внутридневные уровни и держим риски под контролем!"
-                        },
-                        {
-                            p1: "Фокус активной сессии: основные торги идут полным ходом, акции технологического сектора задают тон всему рынку.",
-                            p2: "Покупатели уверенно удерживают VWAP во фьючерсах на Nasdaq и S&P, демонстрируя здоровый внутренний спрос.",
-                            p3: "Долговые рынки переваривают недавние аукционы без лишней суеты.",
-                            p4: "Совет для стрима: показывайте зрителям, как отрабатываются утренние уровни баланса.",
-                            p5: "Соблюдаем риск-менеджмент и забираем прибыль системно!"
                         }
                     ]
                 }
@@ -798,7 +876,7 @@
                 recapSub: "Simple conversational overview for streams and live chats",
                 copyBtn: "Copy",
                 openBtn: "Open",
-                footer: "MacroPulse Terminal v3.27 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.28 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
             },
             ru: {
                 subtitle: "Институциональный новостной терминал и обзор рынка",
@@ -834,7 +912,7 @@
                 recapSub: "Простой разговорный обзор для стримов и живых эфиров",
                 copyBtn: "Копировать",
                 openBtn: "Открыть",
-                footer: "MacroPulse Terminal v3.27 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.28 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
             }
         };
 
@@ -854,7 +932,7 @@
 
         function switchSessionManual(sessionKey) {
             activeSessionKey = sessionKey;
-            currentAngleIndex = 0; // reset angle on session switch
+            currentAngleIndex = 0;
             
             ['tokyo', 'london', 'nypremkt', 'nyopen'].forEach(key => {
                 const btn = document.getElementById('btn-session-' + key);
@@ -924,7 +1002,7 @@
 
             setTimeout(() => {
                 icon.classList.remove('animate-spin');
-                currentAngleIndex++; // Cycle to the next angle/perspective
+                currentAngleIndex++;
                 renderRecapAngle();
             }, 500);
         }
@@ -1032,7 +1110,7 @@
                     </head>
                     <body class="p-8 max-w-4xl mx-auto space-y-6">
                         <div class="flex items-center justify-between border-b border-gray-800 pb-4">
-                            <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Recap & Briefing</h1>
+                            <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Briefing Reader</h1>
                             <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer">Print / Save PDF</button>
                         </div>
                         <div class="bg-gray-900 border border-gray-800 p-8 rounded-2xl text-lg leading-relaxed space-y-6 shadow-2xl">
