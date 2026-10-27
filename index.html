@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.26</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.27</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -64,7 +64,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.26</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.27</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -127,10 +127,6 @@
             </div>
             <div class="overflow-hidden whitespace-nowrap flex-1 relative flex items-center">
                 <div class="animate-ticker text-xs font-mono text-gray-200 space-x-8" id="ticker-content">
-                    <span>🔴 <strong class="text-emerald-400">GLOBEX EVENING SESSION ACTIVE</strong> • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST • Institutional Order Flow Positive</span>
-                    <span class="text-blue-400">|</span>
-                    <span>⚡ <strong class="text-amber-400">MACRO BRIEFING</strong> • S&P Services PMI Printed 55.4 Strong • 2Y Note Auction ($69B) Absorbed Successfully • Stay Systematic & Manage Risk</span>
-                    <span class="text-blue-400">|</span>
                     <span>🔴 <strong class="text-emerald-400">GLOBEX EVENING SESSION ACTIVE</strong> • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST • Institutional Order Flow Positive</span>
                     <span class="text-blue-400">|</span>
                     <span>⚡ <strong class="text-amber-400">MACRO BRIEFING</strong> • S&P Services PMI Printed 55.4 Strong • 2Y Note Auction ($69B) Absorbed Successfully • Stay Systematic & Manage Risk</span>
@@ -443,7 +439,7 @@
                     </div>
                 </div>
 
-                <!-- MARKET RECAP & BRIEFING BOX -->
+                <!-- MARKET RECAP & BRIEFING BOX WITH NEW REFRESH BUTTON -->
                 <div class="bg-dark-800 border border-gray-700 rounded-xl p-5 space-y-4 shadow-2xl">
                     <div class="flex items-center justify-between pb-3 border-b border-gray-700/60 flex-wrap gap-2">
                         <div class="flex items-center space-x-2">
@@ -456,6 +452,11 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
+                            <!-- NEW DEDICATED REFRESH RECAP BUTTON -->
+                            <button onclick="refreshRecap()" class="bg-dark-900 hover:bg-dark-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer" title="Refresh Recap Angle">
+                                <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="recap-refresh-icon"></i>
+                                <span data-i18n="refreshBtn">Refresh</span>
+                            </button>
                             <button onclick="copyRecapText()" class="bg-dark-900 hover:bg-dark-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                                 <span data-i18n="copyBtn">Copy</span>
@@ -494,7 +495,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark-800 border-t border-gray-800 py-3 px-6 text-center text-xs text-gray-500 font-mono">
-        MacroPulse Terminal v3.26 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
+        MacroPulse Terminal v3.27 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
     </footer>
 
     <!-- JavaScript Logic & Translations -->
@@ -503,6 +504,7 @@
 
         let currentLang = 'en'; 
         let activeSessionKey = 'tokyo'; 
+        let currentAngleIndex = 0;
 
         const sessionData = {
             tokyo: {
@@ -518,11 +520,29 @@
                     news3Desc: "Fixed-income investors process $69B two-year note auction absorption without major yield spikes heading into Asian hours.",
                     news4Title: "Global Central Bank Policy Outlook Remains Favorable for Risk Assets",
                     news4Desc: "Sovereign debt markets steady across European and North American timezones as algorithmic position rebalancing slows down.",
-                    recapP1: "Evening live sync active: CME Globex futures session has officially reopened for the evening. MNQ and ES contracts are holding firm following a successful 69-billion-dollar 2-year Treasury note auction absorption earlier today.",
-                    recapP2: "Reviewing how the cash session concluded: Wall Street closed out on a strong note with tech shares leading the momentum, supported by stable 10-year yields lingering around 4.22% and a soft dollar index near 103.45.",
-                    recapP3: "As we transition into the evening Asian hours and approach the Tokyo open at 7:00 PM EST, liquidity is shifting toward overnight positioning. Early electronic order flow shows steady participants maintaining long bias in major index futures.",
-                    recapP4: "What to expect during the overnight hours? Watch for initial Asian session reaction to US debt refunding digests and steady currency ranges across USD pairs before European desks take over early tomorrow morning.",
-                    recapP5: "Evening session is live. Let's manage overnight risk carefully, respect structural levels, and stay prepared for all macro developments!"
+                    angles: [
+                        {
+                            p1: "Evening live sync active: CME Globex futures session has officially reopened for the evening. MNQ and ES contracts are holding firm following a successful 69-billion-dollar 2-year Treasury note auction absorption earlier today.",
+                            p2: "Reviewing how the cash session concluded: Wall Street closed out on a strong note with tech shares leading the momentum, supported by stable 10-year yields lingering around 4.22% and a soft dollar index near 103.45.",
+                            p3: "As we transition into the evening Asian hours and approach the Tokyo open at 7:00 PM EST, liquidity is shifting toward overnight positioning. Early electronic order flow shows steady participants maintaining long bias in major index futures.",
+                            p4: "What to expect during the overnight hours? Watch for initial Asian session reaction to US debt refunding digests and steady currency ranges across USD pairs before European desks take over early tomorrow morning.",
+                            p5: "Evening session is live. Let's manage overnight risk carefully, respect structural levels, and stay prepared for all macro developments!"
+                        },
+                        {
+                            p1: "Fresh angle update: Looking at the macro structure as Globex re-opens, the smooth absorption of the 69B 2-year note auction has removed immediate debt-ceiling and liquidity jitters from traders' radars.",
+                            p2: "With 10-year yields anchored at 4.22% and the dollar softening to 103.45, algorithmic desks in Asia are finding fertile ground to support index futures without aggressive short-selling pressure.",
+                            p3: "On the order flow side, overnight participants are eyeing the upcoming Tokyo open. Semiconductor leadership from the cash session is spilling over into electronic Asian sentiment.",
+                            p4: "For your TikTok or live streams, highlight this: overnight ranges are clean, but patience is required until European liquidity enters the book. Don't chase early noise.",
+                            p5: "Stay disciplined, keep your risk parameters tight, and let the market show its hand before placing overnight orders!"
+                        },
+                        {
+                            p1: "Streamer briefing angle: The transition from the New York cash close to the evening Globex session is moving exactly as anticipated. Tech strength and stable bond yields are setting a constructive tone.",
+                            p2: "Traders are digesting the stellar 55.4 services PMI from earlier alongside the debt auction results. There's no panic, just steady institutional duration adjustment.",
+                            p3: "As we head toward the Tokyo handover, keep an eye on how key support levels on MNQ hold. Buyers are clearly defending opening structural boundaries.",
+                            p4: "Actionable takeaway for tonight: Use quiet consolidation periods to map out your pre-market levels for tomorrow's London session. Preparation beats reaction every time.",
+                            p5: "Trade smart, protect your capital, and let's capture those clean moves together!"
+                        }
+                    ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Вечерняя сессия Globex и Азия",
@@ -536,11 +556,29 @@
                     news3Desc: "Инвесторы переварили поглощение нового госдолга без резких скачков доходности перед азиатскими торгами.",
                     news4Title: "Прогноз политики центробанков остается благоприятным для рисковых активов",
                     news4Desc: "Рынки суверенного долга стабилизировались в американской и европейской зонах по мере снижения объемов ребалансировки.",
-                    recapP1: "Вечерняя живая синхронизация: Фьючерсная сессия CME Globex официально открылась на вечер. Контракты MNQ и ES уверенно держатся после успешного дневного аукциона гособлигаций на 69 миллиардов.",
-                    recapP2: "Итоги завершившейся дневной сессии: Уолл-стрит закрылась в уверенном плюсе, техсектор вел за собой рынок на фоне стабильной доходности 10леток на 4.22% и слабого доллара на 103.45.",
-                    recapP3: "По мере перехода к вечерним азиатским часам и в преддверии открытия Токио в 19:00 EST, ликвидность смещается в сторону ночного позиционирования. Биржевой стакан показывает сохранение лонгового настроя.",
-                    recapP4: "Чего ждать ночью? Следим за реакцией азиатских площадок на новости по американскому госдолгу и за спокойным диапазоном валютных пар перед открытием Европы.",
-                    recapP5: "Вечерняя сессия в работе. Аккуратно управляем рисками и следим за развитием событий!"
+                    angles: [
+                        {
+                            p1: "Вечерняя живая синхронизация: Фьючерсная сессия CME Globex официально открылась на вечер. Контракты MNQ и ES уверенно держатся после успешного дневного аукциона гособлигаций на 69 миллиардов.",
+                            p2: "Итоги завершившейся дневной сессии: Уолл-стрит закрылась в уверенном плюсе, техсектор вел за собой рынок на фоне стабильной доходности 10леток на 4.22% и слабого доллара на 103.45.",
+                            p3: "По мере перехода к вечерним азиатским часам и в преддверии открытия Токио в 19:00 EST, ликвидность смещается в сторону ночного позиционирования. Биржевой стакан показывает сохранение лонгового настроя.",
+                            p4: "Чего ждать ночью? Следим за реакцией азиатских площадок на новости по американскому госдолгу и за спокойным диапазоном валютных пар перед открытием Европы.",
+                            p5: "Вечерняя сессия в работе. Аккуратно управляем рисками и следим за развитием событий!"
+                        },
+                        {
+                            p1: "Альтернативный ракурс для эфира: Успешное поглощение 69-миллиардного аукциона двухлеток сняло главные страхи долгового рынка на вечернюю сессию.",
+                            p2: "Доходность 10-летних облигаций замерла на 4.22%, а индекс доллара просел к 103.45. Это дает отличный фундамент для ночных покупателей фьючерсов на индекс Nasdaq.",
+                            p3: "В стакане ордеров перед открытием Токио наблюдается спокойный переток ликвидности. Никаких признаков паники или агрессивного шорта нет.",
+                            p4: "Что сказать зрителям на TikTok? Ночные рынки любят тишину и уважение к уровням. Не гонитесь за шумом, ждите подтверждений от институциональных зон.",
+                            p5: "Торгуем системно, бережем депозит и готовимся к новому продуктивному дню!"
+                        },
+                        {
+                            p1: "Практический фокус брифинга: Мы плавно перешагнули из американской кассовой сессии в вечерний Globex. Основные индексы удерживают завоеванные позиции.",
+                            p2: "Утренний сильный PMI в сфере услуг (55.4) и стабильный доллар продолжают оказывать психологическую поддержку быкам в преддверии азиатских торгов.",
+                            p3: "Обратите внимание на защиту балансовых зон по MNQ: покупатели контролируют инициативу вблизи ключевых скользящих средних.",
+                            p4: "Совет для стрима: используйте вечернее время для глубокой подготовки уровней, чтобы на утренней сессии действовать на опережение, а не догонять рынок.",
+                            p5: "Дисциплина и холодный расчет — главные ключи к успешному трейдингу. Поехали дальше!"
+                        }
+                    ]
                 }
             },
             london: {
@@ -556,11 +594,22 @@
                     news3Desc: "Sterling crosses maintain quiet ranges as London trading desks prepare for morning auction schedules.",
                     news4Title: "Energy Contracts Stabilize on Moderate Continental Weather Outlook",
                     news4Desc: "Natural gas and power futures provide cost relief for eurozone manufacturers ahead of winter.",
-                    recapP1: "Preparing for the European session: DAX and FTSE futures are holding steady in early electronic trading, awaiting upcoming European economic indicators.",
-                    recapP2: "ECB expectations remain well-anchored, and UK gilt yields display quiet composure across sterling crosses.",
-                    recapP3: "Energy futures are providing a stable backdrop for eurozone manufacturing, easing cost pressures.",
-                    recapP4: "As we bridge the gap towards the London open, keep monitoring overnight US index futures for continuation patterns.",
-                    recapP5: "European session prep is underway. Stay sharp for the early morning London bell!"
+                    angles: [
+                        {
+                            p1: "Preparing for the European session: DAX and FTSE futures are holding steady in early electronic trading, awaiting upcoming European economic indicators.",
+                            p2: "ECB expectations remain well-anchored, and UK gilt yields display quiet composure across sterling crosses.",
+                            p3: "Energy futures are providing a stable backdrop for eurozone manufacturing, easing cost pressures.",
+                            p4: "As we bridge the gap towards the London open, keep monitoring overnight US index futures for continuation patterns.",
+                            p5: "European session prep is underway. Stay sharp for the early morning London bell!"
+                        },
+                        {
+                            p1: "Alternative London angle: European bourses are gearing up for a balanced open. Bond yields across the continent reflect calm policy expectations.",
+                            p2: "Sterling and euro pairs are consolidating in tight ranges, waiting for fresh inflation and business climate prints.",
+                            p3: "For your morning streams, emphasize that European pre-market action is setting a stable bridge from the Asian overnight close.",
+                            p4: "Keep your charts focused on key Frankfurt and London opening ranges before the New York pre-market kicks in.",
+                            p5: "Plan your trades carefully and execute with confidence!"
+                        }
+                    ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Подготовка к европейской сессии",
@@ -574,11 +623,22 @@
                     news3Desc: "Кросс-курсы фунта сохраняют узкие диапазоны в преддверии утренней сессии.",
                     news4Title: "Энергоносители стабильны на мягких прогнозах погоды в Европе",
                     news4Desc: "Газовые фьючерсы дают передышку промышленникам еврозоны перед началом зимы.",
-                    recapP1: "Готовимся к европейской сессии: фьючерсы на DAX и FTSE торгуются стабильно в ожидании европейской статистики.",
-                    recapP2: "Ожидания по ЕЦБ стабильны, британские гильты демонстрируют спокойствие в кросс-курсах с фунтом.",
-                    recapP3: "Энергетические контракты создают надежный фундамент для европейской промышленности.",
-                    recapP4: "Пока идет переход к лондонскому открытию, держим в поле зрения ночную динамику индексов США.",
-                    recapP5: "Подготовка к Европе идет по плану. Готовимся к утреннему звонку в Лондоне!"
+                    angles: [
+                        {
+                            p1: "Готовимся к европейской сессии: фьючерсы на DAX и FTSE торгуются стабильно в ожидании европейской статистики.",
+                            p2: "Ожидания по ЕЦБ стабильны, британские гильты демонстрируют спокойствие в кросс-курсах с фунтом.",
+                            p3: "Энергетические контракты создают надежный фундамент для европейской промышленности.",
+                            p4: "Пока идет переход к лондонскому открытию, держим в поле зрения ночную динамику индексов США.",
+                            p5: "Подготовка к Европе идет по плану. Готовимся к утреннему звонку в Лондоне!"
+                        },
+                        {
+                            p1: "Альтернативный ракурс для Лондона: европейские площадки открываются в спокойной обстановке без лишних потрясений.",
+                            p2: "Валютные пары с фунтом и евро зажаты в узких каналах, трейдеры ждут выхода локальных индексов.",
+                            p3: "Отличный момент для утреннего эфира: объясните зрителям, как европейские фьючерсы влияют на американские индексы.",
+                            p4: "Следим за открытием британской биржи и ждем европейский позитив.",
+                            p5: "Успешного торгового утра и чистых сделок!"
+                        }
+                    ]
                 }
             },
             nypremkt: {
@@ -594,15 +654,26 @@
                     news3Desc: "FX desks monitor major currency pairs ahead of initial US economic releases.",
                     news4Title: "Treasury Yields Stable as Bond Market Liquidity Returns",
                     news4Desc: "Fixed-income participants adjust portfolios ahead of regular cash trading hours.",
-                    recapP1: "Preparing for the New York pre-market: US index futures are showing early strength as bond yields hold steady around 4.22%.",
-                    recapP2: "Wall Street analysts are closely evaluating corporate earnings guidance and upcoming macro economic releases.",
-                    recapP3: "The dollar index remains stable near 103.45 while currency traders establish morning positions.",
-                    recapP4: "Get ready for the opening bell as liquidity scales up across major equity and futures exchanges.",
-                    recapP5: "Pre-market preparation is active. Let's get our charts aligned for the New York open!"
+                    angles: [
+                        {
+                            p1: "Preparing for the New York pre-market: US index futures are showing early strength as bond yields hold steady around 4.22%.",
+                            p2: "Wall Street analysts are closely evaluating corporate earnings guidance and upcoming macro economic releases.",
+                            p3: "The dollar index remains stable near 103.45 while currency traders establish morning positions.",
+                            p4: "Get ready for the opening bell as liquidity scales up across major equity and futures exchanges.",
+                            p5: "Pre-market preparation is active. Let's get our charts aligned for the New York open!"
+                        },
+                        {
+                            p1: "Pre-market action angle: Wall Street futures are building positive momentum right before the bell, backed by stable treasury yields.",
+                            p2: "Traders are locking in their risk profiles, ensuring all pre-market catalysts are mapped out on the charts.",
+                            p3: "A soft dollar index is continuing to act as a supportive tailwind for tech equities and Nasdaq futures.",
+                            p4: "For your pre-market stream: remind your audience to wait for the initial opening range formation before jumping into breakouts.",
+                            p5: "Get your setup ready and trade with complete clarity!"
+                        }
+                    ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Подготовка к премаркету США",
-                    wireUpdated: "Обновлено: Пн, 26 окт 2026 • Премаркет Наблюдение",
+                    wireUpdated: "Updated: Mon, Oct 26, 2026 • Pre-Market Watch",
                     tickerText: "🔔 ПРЕБАРКЕТ НЬЮ-ЙОРКА • Фьючерсы США показывают силу • Доходность бондов на 4.22% • Индекс доллара: 103.45 • Подготовка к открытию бирж",
                     news1Title: "Фьючерсы США показывают утренний рост перед звонком в Нью-Йорке",
                     news1Desc: "Индексные фьючерсы отскакивают на утренних торгах, доходность бондов держится на 4.22%.",
@@ -612,11 +683,22 @@
                     news3Desc: "Валютные столы отслеживают ключевые пары перед утренними релизами в США.",
                     news4Title: "Доходность трежерис стабильна по мере возврата ликвидности на бонды",
                     news4Desc: "Участники долгового рынка корректируют портфели к открытию наличных торгов.",
-                    recapP1: "Готовимся к премаркету Нью-Йорка: фьючерсы демонстрируют силу, доходность гособлигаций стабильна на 4.22%.",
-                    recapP2: "Аналитики Уолл-стрит внимательно оценивают прогнозы по компаниям и предстоящую статистику.",
-                    recapP3: "Индекс доллара стабилен у отметки 103.45, валютные трейдеры формируют утренние позиции.",
-                    recapP4: "Готовимся к открытию звонка по мере роста ликвидности на площадках.",
-                    recapP5: "Подготовка к премаркету активна. Настраиваем графики к открытию Нью-Йорка!"
+                    angles: [
+                        {
+                            p1: "Готовимся к премаркету Нью-Йорка: фьючерсы демонстрируют силу, доходность гособлигаций стабильна на 4.22%.",
+                            p2: "Аналитики Уолл-стрит внимательно оценивают прогнозы по компаниям и предстоящую статистику.",
+                            p3: "Индекс доллара стабилен у отметки 103.45, валютные трейдеры формируют утренние позиции.",
+                            p4: "Готовимся к открытию звонка по мере роста ликвидности на площадках.",
+                            p5: "Подготовка к премаркету активна. Настраиваем графики к открытию Нью-Йорка!"
+                        },
+                        {
+                            p1: "Ракурс премаркета: американские площадки готовятся открыть торги в зеленой зоне на фоне спокойного долгового рынка.",
+                            p2: "Крупные игроки завершают оценку рисков, а слабый доллар помогает фьючерсам на технологические компании.",
+                            p3: "Идеальный совет для зрителей стрима: не спешите открывать сделки на самом открытии, дайте сформироваться первичному диапазону.",
+                            p4: "Следим за ключевыми уровнями и действуем строго по торговому плану.",
+                            p5: "Отличного премаркета и профитных сделок!"
+                        }
+                    ]
                 }
             },
             nyopen: {
@@ -632,15 +714,26 @@
                     news3Desc: "FX markets price in ongoing macroeconomic developments and Fed policy outlook.",
                     news4Title: "Market Breadth Remains Healthy Across S&P 500 and Nasdaq Components",
                     news4Desc: "Institutional portfolio managers maintain active rotation into growth and semiconductor leaders.",
-                    recapP1: "New York day session is active: equities are trading on a constructive footing, with technology sectors leading volume.",
-                    recapP2: "Fixed income markets continue digesting treasury auction results and macroeconomic data flows.",
-                    recapP3: "The dollar index remains stable around 103.45 amidst steady rate cut expectations.",
-                    recapP4: "Market breadth across major indices remains healthy with active institutional participation.",
-                    recapP5: "Day session execution is steady. Respect your intraday levels and manage risk cleanly!"
+                    angles: [
+                        {
+                            p1: "New York day session is active: equities are trading on a constructive footing, with technology sectors leading volume.",
+                            p2: "Fixed income markets continue digesting treasury auction results and macroeconomic data flows.",
+                            p3: "The dollar index remains stable around 103.45 amidst steady rate cut expectations.",
+                            p4: "Market breadth across major indices remains healthy with active institutional participation.",
+                            p5: "Day session execution is steady. Respect your intraday levels and manage risk cleanly!"
+                        },
+                        {
+                            p1: "Live session focus: Regular trading hours are fully underway with robust participation in semiconductor and mega-cap tech shares.",
+                            p2: "Buyers continue to aggressively defend VWAP across major indices, demonstrating healthy underlying momentum.",
+                            p3: "Fixed income desks remain focused on yield stability following recent Treasury debt schedules.",
+                            p4: "Streamer note: Highlight how structural opening ranges are holding up against midday tests.",
+                            p5: "Execute cleanly, manage your risk, and trade like a professional!"
+                        }
+                    ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Дневная сессия Нью-Йорка",
-                    wireUpdated: "Обновлено: Пн, 26 окт 2026 • Дневная сессия Нью-Йорка Live",
+                    wireUpdated: "Updated: Mon, Oct 26, 2026 • New York Session Live",
                     tickerText: "🟢 ДНЕВНАЯ СЕССИЯ НЬЮ-ЙОРКА АКТИВНА • Технологический сектор лидирует по объемам • Ширина рынка S&P 500 и Nasdaq в норме • Покупатели защищают VWAP",
                     news1Title: "Акции Уолл-стрит торгуются конструктивно в течение дня",
                     news1Desc: "Основные индексы удерживают уверенные позиции, технологический сектор лидирует по объемам.",
@@ -650,11 +743,22 @@
                     news3Desc: "Валютные рынки закладывают в цены макроэкономические тенденции и риторику ФРС.",
                     news4Title: "Рыночная ширина остается здоровой в компонентах S&P 500 и Nasdaq",
                     news4Desc: "Институциональные менеджеры поддерживают ротацию в лидеров роста и полупроводников.",
-                    recapP1: "Дневная сессия Нью-Йорка активна: акции торгуются уверенно, техсектор ведет за собой объемы.",
-                    recapP2: "Долговые рынки продолжают переваривать итоги аукционов гособлигаций и макроданные.",
-                    recapP3: "Индекс доллара держится около 103.45 на фоне стабильных ожиданий по политике ФРС.",
-                    recapP4: "Ширина рынка в основных индексах остается здоровой при активном участии фондов.",
-                    recapP5: "Дневная сессия идет стабильно. Уважаем внутридневные уровни и держим риски под контролем!"
+                    angles: [
+                        {
+                            p1: "Дневная сессия Нью-Йорка активна: акции торгуются уверенно, техсектор ведет за собой объемы.",
+                            p2: "Долговые рынки продолжают переваривать итоги аукционов гособлигаций и макроданные.",
+                            p3: "Индекс доллара держится около 103.45 на фоне стабильных ожиданий по политике ФРС.",
+                            p4: "Ширина рынка в основных индексах остается здоровой при активном участии фондов.",
+                            p5: "Дневная сессия идет стабильно. Уважаем внутридневные уровни и держим риски под контролем!"
+                        },
+                        {
+                            p1: "Фокус активной сессии: основные торги идут полным ходом, акции технологического сектора задают тон всему рынку.",
+                            p2: "Покупатели уверенно удерживают VWAP во фьючерсах на Nasdaq и S&P, демонстрируя здоровый внутренний спрос.",
+                            p3: "Долговые рынки переваривают недавние аукционы без лишней суеты.",
+                            p4: "Совет для стрима: показывайте зрителям, как отрабатываются утренние уровни баланса.",
+                            p5: "Соблюдаем риск-менеджмент и забираем прибыль системно!"
+                        }
+                    ]
                 }
             }
         };
@@ -668,6 +772,7 @@
                 tickerLabel: "LIVE WIRE",
                 chartsHeader: "Macro Context Charts",
                 delayNotice: "⚠️ Chart quotes delayed by 15 mins (Exchange rule). News & Briefing feed is live-synced.",
+                refreshBtn: "Refresh",
                 lastSync: "Last Web Search",
                 sidebarTitle: "Select Session News Wire",
                 tokyoBtn: "Tokyo / Globex Evening",
@@ -693,7 +798,7 @@
                 recapSub: "Simple conversational overview for streams and live chats",
                 copyBtn: "Copy",
                 openBtn: "Open",
-                footer: "MacroPulse Terminal v3.26 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.27 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
             },
             ru: {
                 subtitle: "Институциональный новостной терминал и обзор рынка",
@@ -703,6 +808,7 @@
                 tickerLabel: "ЛЕНТА НОВОСТЕЙ",
                 chartsHeader: "Контекстные макро-графики",
                 delayNotice: "⚠️ Котировки графиков с задержкой 15 мин (правила биржи). Новостной поток и брифинг синхронизированы в реальном времени.",
+                refreshBtn: "Обновить",
                 lastSync: "Последний поиск",
                 sidebarTitle: "Выбор сессионного дайджеста",
                 tokyoBtn: "Токио / Вечерний Globex",
@@ -728,7 +834,7 @@
                 recapSub: "Простой разговорный обзор для стримов и живых эфиров",
                 copyBtn: "Копировать",
                 openBtn: "Открыть",
-                footer: "MacroPulse Terminal v3.26 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.27 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
             }
         };
 
@@ -748,6 +854,7 @@
 
         function switchSessionManual(sessionKey) {
             activeSessionKey = sessionKey;
+            currentAngleIndex = 0; // reset angle on session switch
             
             ['tokyo', 'london', 'nypremkt', 'nyopen'].forEach(key => {
                 const btn = document.getElementById('btn-session-' + key);
@@ -773,31 +880,53 @@
         }
 
         function renderActiveSessionContent() {
-            const data = sessionData[activeSessionKey][currentLang];
+            const sessObj = sessionData[activeSessionKey][currentLang];
             
-            document.getElementById('main-heading').innerText = data.mainHeading;
-            document.getElementById('wire-update-time').innerText = data.wireUpdated;
+            document.getElementById('main-heading').innerText = sessObj.mainHeading;
+            document.getElementById('wire-update-time').innerText = sessObj.wireUpdated;
             
-            const tickerHtml = `<span>${data.tickerText}</span><span class="text-blue-400">|</span><span>${data.tickerText}</span><span class="text-blue-400">|</span>`;
+            const tickerHtml = `<span>${sessObj.tickerText}</span><span class="text-blue-400">|</span><span>${sessObj.tickerText}</span><span class="text-blue-400">|</span>`;
             document.getElementById('ticker-content').innerHTML = tickerHtml;
 
-            document.getElementById('news-1-title').innerText = data.news1Title;
-            document.getElementById('news-1-desc').innerText = data.news1Desc;
+            document.getElementById('news-1-title').innerText = sessObj.news1Title;
+            document.getElementById('news-1-desc').innerText = sessObj.news1Desc;
 
-            document.getElementById('news-2-title').innerText = data.news2Title;
-            document.getElementById('news-2-desc').innerText = data.news2Desc;
+            document.getElementById('news-2-title').innerText = sessObj.news2Title;
+            document.getElementById('news-2-desc').innerText = sessObj.news2Desc;
 
-            document.getElementById('news-3-title').innerText = data.news3Title;
-            document.getElementById('news-3-desc').innerText = data.news3Desc;
+            document.getElementById('news-3-title').innerText = sessObj.news3Title;
+            document.getElementById('news-3-desc').innerText = sessObj.news3Desc;
 
-            document.getElementById('news-4-title').innerText = data.news4Title;
-            document.getElementById('news-4-desc').innerText = data.news4Desc;
+            document.getElementById('news-4-title').innerText = sessObj.news4Title;
+            document.getElementById('news-4-desc').innerText = sessObj.news4Desc;
 
-            document.getElementById('recap-p1').innerText = data.recapP1;
-            document.getElementById('recap-p2').innerText = data.recapP2;
-            document.getElementById('recap-p3').innerText = data.recapP3;
-            document.getElementById('recap-p4').innerText = data.recapP4;
-            document.getElementById('recap-p5').innerText = data.recapP5;
+            renderRecapAngle();
+        }
+
+        function renderRecapAngle() {
+            const sessObj = sessionData[activeSessionKey][currentLang];
+            const angles = sessObj.angles || [
+                { p1: "Default recap paragraph 1", p2: "Default recap paragraph 2", p3: "Default recap paragraph 3", p4: "Default recap paragraph 4", p5: "Default recap paragraph 5" }
+            ];
+            
+            const currentAngle = angles[currentAngleIndex % angles.length];
+
+            document.getElementById('recap-p1').innerText = currentAngle.p1;
+            document.getElementById('recap-p2').innerText = currentAngle.p2;
+            document.getElementById('recap-p3').innerText = currentAngle.p3;
+            document.getElementById('recap-p4').innerText = currentAngle.p4;
+            document.getElementById('recap-p5').innerText = currentAngle.p5;
+        }
+
+        function refreshRecap() {
+            const icon = document.getElementById('recap-refresh-icon');
+            icon.classList.add('animate-spin');
+
+            setTimeout(() => {
+                icon.classList.remove('animate-spin');
+                currentAngleIndex++; // Cycle to the next angle/perspective
+                renderRecapAngle();
+            }, 500);
         }
 
         function triggerSync() {
