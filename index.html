@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.29</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.30</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -63,13 +63,13 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.29</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.30</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
         </div>
 
-        <!-- Live Clocks & Controls (Visible on Mobile & Desktop) -->
+        <!-- Live Clocks & Controls -->
         <div class="flex items-center space-x-3 flex-wrap">
             <div class="flex items-center space-x-2 bg-dark-900/80 border border-gray-700/60 px-2.5 py-1.5 rounded-lg text-[11px] font-mono">
                 <span id="current-day-date" class="text-blue-400 font-semibold border-r border-gray-700 pr-2">--</span>
@@ -83,7 +83,7 @@
                 <span id="badge-ny" class="px-2 py-1 rounded bg-gray-800 text-gray-400 border border-gray-700">New York: --</span>
             </div>
 
-            <!-- Admin Settings Button (Visible only when unlocked) -->
+            <!-- Admin Settings Button -->
             <button id="admin-badge-btn" onclick="toggleAdminPanel()" class="hidden bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3 py-2 rounded-lg text-xs font-mono font-bold flex items-center space-x-1.5 transition-all cursor-pointer">
                 <i data-lucide="shield" class="w-4 h-4"></i>
                 <span>Admin AI</span>
@@ -132,9 +132,7 @@
             </div>
             <div class="overflow-hidden whitespace-nowrap flex-1 relative flex items-center">
                 <div class="animate-ticker text-xs font-mono text-gray-200 space-x-8" id="ticker-content">
-                    <span>🔴 <strong class="text-emerald-400">GLOBEX EVENING SESSION ACTIVE</strong> • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST • Institutional Order Flow Positive</span>
-                    <span class="text-blue-400">|</span>
-                    <span>⚡ <strong class="text-amber-400">MACRO BRIEFING</strong> • S&P Services PMI Printed 55.4 Strong • 2Y Note Auction ($69B) Absorbed Successfully • Stay Systematic & Manage Risk</span>
+                    <span>🔴 <strong class="text-emerald-400">SESSION LIVE</strong> • Real-time macro feeds synchronized • Monitor key intraday levels & order flow.</span>
                 </div>
             </div>
         </div>
@@ -154,7 +152,6 @@
 
             <!-- STABLE TRADINGVIEW MINI CHARTS ROW (SPY, QQQ, Gold) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- SPY Chart Widget -->
                 <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
                     <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
                         <span class="font-bold text-blue-400">SPY (S&P 500 ETF) — MACRO</span>
@@ -163,24 +160,11 @@
                     <div class="tradingview-widget-container flex-1 w-full">
                         <div class="tradingview-widget-container__widget h-full"></div>
                         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                        {
-                        "symbol": "AMEX:SPY",
-                        "width": "100%",
-                        "height": "100%",
-                        "locale": "en",
-                        "dateRange": "1D",
-                        "colorTheme": "dark",
-                        "trendLineColor": "#3b82f6",
-                        "underLineColor": "rgba(59, 130, 246, 0.1)",
-                        "underLineBottomColor": "rgba(59, 130, 246, 0)",
-                        "isTransparent": true,
-                        "autosize": true
-                        }
+                        {"symbol": "AMEX:SPY", "width": "100%", "height": "100%", "locale": "en", "dateRange": "1D", "colorTheme": "dark", "trendLineColor": "#3b82f6", "underLineColor": "rgba(59, 130, 246, 0.1)", "underLineBottomColor": "rgba(59, 130, 246, 0)", "isTransparent": true, "autosize": true}
                         </script>
                     </div>
                 </div>
 
-                <!-- QQQ Chart Widget -->
                 <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
                     <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
                         <span class="font-bold text-amber-400">QQQ (Nasdaq 100) — MACRO</span>
@@ -189,24 +173,11 @@
                     <div class="tradingview-widget-container flex-1 w-full">
                         <div class="tradingview-widget-container__widget h-full"></div>
                         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                        {
-                        "symbol": "NASDAQ:QQQ",
-                        "width": "100%",
-                        "height": "100%",
-                        "locale": "en",
-                        "dateRange": "1D",
-                        "colorTheme": "dark",
-                        "trendLineColor": "#f59e0b",
-                        "underLineColor": "rgba(245, 158, 11, 0.1)",
-                        "underLineBottomColor": "rgba(245, 158, 11, 0)",
-                        "isTransparent": true,
-                        "autosize": true
-                        }
+                        {"symbol": "NASDAQ:QQQ", "width": "100%", "height": "100%", "locale": "en", "dateRange": "1D", "colorTheme": "dark", "trendLineColor": "#f59e0b", "underLineColor": "rgba(245, 158, 11, 0.1)", "underLineBottomColor": "rgba(245, 158, 11, 0)", "isTransparent": true, "autosize": true}
                         </script>
                     </div>
                 </div>
 
-                <!-- Gold (XAUUSD) Chart Widget -->
                 <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
                     <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
                         <span class="font-bold text-yellow-400">XAUUSD (Gold Spot) — MACRO</span>
@@ -215,19 +186,7 @@
                     <div class="tradingview-widget-container flex-1 w-full">
                         <div class="tradingview-widget-container__widget h-full"></div>
                         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                        {
-                        "symbol": "OANDA:XAUUSD",
-                        "width": "100%",
-                        "height": "100%",
-                        "locale": "en",
-                        "dateRange": "1D",
-                        "colorTheme": "dark",
-                        "trendLineColor": "#eab308",
-                        "underLineColor": "rgba(234, 179, 8, 0.1)",
-                        "underLineBottomColor": "rgba(234, 179, 8, 0)",
-                        "isTransparent": true,
-                        "autosize": true
-                        }
+                        {"symbol": "OANDA:XAUUSD", "width": "100%", "height": "100%", "locale": "en", "dateRange": "1D", "colorTheme": "dark", "trendLineColor": "#eab308", "underLineColor": "rgba(234, 179, 8, 0.1)", "underLineBottomColor": "rgba(234, 179, 8, 0)", "isTransparent": true, "autosize": true}
                         </script>
                     </div>
                 </div>
@@ -245,41 +204,41 @@
                     <div class="space-y-2">
                         <button onclick="switchSessionManual('tokyo')" id="btn-session-tokyo" class="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-gray-700 bg-dark-900/60 hover:bg-dark-700 text-gray-300 flex items-center justify-between transition-all cursor-pointer">
                             <span class="flex items-center space-x-2"><span>🌙</span><span data-i18n="tokyoBtn">Tokyo / Globex Evening</span></span>
-                            <span class="text-[10px] font-mono text-emerald-400 font-semibold" id="status-tokyo-btn">Active Now</span>
+                            <span class="text-[10px] font-mono text-gray-500" id="status-tokyo-btn">Completed</span>
                         </button>
                         <button onclick="switchSessionManual('london')" id="btn-session-london" class="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-gray-700 bg-dark-900/60 hover:bg-dark-700 text-gray-300 flex items-center justify-between transition-all cursor-pointer">
                             <span class="flex items-center space-x-2"><span>🌅</span><span data-i18n="londonBtn">London Open News</span></span>
-                            <span class="text-[10px] font-mono text-gray-500" data-i18n="statusCompleted">Completed</span>
+                            <span class="text-[10px] font-mono text-gray-500" id="status-london-btn">Completed</span>
                         </button>
                         <button onclick="switchSessionManual('nypremkt')" id="btn-session-nypremkt" class="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-gray-700 bg-dark-900/60 hover:bg-dark-700 text-gray-300 flex items-center justify-between transition-all cursor-pointer">
                             <span class="flex items-center space-x-2"><span>🔔</span><span data-i18n="nyPreMktBtn">New York Pre-Market</span></span>
-                            <span class="text-[10px] font-mono text-gray-500" data-i18n="statusCompleted">Completed</span>
+                            <span class="text-[10px] font-mono text-emerald-400 font-semibold" id="status-nypremkt-btn">Active Now</span>
                         </button>
                         <button onclick="switchSessionManual('nyopen')" id="btn-session-nyopen" class="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium border border-gray-700 bg-dark-900/60 hover:bg-dark-700 text-gray-300 flex items-center justify-between transition-all cursor-pointer">
                             <span class="flex items-center space-x-2"><span>🔔</span><span data-i18n="nyOpenBtn">New York Day Session</span></span>
-                            <span class="text-[10px] font-mono text-gray-500" data-i18n="statusCompleted">Completed</span>
+                            <span class="text-[10px] font-mono text-gray-500" id="status-nyopen-btn">Completed</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Session Highlights -->
+                <!-- Session Highlights (Dynamic) -->
                 <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 space-y-3">
                     <div class="flex items-center justify-between">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 font-mono" data-i18n="highlightsTitle">Session Highlights</h3>
-                        <span id="highlights-focus" class="text-[10px] text-emerald-400 font-mono">Globex Reopen</span>
+                        <span id="highlights-focus" class="text-[10px] text-emerald-400 font-mono">Pre-Market</span>
                     </div>
                     <div class="space-y-2 text-xs font-mono">
                         <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
                             <div class="flex justify-between text-gray-400 text-[10px]">
-                               <span id="highlight-time">18:00 EST</span>
-                               <span class="text-emerald-400 font-semibold" id="highlight-event">Futures Globex Reopen</span>
+                               <span id="highlight-time">08:30 EST</span>
+                               <span class="text-emerald-400 font-semibold" id="highlight-event">Pre-Market Flow Active</span>
                             </div>
-                            <p class="text-gray-200 text-xs" id="highlight-desc">MNQ / ES evening liquidity flow active</p>
+                            <p class="text-gray-200 text-xs" id="highlight-desc">MNQ / ES positioning & yield monitoring</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Top 3 Nearest NQ / ES Catalysts Widget -->
+                <!-- Top 3 Nearest NQ / ES Catalysts (Dynamic) -->
                 <div class="bg-dark-800 border border-blue-500/30 rounded-xl p-4 space-y-3 shadow-lg shadow-blue-500/5">
                     <div class="flex items-center justify-between">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-blue-400 font-mono flex items-center space-x-1.5">
@@ -291,29 +250,29 @@
                     <div class="space-y-2 text-xs font-mono">
                         <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
                             <div class="flex justify-between text-gray-400 text-[10px]">
-                                <span class="text-yellow-400 font-semibold">19:00 EST</span>
-                                <span class="text-blue-400">Tokyo Open</span>
+                                <span class="text-yellow-400 font-semibold" id="cat1-time">08:30 EST</span>
+                                <span class="text-blue-400" id="cat1-tag">Economic Data</span>
                             </div>
-                            <p class="text-gray-200 text-[11px] font-sans font-medium" data-i18n="cat1">Asian Session Liquidity & FX Handover</p>
+                            <p class="text-gray-200 text-[11px] font-sans font-medium" id="cat1-text">Pre-market Employment & Housing Prints</p>
                         </div>
                         <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
                             <div class="flex justify-between text-gray-400 text-[10px]">
-                                <span class="text-yellow-400 font-semibold">21:00 EST</span>
-                                <span class="text-blue-400">Macro Flow</span>
+                                <span class="text-yellow-400 font-semibold" id="cat2-time">09:00 EST</span>
+                                <span class="text-blue-400" id="cat2-tag">Fed Speaker</span>
                             </div>
-                            <p class="text-gray-200 text-[11px] font-sans font-medium" data-i18n="cat2">Overnight Bond Yield & Treasury Futures Watch</p>
+                            <p class="text-gray-200 text-[11px] font-sans font-medium" id="cat2-text">Initial Opening Range & Liquidity Scans</p>
                         </div>
                         <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
                             <div class="flex justify-between text-gray-400 text-[10px]">
-                                <span class="text-yellow-400 font-semibold">03:00 EST</span>
-                                <span class="text-yellow-400">London Prep</span>
+                                <span class="text-yellow-400 font-semibold" id="cat3-time">09:29 EST</span>
+                                <span class="text-yellow-400" id="cat3-tag">Opening Bell</span>
                             </div>
-                            <p class="text-gray-200 text-[11px] font-sans font-medium" data-i18n="cat3">European Pre-Open Index Futures Action</p>
+                            <p class="text-gray-200 text-[11px] font-sans font-medium" id="cat3-text">Cash Session Opening Bell & Initial Balance</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Full-Day Economic Calendar -->
+                <!-- Full-Day Economic Calendar (Dynamic High Impact) -->
                 <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 space-y-3">
                     <div class="flex items-center justify-between">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 font-mono" data-i18n="fullDayTitle">Full-Day Economic Calendar</h3>
@@ -325,10 +284,10 @@
                     <div class="space-y-2 text-xs font-mono">
                         <div class="bg-dark-900 p-2.5 rounded border border-gray-700 space-y-1">
                             <div class="flex justify-between text-gray-400 text-[10px]">
-                                <span>13:00 EST</span>
-                                <span class="text-emerald-400 font-semibold">2Y Note Auction ($69B Completed)</span>
+                                <span id="cal-time">08:30 EST</span>
+                                <span class="text-red-400 font-semibold" id="cal-impact">🔴 HIGH IMPACT (Red Folder)</span>
                             </div>
-                            <p class="text-gray-200 text-[11px]">Stable Digest in Evening Wires</p>
+                            <p class="text-gray-200 text-[11px]" id="cal-desc">US Core Durable Goods / Retail Inventories</p>
                         </div>
                     </div>
                 </div>
@@ -370,7 +329,7 @@
                         <div class="space-y-1">
                             <div class="flex items-center space-x-2">
                                 <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono border border-emerald-500/20 font-semibold" data-i18n="wireAggregator">LIVE WEB SYNCED FEED</span>
-                                <span class="text-xs font-mono text-gray-400" id="wire-update-time">Updated: Just Now • Session Live</span>
+                                <span class="text-xs font-mono text-gray-400" id="wire-update-time">Updated: Live Session</span>
                             </div>
                             <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & News Flow</h2>
                         </div>
@@ -382,7 +341,7 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-xs font-mono text-gray-400">
                                     <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-semibold">Bloomberg Markets</span>
-                                    <span id="news-1-time">--:-- EST</span>
+                                    <span id="news-1-time" class="text-blue-400 font-semibold">--:-- EST</span>
                                 </div>
                                 <h3 class="font-bold text-white text-sm">
                                     <a href="https://www.bloomberg.com/markets" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
@@ -398,7 +357,7 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-xs font-mono text-gray-400">
                                     <span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20 font-semibold">Benzinga Pro</span>
-                                    <span id="news-2-time">--:-- EST</span>
+                                    <span id="news-2-time" class="text-blue-400 font-semibold">--:-- EST</span>
                                 </div>
                                 <h3 class="font-bold text-white text-sm">
                                     <a href="https://www.benzinga.com/" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
@@ -414,7 +373,7 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-xs font-mono text-gray-400">
                                     <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-semibold">Reuters Macro</span>
-                                    <span id="news-3-time">--:-- EST</span>
+                                    <span id="news-3-time" class="text-blue-400 font-semibold">--:-- EST</span>
                                 </div>
                                 <h3 class="font-bold text-white text-sm">
                                     <a href="https://www.reuters.com/markets/" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
@@ -430,7 +389,7 @@
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between text-xs font-mono text-gray-400">
                                     <span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-semibold">Financial Times</span>
-                                    <span id="news-4-time">--:-- EST</span>
+                                    <span id="news-4-time" class="text-blue-400 font-semibold">--:-- EST</span>
                                 </div>
                                 <h3 class="font-bold text-white text-sm">
                                     <a href="https://www.ft.com/global-economy" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
@@ -485,7 +444,7 @@
             </div>
         </div>
 
-        <!-- AUTHOR AI SCRIPT GENERATOR (MOVED TO THE VERY BOTTOM, ADMIN ONLY) -->
+        <!-- AUTHOR AI SCRIPT GENERATOR (ADMIN ONLY - BOTTOM) -->
         <div id="admin-ai-panel" class="hidden bg-gradient-to-r from-dark-800 via-dark-800 to-amber-950/20 border border-amber-500/40 rounded-xl p-5 space-y-4 shadow-2xl">
             <div class="flex items-center justify-between pb-3 border-b border-amber-500/20 flex-wrap gap-2">
                 <div class="flex items-center space-x-2">
@@ -530,7 +489,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark-800 border-t border-gray-800 py-3 px-6 text-center text-xs text-gray-500 font-mono">
-        MacroPulse Terminal v3.29 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
+        MacroPulse Terminal v3.30 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT
     </footer>
 
     <!-- JavaScript Logic & Translations -->
@@ -538,24 +497,36 @@
         lucide.createIcons();
 
         let currentLang = 'en'; 
-        let activeSessionKey = 'tokyo'; 
+        let activeSessionKey = 'nypremkt'; 
         let currentAngleIndex = 0;
 
-        // DATASETS FOR 4 SESSIONS (Tokyo, London, NY Pre-Market, NY Day Open)
+        // FULLY SYNCHRONIZED SESSION DATA FOR ALL WIDGETS
         const sessionData = {
             tokyo: {
                 en: {
                     mainHeading: "Market Intelligence & News Flow: Evening Globex & Asia Session",
                     wireUpdated: "Updated: Evening Globex Live",
-                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST • Institutional Order Flow Positive",
+                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • MNQ & ES Futures Holding Firm Post-Auction • 10-Year Yield Stable at 4.22% • Dollar Index: 103.45 • Next Focus: Tokyo Session Open at 19:00 EST",
+                    news1Time: "18:15 EST",
                     news1Title: "US Index Futures Open Higher as Overnight Globex Session Commences",
-                    news1Desc: "MNQ and ES futures hold onto day session gains following stable 2-year Treasury note auction results and resilient tech shares.",
+                    news1Desc: "MNQ and ES futures hold onto day session gains following stable 2-year Treasury note auction results.",
+                    news2Time: "18:30 EST",
                     news2Title: "Asian Markets Prepare for Tokyo Open Amid Soft Dollar Tone at 103.45",
-                    news2Desc: "Regional trading desks eye currency stability and PBOC liquidity guidelines as the evening Asian session handover begins.",
+                    news2Desc: "Regional trading desks eye currency stability and PBOC liquidity guidelines as evening Asian handover begins.",
+                    news3Time: "18:45 EST",
                     news3Title: "Treasury Refunding Digest: Bond Yields Hold Near 4.22% Post-Auction",
-                    news3Desc: "Fixed-income investors process $69B two-year note auction absorption without major yield spikes heading into Asian hours.",
+                    news3Desc: "Fixed-income investors process $69B two-year note auction absorption without major yield spikes.",
+                    news4Time: "18:55 EST",
                     news4Title: "Global Central Bank Policy Outlook Remains Favorable for Risk Assets",
-                    news4Desc: "Sovereign debt markets steady across European and North American timezones as algorithmic position rebalancing slows down.",
+                    news4Desc: "Sovereign debt markets steady across European and North American timezones during Globex reopening.",
+                    highlightTime: "18:00 EST",
+                    highlightEvent: "Futures Globex Reopen",
+                    highlightDesc: "MNQ / ES evening liquidity flow active",
+                    highlightFocus: "Globex Reopen",
+                    cat1Time: "19:00 EST", cat1Tag: "Tokyo Open", cat1Text: "Asian Session Liquidity & FX Handover",
+                    cat2Time: "21:00 EST", cat2Tag: "Macro Flow", cat2Text: "Overnight Bond Yield & Treasury Futures Watch",
+                    cat3Time: "03:00 EST", cat3Tag: "London Prep", cat3Text: "European Pre-Open Index Futures Action",
+                    calTime: "13:00 EST", calImpact: "🔴 HIGH IMPACT (Red Folder)", calDesc: "2-Year Note Treasury Auction ($69B Completed)",
                     angles: [
                         {
                             p1: "Evening live sync active: CME Globex futures session has officially reopened for the evening. MNQ and ES contracts are holding firm following a successful 69-billion-dollar 2-year Treasury note auction absorption earlier today.",
@@ -563,42 +534,40 @@
                             p3: "As we transition into the evening Asian hours and approach the Tokyo open at 7:00 PM EST, liquidity is shifting toward overnight positioning. Early electronic order flow shows steady participants maintaining long bias in major index futures.",
                             p4: "What to expect during the overnight hours? Watch for initial Asian session reaction to US debt refunding digests and steady currency ranges across USD pairs before European desks take over early tomorrow morning.",
                             p5: "Evening session is live. Let's manage overnight risk carefully, respect structural levels, and stay prepared for all macro developments!"
-                        },
-                        {
-                            p1: "Fresh angle update: Looking at the macro structure as Globex re-opens, the smooth absorption of the 69B 2-year note auction has removed immediate debt-ceiling and liquidity jitters from traders' radars.",
-                            p2: "With 10-year yields anchored at 4.22% and the dollar softening to 103.45, algorithmic desks in Asia are finding fertile ground to support index futures without aggressive short-selling pressure.",
-                            p3: "On the order flow side, overnight participants are eyeing the upcoming Tokyo open. Semiconductor leadership from the cash session is spilling over into electronic Asian sentiment.",
-                            p4: "For your TikTok or live streams, highlight this: overnight ranges are clean, but patience is required until European liquidity enters the book. Don't chase early noise.",
-                            p5: "Stay disciplined, keep your risk parameters tight, and let the market show its hand before placing overnight orders!"
                         }
                     ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Вечерняя сессия Globex и Азия",
                     wireUpdated: "Обновлено: Вечерняя сессия Globex Live",
-                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX АКТИВНА • Фьючерсы MNQ и ES стабильны после аукциона • Доходность 10леток: 4.22% • Индекс доллара: 103.45 • В фокусе: Открытие Токио в 19:00 EST • Институциональный поток позитивный",
+                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX АКТИВНА • Фьючерсы MNQ и ES стабильны после аукциона • Доходность 10леток: 4.22% • Индекс доллара: 103.45 • В фокусе: Открытие Токио в 19:00 EST",
+                    news1Time: "18:15 EST",
                     news1Title: "Фьючерсы на индексы США открылись ростом с началом сессии Globex",
-                    news1Desc: "Фьючерсы MNQ и ES удерживают дневной прирост после успешного размещения двухлетних гособлигаций на $69 млрд.",
+                    news1Desc: "Фьючерсы MNQ и ES удерживают дневной прирост после успешного размещения двухлетних гособлигаций.",
+                    news2Time: "18:30 EST",
                     news2Title: "Азиатские рынки готовятся к открытию Токио на фоне мягкого доллара",
-                    news2Desc: "Региональные столы следят за стабильностью валют и мерами НБК в начале вечерней азиатской сессии.",
+                    news2Desc: "Региональные столы следят за стабильностью валют и мерами НБК в начале вечерней сессии.",
+                    news3Time: "18:45 EST",
                     news3Title: "Итоги аукциона Минфина: доходность бондов держится около 4.22%",
-                    news3Desc: "Инвесторы переварили поглощение нового госдолга без резких скачков доходности перед азиатскими торгами.",
+                    news3Desc: "Инвесторы переварили поглощение нового госдолга без резких скачков доходности.",
+                    news4Time: "18:55 EST",
                     news4Title: "Прогноз политики центробанков остается благоприятным для рисковых активов",
-                    news4Desc: "Рынки суверенного долга стабилизировались в американской и европейской зонах по мере снижения объемов ребалансировки.",
+                    news4Desc: "Рынки суверенного долга стабилизировались в американской и европейской зонах.",
+                    highlightTime: "18:00 EST",
+                    highlightEvent: "Рестарт Globex",
+                    highlightDesc: "Вечерний поток ликвидности MNQ / ES активен",
+                    highlightFocus: "Globex Reopen",
+                    cat1Time: "19:00 EST", cat1Tag: "Открытие Токио", cat1Text: "Ликвидность Азии и переход FX",
+                    cat2Time: "21:00 EST", cat2Tag: "Макро Поток", cat2Text: "Ночные доходности бондов и трежерис",
+                    cat3Time: "03:00 EST", cat3Tag: "Подготовка Лондона", cat3Text: "Пред-открытие европейских индексных фьючерсов",
+                    calTime: "13:00 EST", calImpact: "🔴 HIGH IMPACT (Red Folder)", calDesc: "Аукцион 2-летних гособлигаций США ($69 млрд)",
                     angles: [
                         {
                             p1: "Вечерняя живая синхронизация: Фьючерсная сессия CME Globex официально открылась на вечер. Контракты MNQ и ES уверенно держатся после успешного дневного аукциона гособлигаций на 69 миллиардов.",
                             p2: "Итоги завершившейся дневной сессии: Уолл-стрит закрылась в уверенном плюсе, техсектор вел за собой рынок на фоне стабильной доходности 10леток на 4.22% и слабого доллара на 103.45.",
-                            p3: "По мере перехода к вечерним азиатским часам и в преддверии открытия Токио в 19:00 EST, ликвидность смещается в сторону ночного позиционирования. Биржевой стакан показывает сохранение лонгового настроя.",
-                            p4: "Чего ждать ночью? Следим за реакцией азиатских площадок на новости по американскому госдолгу и за спокойным диапазоном валютных пар перед открытием Европы.",
+                            p3: "По мере перехода к вечерним азиатским часам и в преддверии открытия Токио в 19:00 EST, ликвидность смещается в сторону ночного позиционирования.",
+                            p4: "Чего ждать ночью? Следим за реакцией азиатских площадок на новости по американскому госдолгу перед открытием Европы.",
                             p5: "Вечерняя сессия в работе. Аккуратно управляем рисками и следим за развитием событий!"
-                        },
-                        {
-                            p1: "Альтернативный ракурс для эфира: Успешное поглощение 69-миллиардного аукциона двухлеток сняло главные страхи долгового рынка на вечернюю сессию.",
-                            p2: "Доходность 10-летних облигаций замерла на 4.22%, а индекс доллара просел к 103.45. Это дает отличный фундамент для ночных покупателей фьючерсов на индекс Nasdaq.",
-                            p3: "В стакане ордеров перед открытием Токио наблюдается спокойный переток ликвидности. Никаких признаков паники или агрессивного шорта нет.",
-                            p4: "Что сказать зрителям на TikTok? Ночные рынки любят тишину и уважение к уровням. Не гонитесь за шумом, ждите подтверждений от институциональных зон.",
-                            p5: "Торгуем системно, бережем депозит и готовимся к новому продуктивному дню!"
                         }
                     ]
                 }
@@ -608,14 +577,26 @@
                     mainHeading: "Market Intelligence & News Flow: European Session & London Open",
                     wireUpdated: "Updated: European Session Live",
                     tickerText: "🌅 EUROPEAN SESSION ACTIVE • DAX & FTSE Futures Steady • ECB Policy Expectations Anchored • UK Gilt Yields Calm • London Open in Progress",
+                    news1Time: "04:15 EST",
                     news1Title: "European Index Futures Active Following London Open",
-                    news1Desc: "DAX and FTSE futures hold steady in electronic trading as global macro desks process European economic releases.",
+                    news1Desc: "DAX and FTSE futures hold steady in electronic trading as global macro desks process European data.",
+                    news2Time: "04:30 EST",
                     news2Title: "ECB Rate Path Expectations Remain Anchored Amid Stable Inflation",
                     news2Desc: "Eurozone bond yields reflect balanced risk sentiment across continental banking networks.",
+                    news3Time: "05:00 EST",
                     news3Title: "UK Fiscal Outlook and Gilt Yields Focus During London Trading",
                     news3Desc: "Sterling crosses maintain active ranges as London trading desks process morning auction schedules.",
+                    news4Time: "05:20 EST",
                     news4Title: "Energy Contracts Stabilize on Moderate Continental Weather Outlook",
                     news4Desc: "Natural gas and power futures provide cost relief for eurozone manufacturers ahead of winter.",
+                    highlightTime: "03:00 EST",
+                    highlightEvent: "London Open & European Flow",
+                    highlightDesc: "DAX, FTSE & Eurozone liquidity active",
+                    highlightFocus: "London Open",
+                    cat1Time: "04:00 EST", cat1Tag: "Eurozone Data", cat1Text: "German Factory Orders & Trade Balance",
+                    cat2Time: "05:00 EST", cat2Tag: "ECB Focus", cat2Text: "European Central Bank Speeches & Yield Curve",
+                    cat3Time: "07:30 EST", cat3Tag: "UK Gilt Watch", cat3Text: "Sterling Liquidity & UK Debt Management Office",
+                    calTime: "05:00 EST", calImpact: "🔴 HIGH IMPACT (Red Folder)", calDesc: "Eurozone CPI Flash Estimate & Employment Change",
                     angles: [
                         {
                             p1: "European session is live: DAX and FTSE futures are trading actively following the London open, with European economic indicators in focus.",
@@ -630,14 +611,26 @@
                     mainHeading: "Рыночная разведка и новости: Европейская сессия и открытие Лондона",
                     wireUpdated: "Обновлено: Европейская сессия Live",
                     tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ АКТИВНА • Фьючерсы DAX и FTSE стабильны • Ставки ЕЦБ под контролем • Доходность британских гильтов спокойна",
+                    news1Time: "04:15 EST",
                     news1Title: "Евро-индексы активны после открытия лондонской сессии",
                     news1Desc: "Фьючерсы DAX и FTSE держатся стабильно в торгах в ожидании европейской статистики.",
+                    news2Time: "04:30 EST",
                     news2Title: "Ожидания по ставке ЕЦБ остаются якорем на фоне стабильной инфляции",
                     news2Desc: "Доходность бондов еврозоны отражает сбалансированный сентимент в банковском секторе.",
+                    news3Time: "05:00 EST",
                     news3Title: "Британские гильты и фискальный прогноз в фокусе лондонских торгов",
                     news3Desc: "Кросс-курсы фунта сохраняют рабочие диапазоны в утренней сессии.",
+                    news4Time: "05:20 EST",
                     news4Title: "Энергоносители стабильны на мягких прогнозах погоды в Европе",
                     news4Desc: "Газовые фьючерсы дают передышку промышленникам еврозоны перед началом зимы.",
+                    highlightTime: "03:00 EST",
+                    highlightEvent: "Открытие Лондона",
+                    highlightDesc: "Активность на DAX, FTSE и в еврозоне",
+                    highlightFocus: "London Open",
+                    cat1Time: "04:00 EST", cat1Tag: "Статистика ЕС", cat1Text: "Заказы в промышленности Германии",
+                    cat2Time: "05:00 EST", cat2Tag: "Риторика ЕЦБ", cat2Text: "Выступления представителей ЕЦБ и кривая доходности",
+                    cat3Time: "07:30 EST", cat3Tag: "Британские гильты", cat3Text: "Ликвидность фунта и агентство по управлению долгом УК",
+                    calTime: "05:00 EST", calImpact: "🔴 HIGH IMPACT (Red Folder)", calDesc: "Инфляция в еврозоне (CPI Flash Estimate)",
                     angles: [
                         {
                             p1: "Европейская сессия в работе: фьючерсы на DAX и FTSE торгуются активно после открытия Лондона.",
@@ -654,14 +647,26 @@
                     mainHeading: "Market Intelligence & News Flow: New York Pre-Market Prep",
                     wireUpdated: "Updated: New York Pre-Market Live",
                     tickerText: "🔔 NEW YORK PRE-MARKET PREP • US Index Futures Show Early Strength • Bond Yields Hover Near 4.22% • Dollar Index at 103.45 • Opening Bell Approaching",
+                    news1Time: "08:10 EST",
                     news1Title: "US Futures Point to Early Strength Ahead of New York Bell",
                     news1Desc: "Index futures rebound in early morning electronic trading as bond yields hover near 4.22%.",
+                    news2Time: "08:18 EST",
                     news2Title: "Corporate Earnings and Macro Calendar in Focus for US Equities",
-                    news2Desc: "Wall Street analysts review upcoming economic prints and tech sector guidance.",
+                    news2Desc: "Wall Street analysts review upcoming economic prints and tech sector earnings guidance.",
+                    news3Time: "08:25 EST",
                     news3Title: "Dollar Index Holds Near 103.45 as Currency Traders Position",
-                    news3Desc: "FX desks monitor major currency pairs ahead of initial US economic releases.",
+                    news3Desc: "FX desks monitor major currency pairs ahead of initial US economic data releases.",
+                    news4Time: "08:32 EST",
                     news4Title: "Treasury Yields Stable as Bond Market Liquidity Returns",
                     news4Desc: "Fixed-income participants adjust portfolios ahead of regular cash trading hours.",
+                    highlightTime: "08:30 EST",
+                    highlightEvent: "Pre-Market US Data & Yield Watch",
+                    highlightDesc: "MNQ / ES positioning & pre-market volume scaling",
+                    highlightFocus: "Pre-Market",
+                    cat1Time: "08:30 EST", cat1Tag: "High Impact Data", cat1Text: "US Durable Goods Orders / Retail Inventories (Red Folder)",
+                    cat2Time: "09:00 EST", cat2Tag: "Fed / Opening Range", cat2Text: "Federal Reserve Speaker & Initial Balance Prep",
+                    cat3Time: "09:29 EST", cat3Tag: "Opening Bell", cat3Text: "Cash Session Opening Bell & Institutional Liquidity Scale",
+                    calTime: "08:30 EST", calImpact: "🔴 HIGH IMPACT (Red Folder)", calDesc: "US Core Durable Goods Orders (MoM)",
                     angles: [
                         {
                             p1: "Preparing for the New York pre-market: US index futures are showing early strength as bond yields hold steady around 4.22%.",
@@ -669,6 +674,13 @@
                             p3: "The dollar index remains stable near 103.45 while currency traders establish morning positions.",
                             p4: "Get ready for the opening bell as liquidity scales up across major equity and futures exchanges.",
                             p5: "Pre-market preparation is active. Let's get our charts aligned for the New York open!"
+                        },
+                        {
+                            p1: "Pre-market action angle: Wall Street futures are building positive momentum right before the bell, backed by stable treasury yields.",
+                            p2: "Traders are locking in their risk profiles, ensuring all pre-market catalysts are mapped out on the charts.",
+                            p3: "A soft dollar index is continuing to act as a supportive tailwind for tech equities and Nasdaq futures.",
+                            p4: "For your pre-market stream: remind your audience to wait for the initial opening range formation before jumping into breakouts.",
+                            p5: "Get your setup ready and trade with complete clarity!"
                         }
                     ]
                 },
@@ -676,14 +688,26 @@
                     mainHeading: "Рыночная разведка и новости: Премаркет Нью-Йорка",
                     wireUpdated: "Обновлено: Премаркет США Live",
                     tickerText: "🔔 ПРЕБАРКЕТ НЬЮ-ЙОРКА • Фьючерсы США показывают силу • Доходность бондов на 4.22% • Индекс доллара: 103.45 • Подготовка к открытию бирж",
+                    news1Time: "08:10 EST",
                     news1Title: "Фьючерсы США показывают утренний рост перед звонком в Нью-Йорке",
                     news1Desc: "Индексные фьючерсы отскакивают на утренних торгах, доходность бондов держится на 4.22%.",
+                    news2Time: "08:18 EST",
                     news2Title: "Корпоративные отчеты и макрокалендарь в фокусе для акций США",
                     news2Desc: "Аналитики Уолл-стрит изучают прогнозы техсектора и предстоящую статистику.",
+                    news3Time: "08:25 EST",
                     news3Title: "Индекс доллара держится около 103.45 при позиционировании трейдеров",
                     news3Desc: "Валютные столы отслеживают ключевые пары перед утренними релизами в США.",
+                    news4Time: "08:32 EST",
                     news4Title: "Доходность трежерис стабильна по мере возврата ликвидности на бонды",
                     news4Desc: "Участники долгового рынка корректируют портфели к открытию наличных торгов.",
+                    highlightTime: "08:30 EST",
+                    highlightEvent: "Премаркет США и данные по бондам",
+                    highlightDesc: "Позиционирование MNQ / ES и рост утреннего объема",
+                    highlightFocus: "Pre-Market",
+                    cat1Time: "08:30 EST", cat1Tag: "Важные данные", cat1Text: "Заказы на товары длительного пользования в США (Red Folder)",
+                    cat2Time: "09:00 EST", cat2Tag: "Риторика ФРС", cat2Text: "Выступление представителя ФРС и подготовка к открытию",
+                    cat3Time: "09:29 EST", cat3Tag: "Звонок открытия", cat3Text: "Открытие сессии и масштаб институциональной ликвидности",
+                    calTime: "08:30 EST", calImpact: "🔴 HIGH IMPACT (Red Folder)", calDesc: "Заказы на товары длительного пользования (Core Durable Goods)",
                     angles: [
                         {
                             p1: "Идет премаркет Нью-Йорка: американские фьючерсы демонстрируют утреннюю силу на фоне стабильной доходности бондов на 4.22%.",
@@ -700,14 +724,26 @@
                     mainHeading: "Market Intelligence & News Flow: New York Day Session",
                     wireUpdated: "Updated: New York Day Session Live",
                     tickerText: "🟢 NEW YORK DAY SESSION ACTIVE • Technology Sector Leading Volume • S&P 500 & Nasdaq Breadth Healthy • VWAP Defense Active Across Major Indices",
+                    news1Time: "09:35 EST",
                     news1Title: "Wall Street Equities Trade Constructively During Day Session",
                     news1Desc: "Major stock indices maintain firm footing with technology sector leading volume and price action.",
+                    news2Time: "10:00 EST",
                     news2Title: "Treasury Auctions and Macro Wires Keep Fixed Income Active",
                     news2Desc: "Bond market participants digest recent note auction results and liquidity flows.",
+                    news3Time: "10:30 EST",
                     news3Title: "Dollar Index Stabilizes Around 103.45 Amid Steady Rate Expectations",
                     news3Desc: "FX markets price in ongoing macroeconomic developments and Fed policy outlook.",
+                    news4Time: "11:00 EST",
                     news4Title: "Market Breadth Remains Healthy Across S&P 500 and Nasdaq Components",
                     news4Desc: "Institutional portfolio managers maintain active rotation into growth and semiconductor leaders.",
+                    highlightTime: "09:30 EST",
+                    highlightEvent: "Cash Session Open & VWAP Defense",
+                    highlightDesc: "Active institutional volume & opening range breakout",
+                    highlightFocus: "Day Session",
+                    cat1Time: "10:00 EST", cat1Tag: "ISM / PMI Data", cat1Text: "Consumer Confidence & Services PMI Print",
+                    cat2Time: "13:00 EST", cat2Tag: "Treasury Flow", cat2Text: "Bond Market Auction Results & Refunding Impact",
+                    cat3Time: "14:00 EST", cat3Tag: "FOMC Minutes", cat3Text: "Federal Reserve Statement & Monetary Policy Minutes",
+                    calTime: "10:00 EST", calImpact: "🔴 HIGH IMPACT (Red Folder)", calDesc: "US CB Consumer Confidence / JOLTS Job Openings",
                     angles: [
                         {
                             p1: "New York day session is active: equities are trading on a constructive footing, with technology sectors leading volume.",
@@ -722,14 +758,26 @@
                     mainHeading: "Рыночная разведка и новости: Дневная сессия Нью-Йорка",
                     wireUpdated: "Обновлено: Дневная сессия Нью-Йорка Live",
                     tickerText: "🟢 ДНЕВНАЯ СЕССИЯ НЬЮ-ЙОРКА АКТИВНА • Технологический сектор лидирует по объемам • Ширина рынка S&P 500 и Nasdaq в норме • Покупатели защищают VWAP",
+                    news1Time: "09:35 EST",
                     news1Title: "Акции Уолл-стрит торгуются конструктивно в течение дня",
                     news1Desc: "Основные индексы удерживают уверенные позиции, технологический сектор лидирует по объемам.",
+                    news2Time: "10:00 EST",
                     news2Title: "Аукционы трежерис и макроленты поддерживают активность бондов",
                     news2Desc: "Участники долгового рынка переваривают результаты аукционов и потоки ликвидности.",
+                    news3Time: "10:30 EST",
                     news3Title: "Индекс доллара стабилизируется около 103.45 на ожидании ставок",
                     news3Desc: "Валютные рынки закладывают в цены макроэкономические тенденции и риторику ФРС.",
+                    news4Time: "11:00 EST",
                     news4Title: "Рыночная ширина остается здоровой в компонентах S&P 500 и Nasdaq",
                     news4Desc: "Институциональные менеджеры поддерживают ротацию в лидеров роста и полупроводников.",
+                    highlightTime: "09:30 EST",
+                    highlightEvent: "Открытие сессии и защита VWAP",
+                    highlightDesc: "Активный объем институционалов и пробой утреннего диапазона",
+                    highlightFocus: "Day Session",
+                    cat1Time: "10:00 EST", cat1Tag: "Индексы PMI", cat1Text: "Данные по доверию потребителей и деловой активности",
+                    cat2Time: "13:00 EST", cat2Tag: "Потоки трежерис", cat2Text: "Итоги аукционов гособлигаций и влияние на долг",
+                    cat3Time: "14:00 EST", cat3Tag: "Протоколы FOMC", cat3Text: "Публикация заявлений ФРС и монетарной политики",
+                    calTime: "10:00 EST", calImpact: "🔴 HIGH IMPACT (Red Folder)", calDesc: "Индекс потребительской уверенности США / Открытые вакансии JOLTS",
                     angles: [
                         {
                             p1: "Дневная сессия Нью-Йорка активна: основные индексы торгуются уверенно, технологический сектор ведет за собой объемы.",
@@ -763,9 +811,6 @@
                 statusActive: "Active Now",
                 highlightsTitle: "Session Highlights",
                 nqCatalystsTitle: "Top 3 NQ / ES Catalysts",
-                cat1: "Asian Session Liquidity & FX Handover",
-                cat2: "Overnight Bond Yield & Treasury Futures Watch",
-                cat3: "European Pre-Open Index Futures Action",
                 fullDayTitle: "Full-Day Economic Calendar",
                 macroLinksTitle: "Global Macro Wires & News",
                 link1: "1. Bloomberg Markets Live Wire",
@@ -778,7 +823,7 @@
                 recapSub: "Simple conversational overview for streams and live chats",
                 copyBtn: "Copy",
                 openBtn: "Open",
-                footer: "MacroPulse Terminal v3.29 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.30 • Streamer Live Briefing • Bloomberg, Benzinga, Reuters, FT"
             },
             ru: {
                 subtitle: "Институциональный новостной терминал и обзор рынка",
@@ -799,9 +844,6 @@
                 statusActive: "Активно",
                 highlightsTitle: "Главные события сессии",
                 nqCatalystsTitle: "Топ-3 катализатора для NQ / ES",
-                cat1: "Ликвидность Азии и переход FX",
-                cat2: "Ночные доходности бондов и фьючерсов",
-                cat3: "Пред-открытие европейских фьючерсов",
                 fullDayTitle: "Экономический календарь на день",
                 macroLinksTitle: "Макро-ленты и источники",
                 link1: "1. Bloomberg Markets (Live Wire)",
@@ -814,28 +856,22 @@
                 recapSub: "Простой разговорный обзор для стримов и живых эфиров",
                 copyBtn: "Копировать",
                 openBtn: "Открыть",
-                footer: "MacroPulse Terminal v3.29 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
+                footer: "MacroPulse Terminal v3.30 • Стрим-брифинг • Bloomberg, Benzinga, Reuters, FT"
             }
         };
 
-        // AUTOMATIC TIME-BASED SESSION DETECTION IN EST
         function detectSessionByEstTime(estDate) {
             const hours = estDate.getHours();
             const minutes = estDate.getMinutes();
             const timeNum = hours + minutes / 60;
 
-            // 18:00 to 03:59 EST -> Tokyo / Globex Evening
             if (timeNum >= 18.0 || timeNum < 4.0) return 'tokyo';
-            // 04:00 to 08:29 EST -> London Open News
             else if (timeNum >= 4.0 && timeNum < 8.5) return 'london';
-            // 08:30 to 09:29 EST -> New York Pre-Market
             else if (timeNum >= 8.5 && timeNum < 9.5) return 'nypremkt';
-            // 09:30 to 17:59 EST -> New York Day Session
             else return 'nyopen';
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Admin Unlocked Check via URL ?admin=gina71
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('admin') === 'gina71') {
                 localStorage.setItem('mp_admin_unlocked', 'true');
@@ -845,13 +881,11 @@
                 document.getElementById('admin-badge-btn').classList.remove('hidden');
             }
             
-            // Load saved Gemini Key if exists
             const savedKey = localStorage.getItem('mp_gemini_key');
             if (savedKey) {
                 document.getElementById('gemini-key-input').value = savedKey;
             }
 
-            // Immediately set session based on current EST time on load
             const now = new Date();
             const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
             const estDate = new Date(estStr);
@@ -903,7 +937,6 @@
             const systemContext = `You are a professional financial trading mentor and streamer (Live Market Coach). Write a high-energy, ready-to-read script for a YouTube video or TikTok based on the user's prompt. Current market context: MNQ/ES futures, 10-year yield at 4.22%, Dollar index 103.45. Keep it engaging, direct, and practical.`;
 
             try {
-                // Using gemini-1.5-flash with proper error handling
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -987,17 +1020,44 @@
             const tickerHtml = `<span>${sessObj.tickerText}</span><span class="text-blue-400">|</span><span>${sessObj.tickerText}</span><span class="text-blue-400">|</span>`;
             document.getElementById('ticker-content').innerHTML = tickerHtml;
 
+            // News items & timestamps
+            document.getElementById('news-1-time').innerText = sessObj.news1Time;
             document.getElementById('news-1-title').innerText = sessObj.news1Title;
             document.getElementById('news-1-desc').innerText = sessObj.news1Desc;
 
+            document.getElementById('news-2-time').innerText = sessObj.news2Time;
             document.getElementById('news-2-title').innerText = sessObj.news2Title;
             document.getElementById('news-2-desc').innerText = sessObj.news2Desc;
 
+            document.getElementById('news-3-time').innerText = sessObj.news3Time;
             document.getElementById('news-3-title').innerText = sessObj.news3Title;
             document.getElementById('news-3-desc').innerText = sessObj.news3Desc;
 
+            document.getElementById('news-4-time').innerText = sessObj.news4Time;
             document.getElementById('news-4-title').innerText = sessObj.news4Title;
             document.getElementById('news-4-desc').innerText = sessObj.news4Desc;
+
+            // Sidebar Dynamic Widgets
+            document.getElementById('highlights-focus').innerText = sessObj.highlightFocus;
+            document.getElementById('highlight-time').innerText = sessObj.highlightTime;
+            document.getElementById('highlight-event').innerText = sessObj.highlightEvent;
+            document.getElementById('highlight-desc').innerText = sessObj.highlightDesc;
+
+            document.getElementById('cat1-time').innerText = sessObj.cat1Time;
+            document.getElementById('cat1-tag').innerText = sessObj.cat1Tag;
+            document.getElementById('cat1-text').innerText = sessObj.cat1Text;
+
+            document.getElementById('cat2-time').innerText = sessObj.cat2Time;
+            document.getElementById('cat2-tag').innerText = sessObj.cat2Tag;
+            document.getElementById('cat2-text').innerText = sessObj.cat2Text;
+
+            document.getElementById('cat3-time').innerText = sessObj.cat3Time;
+            document.getElementById('cat3-tag').innerText = sessObj.cat3Tag;
+            document.getElementById('cat3-text').innerText = sessObj.cat3Text;
+
+            document.getElementById('cal-time').innerText = sessObj.calTime;
+            document.getElementById('cal-impact').innerText = sessObj.calImpact;
+            document.getElementById('cal-desc').innerText = sessObj.calDesc;
 
             renderRecapAngle();
         }
@@ -1047,20 +1107,8 @@
                 const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
                 const estDate = new Date(estStr);
 
-                // Auto-detect session by real EST time on sync
                 const detectedSession = detectSessionByEstTime(estDate);
                 switchSessionManual(detectedSession);
-
-                const currentH = estDate.getHours().toString().padStart(2, '0');
-                const currentM = estDate.getMinutes().toString().padStart(2, '0');
-                const m3 = (estDate.getMinutes() >= 3 ? estDate.getMinutes() - 3 : 0).toString().padStart(2, '0');
-                const m6 = (estDate.getMinutes() >= 6 ? estDate.getMinutes() - 6 : 0).toString().padStart(2, '0');
-                const m9 = (estDate.getMinutes() >= 9 ? estDate.getMinutes() - 9 : 0).toString().padStart(2, '0');
-
-                document.getElementById('news-1-time').innerText = `${currentH}:${m3} EST`;
-                document.getElementById('news-2-time').innerText = `${currentH}:${m6} EST`;
-                document.getElementById('news-3-time').innerText = `${currentH}:${m9} EST`;
-                document.getElementById('news-4-time').innerText = `${currentH}:${currentM} EST`;
 
                 freshness.innerText = 'Synced (' + estDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + ')';
             }, 800);
@@ -1126,7 +1174,7 @@
                     </head>
                     <body class="p-8 max-w-4xl mx-auto space-y-6">
                         <div class="flex items-center justify-between border-b border-gray-800 pb-4">
-                            <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Briefing Reader</h1>
+                            <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Recap & Briefing</h1>
                             <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer">Print / Save PDF</button>
                         </div>
                         <div class="bg-gray-900 border border-gray-800 p-8 rounded-2xl text-lg leading-relaxed space-y-6 shadow-2xl">
