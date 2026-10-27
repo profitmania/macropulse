@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.34</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.35</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.34</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.35</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -264,7 +264,7 @@
                     </div>
                 </div>
 
-                <!-- TOP 10 CATALYSTS & RADAR (REPLACED SESSION HIGHLIGHTS) -->
+                <!-- TOP 10 CATALYSTS & RADAR -->
                 <div class="bg-dark-800 border border-blue-500/30 rounded-xl p-4 space-y-3 shadow-lg shadow-blue-500/5">
                     <div class="flex items-center justify-between">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-blue-400 font-mono flex items-center space-x-1.5">
@@ -277,7 +277,7 @@
                         </a>
                     </div>
                     <div class="space-y-2 text-xs font-mono max-h-[550px] overflow-y-auto pr-1" id="top10-catalysts-container">
-                        <!-- Dynamically populated 10 items focusing heavily on upcoming perspectives -->
+                        <!-- Dynamically populated 10 items -->
                     </div>
                 </div>
 
@@ -339,7 +339,7 @@
                         </div>
                     </div>
 
-                    <!-- 4 Clickable Cards (Prioritizing key breaking articles) -->
+                    <!-- 4 Clickable Cards -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
                             <div class="space-y-2">
@@ -790,7 +790,7 @@
                         {
                             p1: "New York day session is active: equities are trading on a constructive footing, with technology sectors leading volume.",
                             p2: "Fixed income markets continue digesting treasury auction results and macroeconomic data flows.",
-                            p3: "The dollar index remains stable around 103.45 amidst steady rate cut expectations.",
+                            p3: "The dollar index remains stable near 103.45 amidst steady rate cut expectations.",
                             p4: "Market breadth across major indices remains healthy with active institutional participation.",
                             p5: "Day session execution is steady. Respect your intraday levels and manage risk cleanly!"
                         }
@@ -816,7 +816,7 @@
                         { time: "14:00 EST", tag: "Протоколы FOMC", text: "Публикация заявлений ФРС и монетарной политики", isDone: false },
                         { time: "15:00 EST", tag: "Защита VWAP", text: "Институциональная ребалансировка и защита VWAP", isDone: false },
                         { time: "15:45 EST", tag: "Дисбаланс", text: "Сканирование закрывающих дисбалансов в стакане", isDone: false },
-                        { time: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные потоки клиринга", isDone: false }
+                        { time: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные клиринговые потоки", isDone: false }
                     ],
                     angles: [
                         {
@@ -911,7 +911,30 @@
             const estDate = new Date(estStr);
             activeSessionKey = detectSessionByEstTime(estDate);
             switchSessionManual(activeSessionKey);
+
+            // АВТОМАТИЧЕСКАЯ СИНХРОНИЗАЦИЯ КАЖДЫЕ 15 МИНУТ ДЛЯ СТРИМОВ
+            setInterval(() => {
+                backgroundAutoSync();
+            }, 15 * 60 * 1000);
         });
+
+        function backgroundAutoSync() {
+            const now = new Date();
+            const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+            const estDate = new Date(estStr);
+
+            const detectedSession = detectSessionByEstTime(estDate);
+            if (detectedSession !== activeSessionKey) {
+                switchSessionManual(detectedSession);
+            } else {
+                renderActiveSessionContent();
+            }
+
+            const freshness = document.getElementById('freshness-time');
+            if (freshness) {
+                freshness.innerText = 'Auto-synced (' + estDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + ')';
+            }
+        }
 
         function toggleAdminPanel() {
             const panel = document.getElementById('admin-ai-panel');
@@ -1041,12 +1064,10 @@
             const tickerHtml = `<span>${sessObj.tickerText}</span><span class="text-blue-400">|</span><span>${sessObj.tickerText}</span><span class="text-blue-400">|</span>`;
             document.getElementById('ticker-content').innerHTML = tickerHtml;
 
-            // Flash Wire Ticker inside red/rose header zone (increased font size)
             const flashText = sessObj.flashWire;
             const flashHtml = `<span>${flashText}</span><span class="text-rose-400">|</span><span>${flashText}</span><span class="text-rose-400">|</span>`;
             document.getElementById('flash-wire-content').innerHTML = flashHtml;
 
-            // News items & timestamps
             document.getElementById('news-1-time').innerText = sessObj.news1Time;
             document.getElementById('news-1-title').innerText = sessObj.news1Title;
             document.getElementById('news-1-desc').innerText = sessObj.news1Desc;
@@ -1063,7 +1084,6 @@
             document.getElementById('news-4-title').innerText = sessObj.news4Title;
             document.getElementById('news-4-desc').innerText = sessObj.news4Desc;
 
-            // Render Top 10 Catalysts & Radar (replacing Session Highlights)
             const top10Container = document.getElementById('top10-catalysts-container');
             top10Container.innerHTML = '';
             
@@ -1135,14 +1155,7 @@
                 icon.classList.remove('animate-spin');
                 txt.innerText = translations[currentLang].syncBtn;
 
-                const now = new Date();
-                const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
-                const estDate = new Date(estStr);
-
-                const detectedSession = detectSessionByEstTime(estDate);
-                switchSessionManual(detectedSession);
-
-                freshness.innerText = 'Synced (' + estDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + ')';
+                backgroundAutoSync();
             }, 800);
         }
 
@@ -1205,6 +1218,7 @@
                         </style>
                     </head>
                     <body class="p-8 max-w-4xl mx-auto space-y-6">
+                        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
                         <div class="flex items-center justify-between border-b border-gray-800 pb-4">
                             <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Recap & Briefing</h1>
                             <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer">Print / Save PDF</button>
