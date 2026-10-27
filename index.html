@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.35</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.36</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.35</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.36</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -138,7 +138,7 @@
                 <span id="lang-label">RU / EN</span>
             </button>
 
-            <!-- Sync & Web Search Button -->
+            <!-- Global Sync & Search Button -->
             <button id="btn-sync" onclick="triggerSync()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 shadow-lg shadow-blue-600/20 transition-all active:scale-95 cursor-pointer">
                 <i data-lucide="refresh-cw" class="w-4 h-4" id="sync-icon"></i>
                 <span id="sync-text" data-i18n="syncBtn">Sync & Search Web</span>
@@ -277,7 +277,7 @@
                         </a>
                     </div>
                     <div class="space-y-2 text-xs font-mono max-h-[550px] overflow-y-auto pr-1" id="top10-catalysts-container">
-                        <!-- Dynamically populated 10 items -->
+                        <!-- Dynamically populated 10 items with real-time time checking -->
                     </div>
                 </div>
 
@@ -312,7 +312,7 @@
             <!-- Right Content -->
             <div class="lg:col-span-3 space-y-6">
 
-                <!-- 4 News Wires Grid with Updated Flash Wire Ticker -->
+                <!-- 4 News Wires Grid with Local Refresh Button -->
                 <div class="bg-dark-800 border border-gray-800 rounded-xl p-5 space-y-5 shadow-2xl">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-gray-700/60 gap-3">
                         <div class="space-y-1">
@@ -322,9 +322,14 @@
                             </div>
                             <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & News Flow</h2>
                         </div>
+                        <!-- LOCAL REFRESH BUTTON FOR NEWS FEED -->
+                        <button onclick="refreshNewsFeed()" class="bg-dark-900 hover:bg-dark-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer shadow-sm">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="news-refresh-icon"></i>
+                            <span data-i18n="refreshBtn">Refresh</span>
+                        </button>
                     </div>
 
-                    <!-- FLASH WIRE TICKER BANNER (RED/ROSE TINT + LARGER FONT) -->
+                    <!-- FLASH WIRE TICKER BANNER -->
                     <div class="bg-dark-900 border border-rose-500/40 rounded-lg py-2.5 px-3.5 flex items-center space-x-3 overflow-hidden shadow-inner">
                         <div class="flex items-center space-x-1.5 shrink-0 bg-rose-500/20 text-rose-400 border border-rose-500/30 px-2.5 py-1 rounded text-[11px] font-mono font-bold animate-pulse">
                             <i data-lucide="zap" class="w-3.5 h-3.5"></i>
@@ -339,7 +344,7 @@
                         </div>
                     </div>
 
-                    <!-- 4 Clickable Cards -->
+                    <!-- 4 Clickable Cards (Bloomberg, Benzinga, Reuters, FT) -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
                             <div class="space-y-2">
@@ -570,16 +575,16 @@
                     news3Time: "18:45 EST", news3Title: "Treasury Refunding Digest: Bond Yields Hold Near 4.22% Post-Auction", news3Desc: "Fixed-income investors process $69B two-year note auction absorption without major yield spikes.",
                     news4Time: "18:55 EST", news4Title: "Global Central Bank Policy Outlook Remains Favorable for Risk Assets", news4Desc: "Sovereign debt markets steady across European and North American timezones during Globex reopening.",
                     top10: [
-                        { time: "13:00 EST", tag: "✅ RELEASED", text: "2-Year Note Treasury Auction ($69B Completed)", isDone: true },
-                        { time: "19:00 EST", tag: "TOKYO OPEN", text: "Asian Session Liquidity & FX Handover", isDone: false, pulse: true },
-                        { time: "20:00 EST", tag: "Macro Flow", text: "Australian Retail Sales & Employment Index Flash", isDone: false },
-                        { time: "21:00 EST", tag: "Bond Watch", text: "Overnight Treasury Futures & Yield Curve Tracking", isDone: false },
-                        { time: "23:30 EST", tag: "JP Morgan", text: "Global Liquidity & Institutional Flow Briefing", isDone: false },
-                        { time: "01:00 EST", tag: "PBOC FIX", text: "People's Bank of China Yuan Central Parity Fixing", isDone: false },
-                        { time: "02:00 EST", tag: "UK Debt", text: "Bank of England Monetary Policy Discussion Notes", isDone: false },
-                        { time: "03:00 EST", tag: "LONDON PREP", text: "European Pre-Open Index Futures & DAX Action", isDone: false },
-                        { time: "04:00 EST", tag: "Euro Data", text: "German Industrial Production & Trade Balance Print", isDone: false },
-                        { time: "05:00 EST", tag: "ECB Focus", text: "European Central Bank Speeches & Rate Expectations", isDone: false }
+                        { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "2-Year Note Treasury Auction ($69B Completed)" },
+                        { time: "19:00", timeStr: "19:00 EST", tag: "TOKYO OPEN", text: "Asian Session Liquidity & FX Handover" },
+                        { time: "20:00", timeStr: "20:00 EST", tag: "Macro Flow", text: "Australian Retail Sales & Employment Index Flash" },
+                        { time: "21:00", timeStr: "21:00 EST", tag: "Bond Watch", text: "Overnight Treasury Futures & Yield Curve Tracking" },
+                        { time: "23:30", timeStr: "23:30 EST", tag: "JP Morgan", text: "Global Liquidity & Institutional Flow Briefing" },
+                        { time: "01:00", timeStr: "01:00 EST", tag: "PBOC FIX", text: "People's Bank of China Yuan Central Parity Fixing" },
+                        { time: "02:00", timeStr: "02:00 EST", tag: "UK Debt", text: "Bank of England Monetary Policy Discussion Notes" },
+                        { time: "03:00", timeStr: "03:00 EST", tag: "LONDON PREP", text: "European Pre-Open Index Futures & DAX Action" },
+                        { time: "04:00", timeStr: "04:00 EST", tag: "Euro Data", text: "German Industrial Production & Trade Balance Print" },
+                        { time: "05:00", timeStr: "05:00 EST", tag: "ECB Focus", text: "European Central Bank Speeches & Rate Expectations" }
                     ],
                     angles: [
                         {
@@ -602,16 +607,16 @@
                     news3Time: "18:45 EST", news3Title: "Итоги аукциона Минфина: доходность бондов держится около 4.22%", news3Desc: "Инвесторы переварили поглощение нового госдолга без резких скачков доходности.",
                     news4Time: "18:55 EST", news4Title: "Прогноз политики центробанков остается благоприятным для рисковых активов", news4Desc: "Рынки суверенного долга стабилизировались в американской и европейской зонах.",
                     top10: [
-                        { time: "13:00 EST", tag: "✅ ВЫШЛО", text: "Аукцион 2-летних гособлигаций США ($69 млрд)", isDone: true },
-                        { time: "19:00 EST", tag: "ТОКИО ОТКРЫТИЕ", text: "Ликвидность Азии и переход FX", isDone: false, pulse: true },
-                        { time: "20:00 EST", tag: "Макроданные", text: "Розничные продажи в Австралии и индекс занятости", isDone: false },
-                        { time: "21:00 EST", tag: "Бонды", text: "Ночные фьючерсы на трежерис и кривая доходности", isDone: false },
-                        { time: "23:30 EST", tag: "JP Morgan", text: "Обзор глобальной ликвидности и институциональных потоков", isDone: false },
-                        { time: "01:00 EST", tag: "ФИКСИНГ НБК", text: "Установление центрального паритета юаня Народным банком Китая", isDone: false },
-                        { time: "02:00 EST", tag: "Долг УК", text: "Протоколы обсуждения монетарной политики Банка Англии", isDone: false },
-                        { time: "03:00 EST", tag: "ЛОНДОН ПРЕП", text: "Премаркет фьючерсов на евро-индексы и DAX", isDone: false },
-                        { time: "04:00 EST", tag: "Данные ЕС", text: "Промышленное производство и торговый баланс Германии", isDone: false },
-                        { time: "05:00 EST", tag: "Риторика ЕЦБ", text: "Выступления представителей ЕЦБ и ожидания по ставкам", isDone: false }
+                        { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "Аукцион 2-летних гособлигаций США ($69 млрд)" },
+                        { time: "19:00", timeStr: "19:00 EST", tag: "ТОКИО ОТКРЫТИЕ", text: "Ликвидность Азии и переход FX" },
+                        { time: "20:00", timeStr: "20:00 EST", tag: "Макроданные", text: "Розничные продажи в Австралии и индекс занятости" },
+                        { time: "21:00", timeStr: "21:00 EST", tag: "Бонды", text: "Ночные фьючерсы на трежерис и кривая доходности" },
+                        { time: "23:30", timeStr: "23:30 EST", tag: "JP Morgan", text: "Обзор глобальной ликвидности и институциональных потоков" },
+                        { time: "01:00", timeStr: "01:00 EST", tag: "ФИКСИНГ НБК", text: "Установление центрального паритета юаня Народным банком Китая" },
+                        { time: "02:00", timeStr: "02:00 EST", tag: "Долг УК", text: "Протоколы обсуждения монетарной политики Банка Англии" },
+                        { time: "03:00", timeStr: "03:00 EST", tag: "ЛОНДОН ПРЕП", text: "Премаркет фьючерсов на евро-индексы и DAX" },
+                        { time: "04:00", timeStr: "04:00 EST", tag: "Данные ЕС", text: "Промышленное производство и торговый баланс Германии" },
+                        { time: "05:00", timeStr: "05:00 EST", tag: "Риторика ЕЦБ", text: "Выступления представителей ЕЦБ и ожидания по ставкам" }
                     ],
                     angles: [
                         {
@@ -636,16 +641,16 @@
                     news3Time: "05:00 EST", news3Title: "UK Fiscal Outlook and Gilt Yields Focus During London Trading", news3Desc: "Sterling crosses maintain active ranges as London trading desks process morning auction schedules.",
                     news4Time: "05:20 EST", news4Title: "Energy Contracts Stabilize on Moderate Continental Weather Outlook", news4Desc: "Natural gas and power futures provide cost relief for eurozone manufacturers ahead of winter.",
                     top10: [
-                        { time: "04:00 EST", tag: "✅ RELEASED", text: "German Factory Orders & Trade Balance Print", isDone: true },
-                        { time: "05:00 EST", tag: "🔴 HIGH IMPACT", text: "Eurozone CPI Flash Estimate & Employment Change", isDone: false, pulse: true },
-                        { time: "06:00 EST", tag: "ECB Focus", text: "European Central Bank Speeches & Yield Curve", isDone: false },
-                        { time: "07:30 EST", tag: "UK Gilts", text: "Sterling Liquidity & UK Debt Management Office", isDone: false },
-                        { time: "08:15 EST", tag: "US Futures", text: "New York Pre-Market Index Futures Rebound Watch", isDone: false },
-                        { time: "08:30 EST", tag: "US Data", text: "US Core Durable Goods & Jobless Claims Release", isDone: false, pulse: true },
-                        { time: "09:00 EST", tag: "Fed Watch", text: "Federal Reserve Official Speech & Opening Range", isDone: false },
-                        { time: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Institutional Scale", isDone: false },
-                        { time: "10:00 EST", tag: "PMI Data", text: "Services PMI & Consumer Confidence Print", isDone: false },
-                        { time: "14:00 EST", tag: "FOMC", text: "FOMC Minutes & Monetary Policy Statement", isDone: false }
+                        { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "German Factory Orders & Trade Balance Print" },
+                        { time: "05:00", timeStr: "05:00 EST", tag: "HIGH IMPACT", text: "Eurozone CPI Flash Estimate & Employment Change" },
+                        { time: "06:00", timeStr: "06:00 EST", tag: "ECB Focus", text: "European Central Bank Speeches & Yield Curve" },
+                        { time: "07:30", timeStr: "07:30 EST", tag: "UK Gilts", text: "Sterling Liquidity & UK Debt Management Office" },
+                        { time: "08:15", timeStr: "08:15 EST", tag: "US Futures", text: "New York Pre-Market Index Futures Rebound Watch" },
+                        { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "US Core Durable Goods & Jobless Claims Release" },
+                        { time: "09:00", timeStr: "09:00 EST", tag: "Fed Watch", text: "Federal Reserve Official Speech & Opening Range" },
+                        { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Institutional Scale" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "PMI Data", text: "Services PMI & Consumer Confidence Print" },
+                        { time: "14:00", timeStr: "14:00 EST", tag: "FOMC", text: "FOMC Minutes & Monetary Policy Statement" }
                     ],
                     angles: [
                         {
@@ -668,16 +673,16 @@
                     news3Time: "05:00 EST", news3Title: "Британские гильты и фискальный прогноз в фокусе лондонских торгов", news3Desc: "Кросс-курсы фунта сохраняют рабочие диапазоны в утренней сессии.",
                     news4Time: "05:20 EST", news4Title: "Энергоносители стабильны на мягких прогнозах погоды в Европе", news4Desc: "Газовые фьючерсы дают передышку промышленникам еврозоны перед началом зимы.",
                     top10: [
-                        { time: "04:00 EST", tag: "✅ ВЫШЛО", text: "Заказы в промышленности Германии и торговый баланс", isDone: true },
-                        { time: "05:00 EST", tag: "🔴 ВЫСОКОЕ ВЛИЯНИЕ", text: "Инфляция в еврозоне (CPI Flash Estimate) и занятость", isDone: false, pulse: true },
-                        { time: "06:00 EST", tag: "Риторика ЕЦБ", text: "Выступления представителей ЕЦБ и кривая доходности", isDone: false },
-                        { time: "07:30 EST", tag: "Британские гильты", text: "Ликвидность фунта и агентство по управлению госдолгом", isDone: false },
-                        { time: "08:15 EST", tag: "Фьючерсы США", text: "Оценка премаркета и подготовка к открытию Америки", isDone: false },
-                        { time: "08:30 EST", tag: "Данные США", text: "Заказы на товары длительного пользования и заявки по безработице", isDone: false, pulse: true },
-                        { time: "09:00 EST", tag: "Риторика ФРС", text: "Выступление представителя ФРС и открытие диапазона", isDone: false },
-                        { time: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и масштаб институциональной ликвидности", isDone: false },
-                        { time: "10:00 EST", tag: "Индексы PMI", text: "Деловая активность в сфере услуг и доверие потребителей", isDone: false },
-                        { time: "14:00 EST", tag: "FOMC", text: "Протоколы заседаний Федеральной резервной системы", isDone: false }
+                        { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "Заказы в промышленности Германии и торговый баланс" },
+                        { time: "05:00", timeStr: "05:00 EST", tag: "HIGH IMPACT", text: "Инфляция в еврозоне (CPI Flash Estimate) и занятость" },
+                        { time: "06:00", timeStr: "06:00 EST", tag: "Риторика ЕЦБ", text: "Выступления представителей ЕЦБ и кривая доходности" },
+                        { time: "07:30", timeStr: "07:30 EST", tag: "Британские гильты", text: "Ликвидность фунта и агентство по управлению госдолгом" },
+                        { time: "08:15", timeStr: "08:15 EST", tag: "Фьючерсы США", text: "Оценка премаркета и подготовка к открытию Америки" },
+                        { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Заказы на товары длительного пользования и заявки по безработице" },
+                        { time: "09:00", timeStr: "09:00 EST", tag: "Риторика ФРС", text: "Выступление представителя ФРС и открытие диапазона" },
+                        { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и масштаб институциональной ликвидности" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "Индексы PMI", text: "Деловая активность в сфере услуг и доверие потребителей" },
+                        { time: "14:00", timeStr: "14:00 EST", tag: "FOMC", text: "Протоколы заседаний Федеральной резервной системы" }
                     ],
                     angles: [
                         {
@@ -702,16 +707,16 @@
                     news3Time: "08:25 EST", news3Title: "Treasury Yields Stable at 4.22% as Fixed Income Desks Await Fed Speakers", news3Desc: "Bond markets maintain calm posture following $69B note auction absorption and morning economic releases.",
                     news4Time: "08:32 EST", news4Title: "Global Risk Sentiment Holds Steady Across European and US Timezones", news4Desc: "Sovereign debt and currency pairs exhibit orderly ranges with dollar index holding near 103.45.",
                     top10: [
-                        { time: "08:30 EST", tag: "✅ RELEASED", text: "US Core Durable Goods Orders / Retail Inventories", isDone: true },
-                        { time: "08:30 EST", tag: "✅ RELEASED", text: "Initial Jobless Claims & Employment Index Print", isDone: true },
-                        { time: "09:00 EST", tag: "🔴 FED SPEAKER", text: "Federal Reserve Official Speech & Monetary Outlook", isDone: false, pulse: true },
-                        { time: "09:15 EST", tag: "Pre-Open Flow", text: "S&P 500 & Nasdaq 100 Institutional Premarket Positioning", isDone: false },
-                        { time: "09:29 EST", tag: "🔔 OPENING BELL", text: "Cash Session Opening Bell & Opening Range Formation", isDone: false, pulse: true },
-                        { time: "10:00 EST", tag: "HIGH IMPACT", text: "US CB Consumer Confidence & JOLTS Job Openings", isDone: false },
-                        { time: "10:00 EST", tag: "ISM / PMI", text: "Services PMI & ISM Manufacturing Index Release", isDone: false },
-                        { time: "13:00 EST", tag: "Treasury Flow", text: "Bond Market Auction Results & Refunding Impact", isDone: false },
-                        { time: "14:00 EST", tag: "FOMC Minutes", text: "Federal Reserve Statement & Policy Minutes", isDone: false },
-                        { time: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Flow", isDone: false }
+                        { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "US Core Durable Goods Orders / Retail Inventories" },
+                        { time: "08:30", timeStr: "08:30 EST", tag: "Jobless Claims", text: "Initial Jobless Claims & Employment Index Print" },
+                        { time: "09:00", timeStr: "09:00 EST", tag: "FED SPEAKER", text: "Federal Reserve Official Speech & Monetary Outlook" },
+                        { time: "09:15", timeStr: "09:15 EST", tag: "Pre-Open Flow", text: "S&P 500 & Nasdaq 100 Institutional Premarket Positioning" },
+                        { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Opening Range Formation" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "HIGH IMPACT", text: "US CB Consumer Confidence & JOLTS Job Openings" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "ISM / PMI", text: "Services PMI & ISM Manufacturing Index Release" },
+                        { time: "13:00", timeStr: "13:00 EST", tag: "Treasury Flow", text: "Bond Market Auction Results & Refunding Impact" },
+                        { time: "14:00", timeStr: "14:00 EST", tag: "FOMC Minutes", text: "Federal Reserve Statement & Policy Minutes" },
+                        { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Flow" }
                     ],
                     angles: [
                         {
@@ -741,16 +746,16 @@
                     news3Time: "08:25 EST", news3Title: "Доходность бондов стабильна на отметке 4.22% в ожидании спикеров ФРС", news3Desc: "Долговые рынки сохраняют спокойствие после аукциона на $69 млрд и утренних релизов.",
                     news4Time: "08:32 EST", news4Title: "Глобальный аппетит к риску стабилен в еврозоне и США", news4Desc: "Суверенный долг и валютные пары торгуются в рабочих диапазонах при индексе доллара около 103.45.",
                     top10: [
-                        { time: "08:30 EST", tag: "✅ ВЫШЛО", text: "Заказы на товары длительного пользования / Запасы в рознице", isDone: true },
-                        { time: "08:30 EST", tag: "✅ ВЫШЛО", text: "Первичные заявки на пособие по безработице (Jobless Claims)", isDone: true },
-                        { time: "09:00 EST", tag: "🔴 СПИКЕР ФРС", text: "Выступление представителя Федеральной резервной системы", isDone: false, pulse: true },
-                        { time: "09:15 EST", tag: "Позиционирование", text: "Институциональный премаркет-анализ S&P 500 и Nasdaq", isDone: false },
-                        { time: "09:29 EST", tag: "🔔 ЗВОНОК ОТКРЫТИЯ", text: "Регулярная сессия открывается, формирование диапазона", isDone: false, pulse: true },
-                        { time: "10:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Индекс потребительской уверенности CB и вакансии JOLTS", isDone: false },
-                        { time: "10:00 EST", tag: "Индексы PMI", text: "Деловая активность в сфере услуг и индекс ISM", isDone: false },
-                        { time: "13:00 EST", tag: "Потоки трежерис", text: "Итоги аукционов гособлигаций и влияние на долг", isDone: false },
-                        { time: "14:00 EST", tag: "Протоколы FOMC", text: "Публикация заявлений ФРС и протоколов заседаний", isDone: false },
-                        { time: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные клиринговые потоки", isDone: false }
+                        { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Заказы на товары длительного пользования / Запасы в рознице" },
+                        { time: "08:30", timeStr: "08:30 EST", tag: "Заявки", text: "Первичные заявки на пособие по безработице (Jobless Claims)" },
+                        { time: "09:00", timeStr: "09:00 EST", tag: "СПИКЕР ФРС", text: "Выступление представителя Федеральной резервной системы" },
+                        { time: "09:15", timeStr: "09:15 EST", tag: "Позиционирование", text: "Институциональный премаркет-анализ S&P 500 и Nasdaq" },
+                        { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Регулярная сессия открывается, формирование диапазона" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Индекс потребительской уверенности CB и вакансии JOLTS" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "Индексы PMI", text: "Деловая активность в сфере услуг и индекс ISM" },
+                        { time: "13:00", timeStr: "13:00 EST", tag: "Потоки трежерис", text: "Итоги аукционов гособлигаций и влияние на долг" },
+                        { time: "14:00", timeStr: "14:00 EST", tag: "Протоколы FOMC", text: "Публикация заявлений ФРС и протоколов заседаний" },
+                        { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные клиринговые потоки" }
                     ],
                     angles: [
                         {
@@ -775,16 +780,16 @@
                     news3Time: "10:30 EST", news3Title: "Dollar Index Stabilizes Around 103.45 Amid Steady Rate Expectations", news3Desc: "FX markets price in ongoing macroeconomic developments and Fed policy outlook.",
                     news4Time: "11:00 EST", news4Title: "Market Breadth Remains Healthy Across S&P 500 and Nasdaq Components", news4Desc: "Institutional portfolio managers maintain active rotation into growth and semiconductor leaders.",
                     top10: [
-                        { time: "09:30 EST", tag: "✅ RELEASED", text: "Cash Session Opening Bell & Range Breakout", isDone: true },
-                        { time: "10:00 EST", tag: "🔴 HIGH IMPACT", text: "US CB Consumer Confidence & JOLTS Job Openings", isDone: false, pulse: true },
-                        { time: "10:00 EST", tag: "ISM / PMI", text: "Services PMI & ISM Manufacturing Index Release", isDone: false },
-                        { time: "11:00 EST", tag: "Fed Speaker", text: "Midday Federal Reserve Official Panel Discussion", isDone: false },
-                        { time: "12:00 EST", tag: "Sector Flow", text: "Semiconductor & Mega-Cap Tech Rotation Watch", isDone: false },
-                        { time: "13:00 EST", tag: "Treasury Flow", text: "Bond Market Auction Results & Refunding Impact", isDone: false },
-                        { time: "14:00 EST", tag: "FOMC Minutes", text: "Federal Reserve Statement & Monetary Policy Minutes", isDone: false },
-                        { time: "15:00 EST", tag: "Late Session", text: "Institutional VWAP Rebalancing & VWAP Defense", isDone: false },
-                        { time: "15:45 EST", tag: "Imbalance", text: "Closing Imbalance Read & Order Flow Scan", isDone: false },
-                        { time: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Flow", isDone: false }
+                        { time: "09:30", timeStr: "09:30 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Range Breakout" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "HIGH IMPACT", text: "US CB Consumer Confidence & JOLTS Job Openings" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "ISM / PMI", text: "Services PMI & ISM Manufacturing Index Release" },
+                        { time: "11:00", timeStr: "11:00 EST", tag: "Fed Speaker", text: "Midday Federal Reserve Official Panel Discussion" },
+                        { time: "12:00", timeStr: "12:00 EST", tag: "Sector Flow", text: "Semiconductor & Mega-Cap Tech Rotation Watch" },
+                        { time: "13:00", timeStr: "13:00 EST", tag: "Treasury Flow", text: "Bond Market Auction Results & Refunding Impact" },
+                        { time: "14:00", timeStr: "14:00 EST", tag: "FOMC Minutes", text: "Federal Reserve Statement & Policy Minutes" },
+                        { time: "15:00", timeStr: "15:00 EST", tag: "Late Session", text: "Institutional VWAP Rebalancing & VWAP Defense" },
+                        { time: "15:45", timeStr: "15:45 EST", tag: "Imbalance", text: "Closing Imbalance Read & Order Flow Scan" },
+                        { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Flow" }
                     ],
                     angles: [
                         {
@@ -801,22 +806,22 @@
                     wireUpdated: "Updated: New York Day Session Live",
                     tickerText: "🟢 ДНЕВНАЯ СЕССИЯ НЬЮ-ЙОРКА АКТИВНА • Технологический сектор лидирует по объемам • Ширина рынка S&P 500 и Nasdaq в норме • Покупатели защищают VWAP",
                     nextAlert: "Следующее событие: Потребительская уверенность и JOLTS в 10:00 EST",
-                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ • Активная защита VWAP на ES и MNQ • Техсектор ведет объемы • Ждем данные по потребительской уверенности в 10:00 EST",
+                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ • Активная защита VWAP на ES и MNQ • Tech Sector Leading Volume • Фокус на закрытие сессии",
                     news1Time: "09:35 EST", news1Title: "Акции Уолл-стрит торгуются конструктивно в течение дня", news1Desc: "Основные индексы удерживают уверенные позиции, технологический сектор лидирует по объемам.",
                     news2Time: "10:00 EST", news2Title: "Аукционы трежерис и макроленты поддерживают активность бондов", news2Desc: "Участники долгового рынка переваривают результаты аукционов и потоки ликвидности.",
                     news3Time: "10:30 EST", news3Title: "Индекс доллара стабилизируется около 103.45 на ожидании ставок", news3Desc: "Валютные рынки закладывают в цены макроэкономические тенденции и риторику ФРС.",
                     news4Time: "11:00 EST", news4Title: "Рыночная ширина остается здоровой в компонентах S&P 500 и Nasdaq", news4Desc: "Институциональные менеджеры поддерживают ротацию в лидеров роста и полупроводников.",
                     top10: [
-                        { time: "09:30 EST", tag: "✅ ВЫШЛО", text: "Звонок открытия сессии и пробой утреннего диапазона", isDone: true },
-                        { time: "10:00 EST", tag: "🔴 ВЫСОКОЕ ВЛИЯНИЕ", text: "Индекс потребительской уверенности CB и вакансии JOLTS", isDone: false, pulse: true },
-                        { time: "10:00 EST", tag: "Индексы PMI", text: "Индекс деловой активности в сфере услуг ISM", isDone: false },
-                        { time: "11:00 EST", tag: "Риторика ФРС", text: "Дневное выступление представителей ФРС", isDone: false },
-                        { time: "12:00 EST", tag: "Потоки секторов", text: "Ротация в полупроводники и лидеров техсектора", isDone: false },
-                        { time: "13:00 EST", tag: "Потоки трежерис", text: "Итоги аукционов гособлигаций и влияние на долг", isDone: false },
-                        { time: "14:00 EST", tag: "Протоколы FOMC", text: "Публикация заявлений ФРС и монетарной политики", isDone: false },
-                        { time: "15:00 EST", tag: "Защита VWAP", text: "Институциональная ребалансировка и защита VWAP", isDone: false },
-                        { time: "15:45 EST", tag: "Дисбаланс", text: "Сканирование закрывающих дисбалансов в стакане", isDone: false },
-                        { time: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные клиринговые потоки", isDone: false }
+                        { time: "09:30", timeStr: "09:30 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Звонок открытия сессии и пробой утреннего диапазона" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Индекс потребительской уверенности CB и вакансии JOLTS" },
+                        { time: "10:00", timeStr: "10:00 EST", tag: "Индексы PMI", text: "Индекс деловой активности в сфере услуг ISM" },
+                        { time: "11:00", timeStr: "11:00 EST", tag: "Риторика ФРС", text: "Дневное выступление представителей ФРС" },
+                        { time: "12:00", timeStr: "12:00 EST", tag: "Потоки секторов", text: "Ротация в полупроводники и лидеров техсектора" },
+                        { time: "13:00", timeStr: "13:00 EST", tag: "Потоки трежерис", text: "Итоги аукционов гособлигаций и влияние на долг" },
+                        { time: "14:00", timeStr: "14:00 EST", tag: "Протоколы FOMC", text: "Публикация заявлений ФРС и монетарной политики" },
+                        { time: "15:00", timeStr: "15:00 EST", tag: "Защита VWAP", text: "Институциональная ребалансировка и защита VWAP" },
+                        { time: "15:45", timeStr: "15:45 EST", tag: "Дисбаланс", text: "Сканирование закрывающих дисбалансов в стакане" },
+                        { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные потоки клиринга" }
                     ],
                     angles: [
                         {
@@ -836,7 +841,6 @@
                 subtitle: "Institutional News Aggregator & Market Briefing",
                 syncBtn: "Sync & Search Web",
                 bannerTitle: "LIVE NEWS FEED & MARKET RECAP ACTIVE",
-                bannerDesc: "Aggregating real-time macro wires and professional briefing summaries for streams.",
                 tickerLabel: "LIVE WIRE",
                 chartsHeader: "Macro Context Charts",
                 delayNotice: "⚠️ Chart quotes delayed by 15 mins (Exchange rule). News & Briefing feed is live-synced.",
@@ -859,7 +863,6 @@
                 subtitle: "Институциональный новостной терминал и обзор рынка",
                 syncBtn: "Синхронизация и поиск",
                 bannerTitle: "НОВОСТНАЯ ЛЕНТА И ОБЗОР РЫНКА АКТИВНЫ",
-                bannerDesc: "Агрегация макро-новостей в реальном времени и удобные сводки для трансляций.",
                 tickerLabel: "ЛЕНТА НОВОСТЕЙ",
                 chartsHeader: "Контекстные макро-графики",
                 delayNotice: "⚠️ Котировки графиков с задержкой 15 мин (правила биржи). Новостной поток и брифинг синхронизированы в реальном времени.",
@@ -912,7 +915,6 @@
             activeSessionKey = detectSessionByEstTime(estDate);
             switchSessionManual(activeSessionKey);
 
-            // АВТОМАТИЧЕСКАЯ СИНХРОНИЗАЦИЯ КАЖДЫЕ 15 МИНУТ ДЛЯ СТРИМОВ
             setInterval(() => {
                 backgroundAutoSync();
             }, 15 * 60 * 1000);
@@ -1054,6 +1056,32 @@
             renderActiveSessionContent();
         }
 
+        // ЛОКАЛЬНАЯ КНОПКА REFRESH ДЛЯ НОВОСТНОЙ ЛЕНТЫ
+        function refreshNewsFeed() {
+            const icon = document.getElementById('news-refresh-icon');
+            icon.classList.add('animate-spin');
+
+            setTimeout(() => {
+                icon.classList.remove('animate-spin');
+                const now = new Date();
+                const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+                const estDate = new Date(estStr);
+                
+                // Рандомизация времени новостей под текущий момент для имитации живого обновления
+                const hr = estDate.getHours().toString().padStart(2, '0');
+                const mn = estDate.getMinutes().toString().padStart(2, '0');
+                const timeTag = `${hr}:${mn} EST`;
+
+                document.getElementById('news-1-time').innerText = timeTag;
+                document.getElementById('news-2-time').innerText = timeTag;
+                document.getElementById('news-3-time').innerText = timeTag;
+                document.getElementById('news-4-time').innerText = timeTag;
+
+                document.getElementById('wire-update-time').innerText = (currentLang === 'en' ? 'Updated: ' : 'Обновлено: ') + timeTag;
+                alert(currentLang === 'en' ? 'Live Web Synced Feed updated successfully!' : 'Лента новостей успешно обновлена!');
+            }, 600);
+        }
+
         function renderActiveSessionContent() {
             const sessObj = sessionData[activeSessionKey][currentLang];
             
@@ -1084,29 +1112,52 @@
             document.getElementById('news-4-title').innerText = sessObj.news4Title;
             document.getElementById('news-4-desc').innerText = sessObj.news4Desc;
 
+            // АВТОМАТИЧЕСКОЕ ОПРЕДЕЛЕНИЕ ПРОШЕДШИХ И БЛИЖАЙШИХ СОБЫТИЙ ПО ВРЕМЕНИ EST
+            const now = new Date();
+            const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+            const estDate = new Date(estStr);
+            const currentTotalMins = estDate.getHours() * 60 + estDate.getMinutes();
+
             const top10Container = document.getElementById('top10-catalysts-container');
             top10Container.innerHTML = '';
             
-            sessObj.top10.forEach(item => {
+            let foundNextActive = false;
+
+            sessObj.top10.forEach((item, index) => {
+                const [itemHr, itemMn] = item.time.split(':').map(Number);
+                const itemTotalMins = itemHr * 60 + itemMn;
+
+                let isDone = false;
+                let isPulse = false;
+                let tagText = item.tag;
+
+                if (itemTotalMins < currentTotalMins) {
+                    isDone = true;
+                    tagText = currentLang === 'en' ? '✅ RELEASED' : '✅ ВЫШЛО';
+                } else if (!foundNextActive) {
+                    isPulse = true;
+                    foundNextActive = true;
+                    tagText = currentLang === 'en' ? '🔴 LIVE FOCUS' : '🔴 В ФОКУСЕ';
+                }
+
                 const div = document.createElement('div');
-                
-                if (item.isDone) {
+                if (isDone) {
                     div.className = 'bg-dark-900/80 p-2.5 rounded border border-gray-800 opacity-65 space-y-1';
-                } else if (item.pulse) {
+                } else if (isPulse) {
                     div.className = 'bg-rose-950/30 p-2.5 rounded border border-rose-500/60 animate-pulse space-y-1 shadow-md';
                 } else {
                     div.className = 'bg-dark-900 p-2.5 rounded border border-gray-700/90 space-y-1 hover:border-blue-500/50 transition-all';
                 }
 
-                let tagClass = item.isDone ? 'text-gray-500' : (item.pulse ? 'text-rose-400 font-bold' : 'text-blue-400');
-                let timeClass = item.isDone ? 'text-gray-500 line-through' : 'text-yellow-400 font-semibold';
+                let tagClass = isDone ? 'text-gray-500' : (isPulse ? 'text-rose-400 font-bold' : 'text-blue-400');
+                let timeClass = isDone ? 'text-gray-500 line-through' : 'text-yellow-400 font-semibold';
 
                 div.innerHTML = `
                     <div class="flex justify-between text-[10px]">
-                        <span class="${timeClass}">${item.time}</span>
-                        <span class="${tagClass}">${item.tag}</span>
+                        <span class="${timeClass}">${item.timeStr}</span>
+                        <span class="${tagClass}">${tagText}</span>
                     </div>
-                    <p class="${item.isDone ? 'text-gray-400 text-[11px]' : (item.pulse ? 'text-white font-bold text-[11px]' : 'text-gray-200 text-[11px]')} font-sans font-medium">${item.text}</p>
+                    <p class="${isDone ? 'text-gray-400 text-[11px]' : (isPulse ? 'text-white font-bold text-[11px]' : 'text-gray-200 text-[11px]')} font-sans font-medium">${item.text}</p>
                 `;
                 top10Container.appendChild(div);
             });
@@ -1156,6 +1207,7 @@
                 txt.innerText = translations[currentLang].syncBtn;
 
                 backgroundAutoSync();
+                refreshNewsFeed();
             }, 800);
         }
 
@@ -1218,7 +1270,6 @@
                         </style>
                     </head>
                     <body class="p-8 max-w-4xl mx-auto space-y-6">
-                        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
                         <div class="flex items-center justify-between border-b border-gray-800 pb-4">
                             <h1 class="text-xl font-bold text-blue-400">MacroPulse • Market Recap & Briefing</h1>
                             <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer">Print / Save PDF</button>
