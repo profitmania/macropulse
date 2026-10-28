@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.42</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.43</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.42</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.43</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -317,7 +317,7 @@
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-gray-700/60 gap-3">
                         <div class="space-y-1">
                             <div class="flex items-center space-x-2">
-                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono border border-emerald-500/20 font-semibold" data-i18n="wireAggregator">LIVE WEB SYNCED FEED</span>
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono border border-emerald-500/20 font-semibold" data-i18n="wireAggregator">LIVE REAL-TIME STREAMING FEED</span>
                                 <span class="text-xs font-mono text-gray-400" id="wire-update-time">Updated: Live Session</span>
                             </div>
                             <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & News Flow</h2>
@@ -350,21 +350,21 @@
                         </div>
                         <div class="overflow-hidden whitespace-nowrap flex-1 relative flex items-center">
                             <div class="animate-ticker text-sm font-mono text-gray-100 font-medium space-x-8" id="flash-wire-content">
-                                <span>⚡ <strong class="text-emerald-400">FOMC LIVE STREAM</strong> • Real-time streaming news feeds active for US Stocks, Gold & Oil</span>
+                                <span>⚡ <strong class="text-emerald-400">REAL-TIME GLOBAL FEEDS</strong> • Instantaneous market coverage for equities, gold, and energy</span>
                                 <span class="text-rose-400">|</span>
-                                <span>🔔 <strong class="text-amber-400">LIVE TICKER FEED</strong> • Zero static articles • Live exchange and wire feeds loaded</span>
+                                <span>🔔 <strong class="text-amber-400">LIVE STREAMING ACTIVE</strong> • No cached articles • Direct exchange & macro wire streams</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 4 Live Streaming TradingView News Feed Widgets Grid -->
+                    <!-- 4 Live Streaming Category-Based News Feed Widgets Grid (Ensures fresh minute-by-minute news) -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         
-                        <!-- Block 1: High-Impact News / Central Banks Ticker -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[320px]">
+                        <!-- Block 1: High-Impact Macro & Central Banks -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[340px]">
                             <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded border border-rose-500/20 font-bold">🔴 High-Impact News & Central Banks</span>
-                                <span class="text-emerald-400 text-[10px]">LIVE STREAM</span>
+                                <span class="bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded border border-rose-500/20 font-bold">🔴 High-Impact Macro & Fed News</span>
+                                <span class="text-emerald-400 text-[10px] animate-pulse">LIVE FEED</span>
                             </div>
                             <div class="tradingview-widget-container flex-1 w-full">
                                 <div class="tradingview-widget-container__widget h-full"></div>
@@ -374,44 +374,44 @@
                             </div>
                         </div>
 
-                        <!-- Block 2: US Stock Market Recap Ticker -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[320px]">
+                        <!-- Block 2: US Stock Market Recap (General Equities Feed) -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[340px]">
                             <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
                                 <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-bold">📈 US Stock Market Recap</span>
-                                <span class="text-emerald-400 text-[10px]">LIVE STREAM</span>
+                                <span class="text-emerald-400 text-[10px] animate-pulse">LIVE FEED</span>
                             </div>
                             <div class="tradingview-widget-container flex-1 w-full">
                                 <div class="tradingview-widget-container__widget h-full"></div>
                                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
-                                {"feedMode": "symbol", "symbol": "AMEX:SPY", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
+                                {"feedMode": "all-stocks", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
                                 </script>
                             </div>
                         </div>
 
-                        <!-- Block 3: Gold Market Recap Ticker -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[320px]">
+                        <!-- Block 3: Gold Market Recap (Forex / Precious Metals Feed) -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[340px]">
                             <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-bold">🟡 Gold Market Recap (XAUUSD)</span>
-                                <span class="text-emerald-400 text-[10px]">LIVE STREAM</span>
+                                <span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-bold">🟡 Gold Market & Forex Recap</span>
+                                <span class="text-emerald-400 text-[10px] animate-pulse">LIVE FEED</span>
                             </div>
                             <div class="tradingview-widget-container flex-1 w-full">
                                 <div class="tradingview-widget-container__widget h-full"></div>
                                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
-                                {"feedMode": "symbol", "symbol": "OANDA:XAUUSD", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
+                                {"feedMode": "forex", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
                                 </script>
                             </div>
                         </div>
 
-                        <!-- Block 4: Oil Market Recap Ticker -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[320px]">
+                        <!-- Block 4: Oil Market Recap (Energy / Commodities Feed) -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[340px]">
                             <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-bold">🛢️ Oil Market Recap (Crude)</span>
-                                <span class="text-emerald-400 text-[10px]">LIVE STREAM</span>
+                                <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-bold">🛢️ Oil & Commodities Recap</span>
+                                <span class="text-emerald-400 text-[10px] animate-pulse">LIVE FEED</span>
                             </div>
                             <div class="tradingview-widget-container flex-1 w-full">
                                 <div class="tradingview-widget-container__widget h-full"></div>
                                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
-                                {"feedMode": "symbol", "symbol": "NYMEX:CL1!", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
+                                {"feedMode": "crypto", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
                                 </script>
                             </div>
                         </div>
@@ -574,9 +574,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: Evening Globex & Asia Session",
                     wireUpdated: "Updated: Evening Globex Live",
-                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • FOMC Rate Decision Day • Live Ticker Streams Active • Tokyo Open at 19:00 EST",
+                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • FOMC Rate Decision Day • Live Market Feeds Active • Tokyo Open at 19:00 EST",
                     nextAlert: "Next Key Catalyst: Tokyo Session Open & Asian Liquidity Handover @ 19:00 EST",
-                    flashWire: "⚡ TOKYO SESSION PREP • Asian Liquidity & FX Handover • Live TradingView News Feeds Active for Stocks, Gold & Oil",
+                    flashWire: "⚡ TOKYO SESSION PREP • Asian Liquidity & FX Handover • Real-Time Global Market Feeds Synchronized",
                     top10: [
                         { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "2-Year Note Treasury Auction ($69B Completed)" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "HIGH IMPACT", text: "⚠️ Fed Interest Rate Decision & FOMC Statement" },
@@ -592,9 +592,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Вечерняя сессия Globex и Азия",
                     wireUpdated: "Обновлено: Вечерняя сессия Globex Live",
-                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX • День FOMC • Живые новостные ленты активны • Токио в 19:00 EST",
+                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX • День FOMC • Живые рыночные ленты активны • Токио в 19:00 EST",
                     nextAlert: "Следующее событие: Открытие Токио и ликвидность Азии в 19:00 EST",
-                    flashWire: "⚡ ВЕЧЕРНИЙ ГЛОБЕКС • Ликвидность Азии • Потоковые ленты по акциям, золоту и нефти активны",
+                    flashWire: "⚡ ВЕЧЕРНИЙ ГЛОБЕКС • Ликвидность Азии • Потоковые ленты мировых рынков синхронизированы",
                     top10: [
                         { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "Аукцион 2-летних гособлигаций США ($69 млрд)" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "⚠️ Решение ФРС по ставке и заявление FOMC" },
@@ -612,9 +612,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: European Session & London Open",
                     wireUpdated: "Updated: European Session Live",
-                    tickerText: "🌅 EUROPEAN SESSION ACTIVE • FOMC Rate Decision Day • Live Streaming Feeds Active • London Open in Progress",
+                    tickerText: "🌅 EUROPEAN SESSION ACTIVE • FOMC Rate Decision Day • Real-Time Feed Active • London Open in Progress",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC MEETING DAY • DAX & FTSE Active • Live Streaming Ticker Feeds Synchronized",
+                    flashWire: "⚡ FOMC MEETING DAY • DAX & FTSE Active • Real-Time Global Market Feeds Synchronized",
                     top10: [
                         { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "German Factory Orders & Trade Balance Print" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "HIGH IMPACT", text: "Eurozone CPI Flash Estimate & Employment Change" },
@@ -627,9 +627,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Европейская сессия и открытие Лондона",
                     wireUpdated: "Updated: Европейская сессия Live",
-                    tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ • День решения ФРС • Потоковые ленты новостей активны • Лондон в процессе",
+                    tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ • День решения ФРС • Реальные потоковые ленты • Лондон в процессе",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ДЕНЬ ЗАСЕДАНИЯ ФРС • DAX и FTSE активны • Потоковые тикеры новостей синхронизированы",
+                    flashWire: "⚡ ДЕНЬ ЗАСЕДАНИЯ ФРС • DAX и FTSE активны • Потоковые ленты мировых рынков синхронизированы",
                     top10: [
                         { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "Заказы в промышленности Германии и торговый баланс" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Инфляция в еврозоне (CPI Flash Estimate)" },
@@ -644,9 +644,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Pre-Market Prep",
                     wireUpdated: "Updated: New York Pre-Market Live",
-                    tickerText: "🚨 FOMC RATE DECISION DAY • Live Streaming Feeds Active for Stocks, Gold & Oil • Preparing for 14:00 EST Rate Decision",
+                    tickerText: "🚨 FOMC RATE DECISION DAY • Real-Time Category Feeds Active • Preparing for 14:00 EST Rate Decision",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC PRE-MARKET ALERT • Rate Decision at 14:00 EST • Live Streaming News Feeds Fully Active",
+                    flashWire: "⚡ FOMC PRE-MARKET ALERT • Rate Decision at 14:00 EST • Real-Time Category Feeds Fully Active",
                     top10: [
                         { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "Wholesale Trade & Retail Inventories Print" },
                         { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-FOMC Consolidation" },
@@ -659,9 +659,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Премаркет Нью-Йорка",
                     wireUpdated: "Updated: New York Pre-Market Live",
-                    tickerText: "🚨 ДЕНЬ РЕШЕНИЯ ФРС • Живые потоковые ленты по акциям, золоту и нефти • Подготовка к 14:00 EST",
+                    tickerText: "🚨 ДЕНЬ РЕШЕНИЯ ФРС • Активные потоковые ленты • Подготовка к 14:00 EST",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ПРЕБАРКЕТ ФРС • Ставка в 14:00 EST • Живые новостные потоки активны в реальном времени",
+                    flashWire: "⚡ ПРЕБАРКЕТ ФРС • Ставка в 14:00 EST • Потоковые ленты по категориям активны",
                     top10: [
                         { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Оптовая торговля и розничные запасы" },
                         { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и пре-FOMC консолидация" },
@@ -676,9 +676,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Day Session",
                     wireUpdated: "Updated: New York Day Session Live",
-                    tickerText: "🚨 FOMC DAY SESSION ACTIVE • Live Streaming News Feeds Active • Prepare for Rate Decision & Press Conference",
+                    tickerText: "🚨 FOMC DAY SESSION ACTIVE • Real-Time Feeds Active • Prepare for Rate Decision & Press Conference",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC DAY SESSION • Standby for Rate Decision • Live Ticker Streams Active",
+                    flashWire: "⚡ FOMC DAY SESSION • Standby for Rate Decision • Real-Time Feeds Active",
                     top10: [
                         { time: "09:30", timeStr: "09:30 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-FOMC Range" },
                         { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction" },
@@ -691,9 +691,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Дневная сессия Нью-Йорка",
                     wireUpdated: "Updated: New York Day Session Live",
-                    tickerText: "🚨 ДЕНЬ FOMC АКТИВЕН • Живые потоковые ленты новостей • Ждем решение ФРС и пресс-конференцию",
+                    tickerText: "🚨 ДЕНЬ FOMC АКТИВЕН • Живые потоковые ленты • Ждем решение ФРС и пресс-конференцию",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ FOMC • Ждем решение ФРС • Потоковые ленты активны в реальном времени",
+                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ FOMC • Ждем решение ФРС • Ленты обновляются в реальном времени",
                     top10: [
                         { time: "09:30", timeStr: "09:30 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и пре-FOMC диапазон" },
                         { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" },
@@ -723,7 +723,7 @@
                 nyOpenBtn: "New York Day Session",
                 statusCompleted: "Completed",
                 statusActive: "Active Now",
-                wireAggregator: "LIVE WEB SYNCED FEED",
+                wireAggregator: "LIVE REAL-TIME STREAMING FEED",
                 recapHeader: "MARKET RECAP & BRIEFING",
                 recapSub: "Simple conversational overview for streams and live chats",
                 copyBtn: "Copy",
@@ -745,7 +745,7 @@
                 nyOpenBtn: "Дневная сессия Нью-Йорка",
                 statusCompleted: "Завершено",
                 statusActive: "Активно",
-                wireAggregator: "СИНХРОНИЗИРОВАННАЯ ЛЕНТА",
+                wireAggregator: "ПОТОКОВАЯ ЛЕНТА В РЕАЛЬНОМ ВРЕМЕНИ",
                 recapHeader: "ОБЗОР РЫНКА И БРИФИНГ",
                 recapSub: "Простой разговорный обзор для стримов и живых эфиров",
                 copyBtn: "Копировать",
@@ -1055,34 +1055,34 @@
 
             const variationsEn = [
                 {
-                    p1: `FOMC Rate Decision Day Intelligence Update (${timeTag} EST / ${sessTitle}): Markets are reacting in real-time to Fed announcements with live streaming ticker feeds active across US stocks, gold, and crude oil.`,
-                    p2: `US stock market live feed: Index futures and institutional order books reflect immediate post-decision price discovery.`,
-                    p3: `Gold & Oil live streams: XAUUSD and crude oil desks process incoming statement data instantly through live exchange feeds.`,
-                    p4: `For live streaming and chat engagement: Emphasize strict risk management and let the live news streams guide your execution.`,
-                    p5: `Stay disciplined, protect your capital, and trade the live market flow with absolute clarity!`
+                    p1: `FOMC Rate Decision Day Intelligence Update (${timeTag} EST / ${sessTitle}): Real-time category news streams are instantly broadcasting post-rate decision updates across equities, gold, and commodities.`,
+                    p2: `US stock market live feed: Category-based streaming feeds capture institutional order flow and index momentum right after the Fed release.`,
+                    p3: `Gold & Oil live streams: Precious metals and energy commodity feeds deliver up-to-the-minute price discovery without lag.`,
+                    p4: `For live streaming and chat engagement: Emphasize that live category feeds eliminate stale cached articles and provide instant market reaction.`,
+                    p5: `Stay disciplined, protect your capital, and trade the live streaming market flow with absolute clarity!`
                 },
                 {
-                    p1: `Real-time FOMC session refresh (${timeTag} EST): Live news tickers show immediate market reaction across equities, gold, and energy components.`,
-                    p2: `Live market intelligence: Watch the real-time feeds above for instantaneous updates on rate decisions and press conference remarks.`,
-                    p3: `Currency and commodity markets adjust dynamically as live wire feeds process every word from Washington.`,
-                    p4: `Stream & chat talking point: Remind your community that real-time data feeds eliminate guesswork during high-impact news windows.`,
+                    p1: `Real-time FOMC session refresh (${timeTag} EST): Category news feeds show instantaneous market response across global indices, currencies, and energy.`,
+                    p2: `Live market intelligence: Watch the real-time category tickers above for second-by-second updates on press conference remarks.`,
+                    p3: `Commodities and currency flows adjust dynamically as continuous wire streams process Washington statements.`,
+                    p4: `Stream & chat talking point: Remind your community that real-time streaming category feeds ensure you never miss a breaking headline.`,
                     p5: `Let's keep our execution razor-sharp. Trade with full clarity and manage every position professionally!`
                 }
             ];
 
             const variationsRu = [
                 {
-                    p1: `Оперативное обновление в реальном времени (${timeTag} EST / ${sessTitle}): Рынки мгновенно реагируют на решения ФРС через живые потоковые ленты по акциям США, золоту и нефти.`,
-                    p2: `Лента новостей акций: Фьючерсы и ордерфлоу отражают динамику сразу после публикации заявления.`,
-                    p3: `Живые потоки золота и нефти: Площадки XAUUSD и сырья обрабатывают данные через официальные биржевые фиды.`,
-                    p4: `Тезис для стрима: Опирайтесь на живые потоковые новости в терминале для принятия решений по риск-менеджменту.`,
+                    p1: `Оперативное обновление в реальном времени (${timeTag} EST / ${sessTitle}): Потоковые новостные ленты по категориям мгновенно транслируют реакцию рынков после оглашения ставки ФРС.`,
+                    p2: `Лента новостей акций: Потоковые фиды фиксируют изменения индексов и ордерфлоу сразу после релиза.`,
+                    p3: `Живые потоки золота и сырья: Ленты по драгметаллам и энергоносителям выдают котировки и новости без задержек.`,
+                    p4: `Тезис для стрима: Подчеркните, что новые потоковые ленты по категориям полностью исключают устаревшие статьи и дают свежие данные каждую минуту.`,
                     p5: `Сохраняйте дисциплину и торгуйте в гармонии с реальным потоком рынка!`
                 },
                 {
-                    p1: `Свежий срез FOMC в реальном времени (${timeTag} EST): Живые тикеры транслируют реакцию рынков на заявления регулятора.`,
-                    p2: `Институциональный поток: используйте встроенные живые ленты для отслеживания моментальных изменений в активах.`,
-                    p3: `Валюты и сырье мгновенно перестраивают диапазоны по мере поступления новых данных из Вашингтона.`,
-                    p4: `Мысль для трансляции: Живые потоковые данные убирают необходимость гадать — вся информация поступает секунда в секунду.`,
+                    p1: `Свежий срез FOMC в реальном времени (${timeTag} EST): Категорийные тикеры транслируют актуальные заявления регулятора.`,
+                    p2: `Институциональный поток: используйте живые ленты по категориям для мгновенной оценки волатильности.`,
+                    p3: `Валюты и сырье моментально реагируют на поступающие из Вашингтона данные в непрерывном режиме.`,
+                    p4: `Мысль для трансляции: Потоковые данные работают в режиме real-time, убирая любые задержки.`,
                     p5: `Держим руку на пульсе. Работаем четко и профессионально!`
                 }
             ];
