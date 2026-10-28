@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.41</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.42</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.41</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.42</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -350,81 +350,69 @@
                         </div>
                         <div class="overflow-hidden whitespace-nowrap flex-1 relative flex items-center">
                             <div class="animate-ticker text-sm font-mono text-gray-100 font-medium space-x-8" id="flash-wire-content">
-                                <span>⚡ <strong class="text-emerald-400">FOMC RATE DECISION DAY</strong> • Global markets on high alert • Preparing for 14:00 EST Rate Decision & 14:30 EST Press Conference</span>
+                                <span>⚡ <strong class="text-emerald-400">FOMC LIVE STREAM</strong> • Real-time streaming news feeds active for US Stocks, Gold & Oil</span>
                                 <span class="text-rose-400">|</span>
-                                <span>🔔 <strong class="text-amber-400">KEY CATALYST</strong> • Watch US Stocks, Gold & Oil Volatility Spikes</span>
+                                <span>🔔 <strong class="text-amber-400">LIVE TICKER FEED</strong> • Zero static articles • Live exchange and wire feeds loaded</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 4 Structured Cards: 1. High-Impact News | 2. US Stock Recap | 3. Gold Recap | 4. Oil Recap -->
+                    <!-- 4 Live Streaming TradingView News Feed Widgets Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         
-                        <!-- Card 1: High-Impact News -->
-                        <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <div class="flex items-center justify-between text-xs font-mono text-gray-400">
-                                    <span id="news-1-tag" class="bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded border border-rose-500/20 font-semibold">High-Impact News</span>
-                                    <span id="news-1-time" class="text-blue-400 font-semibold">--:-- EST</span>
-                                </div>
-                                <h3 class="font-bold text-white text-sm">
-                                    <a id="news-1-link" href="https://finance.yahoo.com/economy/policy/articles" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
-                                        <span id="news-1-title">Global Markets Are on High Alert Ahead of the Fed Meeting</span>
-                                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-500 shrink-0"></i>
-                                    </a>
-                                </h3>
-                                <p id="news-1-desc" class="text-xs text-gray-300">The Federal Open Market Committee (FOMC) concludes its meeting. Investors brace for volatility, closely monitoring rate guidance.</p>
+                        <!-- Block 1: High-Impact News / Central Banks Ticker -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[320px]">
+                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
+                                <span class="bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded border border-rose-500/20 font-bold">🔴 High-Impact News & Central Banks</span>
+                                <span class="text-emerald-400 text-[10px]">LIVE STREAM</span>
+                            </div>
+                            <div class="tradingview-widget-container flex-1 w-full">
+                                <div class="tradingview-widget-container__widget h-full"></div>
+                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                                {"feedMode": "market", "market": "stock", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
+                                </script>
                             </div>
                         </div>
 
-                        <!-- Card 2: US Stock Market Recap -->
-                        <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <div class="flex items-center justify-between text-xs font-mono text-gray-400">
-                                    <span id="news-2-tag" class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-semibold">US Stock Market Recap</span>
-                                    <span id="news-2-time" class="text-blue-400 font-semibold">--:-- EST</span>
-                                </div>
-                                <h3 class="font-bold text-white text-sm">
-                                    <a id="news-2-link" href="https://www.reuters.com/markets/" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
-                                        <span id="news-2-title">U.S. Stock Market Headlines & Index Futures Recap Today</span>
-                                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-500 shrink-0"></i>
-                                    </a>
-                                </h3>
-                                <p id="news-2-desc" class="text-xs text-gray-300">DJIA, S&P 500 and NASDAQ index futures hold ranges as institutional desks prepare for session opening volume and momentum.</p>
+                        <!-- Block 2: US Stock Market Recap Ticker -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[320px]">
+                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
+                                <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-bold">📈 US Stock Market Recap</span>
+                                <span class="text-emerald-400 text-[10px]">LIVE STREAM</span>
+                            </div>
+                            <div class="tradingview-widget-container flex-1 w-full">
+                                <div class="tradingview-widget-container__widget h-full"></div>
+                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                                {"feedMode": "symbol", "symbol": "AMEX:SPY", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
+                                </script>
                             </div>
                         </div>
 
-                        <!-- Card 3: Gold Market Recap -->
-                        <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <div class="flex items-center justify-between text-xs font-mono text-gray-400">
-                                    <span id="news-3-tag" class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-semibold">Gold Market Recap</span>
-                                    <span id="news-3-time" class="text-blue-400 font-semibold">--:-- EST</span>
-                                </div>
-                                <h3 class="font-bold text-white text-sm">
-                                    <a id="news-3-link" href="https://www.investing.com/commodities/gold" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
-                                        <span id="news-3-title">Gold Prices & XAUUSD Recap Today: Safe Haven Demand Holds Firm</span>
-                                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-500 shrink-0"></i>
-                                    </a>
-                                </h3>
-                                <p id="news-3-desc" class="text-xs text-gray-300">Gold spot maintains robust posture near key technical levels as traders assess Treasury yields and dollar currency fluctuations.</p>
+                        <!-- Block 3: Gold Market Recap Ticker -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[320px]">
+                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
+                                <span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-bold">🟡 Gold Market Recap (XAUUSD)</span>
+                                <span class="text-emerald-400 text-[10px]">LIVE STREAM</span>
+                            </div>
+                            <div class="tradingview-widget-container flex-1 w-full">
+                                <div class="tradingview-widget-container__widget h-full"></div>
+                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                                {"feedMode": "symbol", "symbol": "OANDA:XAUUSD", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
+                                </script>
                             </div>
                         </div>
 
-                        <!-- Card 4: Oil Market Recap -->
-                        <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <div class="flex items-center justify-between text-xs font-mono text-gray-400">
-                                    <span id="news-4-tag" class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-semibold">Oil Market Recap</span>
-                                    <span id="news-4-time" class="text-blue-400 font-semibold">--:-- EST</span>
-                                </div>
-                                <h3 class="font-bold text-white text-sm">
-                                    <a id="news-4-link" href="https://www.bloomberg.com/energy" target="_blank" class="hover:text-blue-400 hover:underline flex items-center justify-between gap-1">
-                                        <span id="news-4-title">Crude Oil & Energy Markets Recap Today: WTI and Brent Action</span>
-                                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-500 shrink-0"></i>
-                                    </a>
-                                </h3>
-                                <p id="news-4-desc" class="text-xs text-gray-300">Crude oil futures absorb API and EIA inventory expectations with steady ranges as energy desks monitor global supply factors.</p>
+                        <!-- Block 4: Oil Market Recap Ticker -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[320px]">
+                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
+                                <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-bold">🛢️ Oil Market Recap (Crude)</span>
+                                <span class="text-emerald-400 text-[10px]">LIVE STREAM</span>
+                            </div>
+                            <div class="tradingview-widget-container flex-1 w-full">
+                                <div class="tradingview-widget-container__widget h-full"></div>
+                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                                {"feedMode": "symbol", "symbol": "NYMEX:CL1!", "colorTheme": "dark", "isTransparent": true, "displayMode": "regular", "width": "100%", "height": "100%", "locale": "en"}
+                                </script>
                             </div>
                         </div>
 
@@ -586,21 +574,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: Evening Globex & Asia Session",
                     wireUpdated: "Updated: Evening Globex Live",
-                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • FOMC Rate Decision Day • US Stocks, Gold & Oil Markets in Focus • Tokyo Open at 19:00 EST",
+                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • FOMC Rate Decision Day • Live Ticker Streams Active • Tokyo Open at 19:00 EST",
                     nextAlert: "Next Key Catalyst: Tokyo Session Open & Asian Liquidity Handover @ 19:00 EST",
-                    flashWire: "⚡ TOKYO SESSION PREP • Asian Liquidity & FX Handover • US Stock Futures, Gold & Oil Recaps Synchronized",
-                    news1Tag: "High-Impact News", news1Link: "https://finance.yahoo.com/economy/policy/articles",
-                    news1Title: "Global Markets Are on High Alert Ahead of the Fed Meeting", 
-                    news1Desc: "The Federal Open Market Committee (FOMC) concludes its meeting. Investors brace for volatility.",
-                    news2Tag: "US Stock Market Recap", news2Link: "https://www.reuters.com/markets/",
-                    news2Title: "U.S. Stock Market Headlines & Index Futures Recap Today", 
-                    news2Desc: "DJIA, S&P 500 and NASDAQ index futures hold ranges as international desks prepare for session handover.",
-                    news3Tag: "Gold Market Recap", news3Link: "https://www.investing.com/commodities/gold",
-                    news3Title: "Gold Prices & XAUUSD Recap Today: Safe Haven Demand Holds Firm", 
-                    news3Desc: "Gold spot maintains robust posture near key technical levels as Asian evening session commences.",
-                    news4Tag: "Oil Market Recap", news4Link: "https://www.bloomberg.com/energy",
-                    news4Title: "Crude Oil & Energy Markets Recap Today: WTI and Brent Action", 
-                    news4Desc: "Crude oil futures absorb inventory expectations with steady ranges across energy desks.",
+                    flashWire: "⚡ TOKYO SESSION PREP • Asian Liquidity & FX Handover • Live TradingView News Feeds Active for Stocks, Gold & Oil",
                     top10: [
                         { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "2-Year Note Treasury Auction ($69B Completed)" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "HIGH IMPACT", text: "⚠️ Fed Interest Rate Decision & FOMC Statement" },
@@ -616,21 +592,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Вечерняя сессия Globex и Азия",
                     wireUpdated: "Обновлено: Вечерняя сессия Globex Live",
-                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX • День FOMC • Обзоры рынков акций США, золота и нефти активны • Токио в 19:00 EST",
+                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX • День FOMC • Живые новостные ленты активны • Токио в 19:00 EST",
                     nextAlert: "Следующее событие: Открытие Токио и ликвидность Азии в 19:00 EST",
-                    flashWire: "⚡ ВЕЧЕРНИЙ ГЛОБЕКС • Ликвидность Азии • Обзоры рынков акций, золота и нефти синхронизированы",
-                    news1Tag: "Главная новость", news1Link: "https://finance.yahoo.com/economy/policy/articles",
-                    news1Title: "Мировые рынки в состоянии повышенной готовности перед заседанием ФРС", 
-                    news1Desc: "Комитет FOMC проводит заседание. Инвесторы готовятся к скачкам волатильности.",
-                    news2Tag: "Рынок акций США (Обзор)", news2Link: "https://www.reuters.com/markets/",
-                    news2Title: "Итоги дня на рынке акций США и обзор фьючерсов на индексы", 
-                    news2Desc: "Фьючерсы на DJIA, S&P 500 и NASDAQ удерживают диапазоны перед вечерним переходом сессий.",
-                    news3Tag: "Рынок золота (Обзор)", news3Link: "https://www.investing.com/commodities/gold",
-                    news3Title: "Цены на золото и обзор XAUUSD: спрос на защитные активы", 
-                    news3Desc: "Спотовое золото сохраняет устойчивость у ключевых уровней с началом азиатского вечера.",
-                    news4Tag: "Рынок нефти (Обзор)", news4Link: "https://www.bloomberg.com/energy",
-                    news4Title: "Обзор нефтяных рынков и энергетики: динамика WTI и Brent", 
-                    news4Desc: "Нефтяные фьючерсы переваривают данные по запасам и глобальный спрос.",
+                    flashWire: "⚡ ВЕЧЕРНИЙ ГЛОБЕКС • Ликвидность Азии • Потоковые ленты по акциям, золоту и нефти активны",
                     top10: [
                         { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "Аукцион 2-летних гособлигаций США ($69 млрд)" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "⚠️ Решение ФРС по ставке и заявление FOMC" },
@@ -648,21 +612,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: European Session & London Open",
                     wireUpdated: "Updated: European Session Live",
-                    tickerText: "🌅 EUROPEAN SESSION ACTIVE • FOMC Rate Decision Day • US Stocks, Gold & Oil Recaps Live • London Open in Progress",
+                    tickerText: "🌅 EUROPEAN SESSION ACTIVE • FOMC Rate Decision Day • Live Streaming Feeds Active • London Open in Progress",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC MEETING DAY • DAX & FTSE Active • US Stock, Gold & Oil Daily Recaps Synchronized",
-                    news1Tag: "High-Impact News", news1Link: "https://finance.yahoo.com/economy/policy/articles",
-                    news1Title: "Global Markets Are on High Alert Ahead of the Fed Meeting", 
-                    news1Desc: "The Federal Open Market Committee (FOMC) concludes its meeting. Investors brace for volatility.",
-                    news2Tag: "US Stock Market Recap", news2Link: "https://www.reuters.com/markets/",
-                    news2Title: "U.S. Stock Market Headlines & Index Futures Recap Today", 
-                    news2Desc: "DJIA, S&P 500 and NASDAQ index futures hold ranges as European desks process morning schedules.",
-                    news3Tag: "Gold Market Recap", news3Link: "https://www.investing.com/commodities/gold",
-                    news3Title: "Gold Prices & XAUUSD Recap Today: Safe Haven Demand Holds Firm", 
-                    news3Desc: "Gold spot maintains robust posture near key technical levels during European trading.",
-                    news4Tag: "Oil Market Recap", news4Link: "https://www.bloomberg.com/energy",
-                    news4Title: "Crude Oil & Energy Markets Recap Today: WTI and Brent Action", 
-                    news4Desc: "Crude oil and energy futures provide cost stability for global industrial outlook.",
+                    flashWire: "⚡ FOMC MEETING DAY • DAX & FTSE Active • Live Streaming Ticker Feeds Synchronized",
                     top10: [
                         { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "German Factory Orders & Trade Balance Print" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "HIGH IMPACT", text: "Eurozone CPI Flash Estimate & Employment Change" },
@@ -674,22 +626,10 @@
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Европейская сессия и открытие Лондона",
-                    wireUpdated: "Обновлено: Европейская сессия Live",
-                    tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ • День решения ФРС • Обзоры акций США, золота и нефти активны • Лондон в процессе",
+                    wireUpdated: "Updated: Европейская сессия Live",
+                    tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ • День решения ФРС • Потоковые ленты новостей активны • Лондон в процессе",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ДЕНЬ ЗАСЕДАНИЯ ФРС • DAX и FTSE активны • Обзоры рынков акций, золота и нефти обновлены",
-                    news1Tag: "Главная новость", news1Link: "https://finance.yahoo.com/economy/policy/articles",
-                    news1Title: "Мировые рынки в состоянии повышенной готовности перед заседанием ФРС", 
-                    news1Desc: "Комитет FOMC завершает заседание. Инвесторам следует готовиться к всплеску волатильности.",
-                    news2Tag: "Рынок акций США (Обзор)", news2Link: "https://www.reuters.com/markets/",
-                    news2Title: "Итоги дня на рынке акций США и обзор фьючерсов на индексы", 
-                    news2Desc: "Фьючерсы на DJIA, S&P 500 и NASDAQ удерживают диапазоны в ходе европейских торгов.",
-                    news3Tag: "Рынок золота (Обзор)", news3Link: "https://www.investing.com/commodities/gold",
-                    news3Title: "Цены на золото и обзор XAUUSD: спрос на защитные активы", 
-                    news3Desc: "Спотовое золото сохраняет устойчивость у ключевых уровней.",
-                    news4Tag: "Рынок нефти (Обзор)", news4Link: "https://www.bloomberg.com/energy",
-                    news4Title: "Обзор нефтяных рынков и энергетики: динамика WTI и Brent", 
-                    news4Desc: "Нефтяные контракты торгуются стабильно на фоне европейской макростатистики.",
+                    flashWire: "⚡ ДЕНЬ ЗАСЕДАНИЯ ФРС • DAX и FTSE активны • Потоковые тикеры новостей синхронизированы",
                     top10: [
                         { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "Заказы в промышленности Германии и торговый баланс" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Инфляция в еврозоне (CPI Flash Estimate)" },
@@ -704,21 +644,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Pre-Market Prep",
                     wireUpdated: "Updated: New York Pre-Market Live",
-                    tickerText: "🚨 FOMC RATE DECISION DAY • US Stock Market Recap, Gold & Oil Recaps Live • Preparing for 14:00 EST Rate Decision",
+                    tickerText: "🚨 FOMC RATE DECISION DAY • Live Streaming Feeds Active for Stocks, Gold & Oil • Preparing for 14:00 EST Rate Decision",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC PRE-MARKET ALERT • Rate Decision at 14:00 EST • US Stock, Gold & Oil Market Recaps Fully Synchronized",
-                    news1Tag: "High-Impact News", news1Link: "https://finance.yahoo.com/economy/policy/articles",
-                    news1Title: "Global Markets Are on High Alert Ahead of the Fed Meeting", 
-                    news1Desc: "The Federal Open Market Committee (FOMC) concludes its meeting. Investors should brace for volatility.",
-                    news2Tag: "US Stock Market Recap", news2Link: "https://www.reuters.com/markets/",
-                    news2Title: "U.S. Stock Market Headlines & Index Futures Recap Today", 
-                    news2Desc: "DJIA, S&P 500 and NASDAQ index futures hold ranges as institutional desks position ahead of FOMC.",
-                    news3Tag: "Gold Market Recap", news3Link: "https://www.investing.com/commodities/gold",
-                    news3Title: "Gold Prices & XAUUSD Recap Today: Safe Haven Demand Holds Firm", 
-                    news3Desc: "Gold spot maintains robust posture as pre-market traders assess dollar currency and yield dynamics.",
-                    news4Tag: "Oil Market Recap", news4Link: "https://www.bloomberg.com/energy",
-                    news4Title: "Crude Oil & Energy Markets Recap Today: WTI and Brent Action", 
-                    news4Desc: "Crude oil futures absorb pre-market inventory expectations with steady ranges.",
+                    flashWire: "⚡ FOMC PRE-MARKET ALERT • Rate Decision at 14:00 EST • Live Streaming News Feeds Fully Active",
                     top10: [
                         { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "Wholesale Trade & Retail Inventories Print" },
                         { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-FOMC Consolidation" },
@@ -731,25 +659,13 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Премаркет Нью-Йорка",
                     wireUpdated: "Updated: New York Pre-Market Live",
-                    tickerText: "🚨 ДЕНЬ РЕШЕНИЯ ФРС • Обзоры рынков акций США, золота и нефти активны • Подготовка к 14:00 EST",
+                    tickerText: "🚨 ДЕНЬ РЕШЕНИЯ ФРС • Живые потоковые ленты по акциям, золоту и нефти • Подготовка к 14:00 EST",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ПРЕБАРКЕТ ФРС • Ставка в 14:00 EST • Обзоры акций, золота и нефти полностью синхронизированы",
-                    news1Tag: "Главная новость", news1Link: "https://finance.yahoo.com/economy/policy/articles",
-                    news1Title: "Мировые рынки в состоянии повышенной готовности перед заседанием ФРС", 
-                    news1Desc: "Комитет FOMC завершает заседание в среду. Инвесторам следует готовиться к всплеску волатильности.",
-                    news2Tag: "Рынок акций США (Обзор)", news2Link: "https://www.reuters.com/markets/",
-                    news2Title: "Итоги дня на рынке акций США и обзор фьючерсов на индексы", 
-                    news2Desc: "Фьючерсы на DJIA, S&P 500 и NASDAQ удерживают диапазоны перед открытием сессии.",
-                    news3Tag: "Рынок золота (Обзор)", news3Link: "https://www.investing.com/commodities/gold",
-                    news3Title: "Цены на золото и обзор XAUUSD: спрос на защитные активы", 
-                    news3Desc: "Спотовое золото сохраняет устойчивость на премаркете на фоне динамики доллара.",
-                    news4Tag: "Рынок нефти (Обзор)", news4Link: "https://www.bloomberg.com/energy",
-                    news4Title: "Обзор нефтяных рынков и энергетики: динамика WTI и Brent", 
-                    news4Desc: "Нефтяные фьючерсы торгуются в стабильных диапазонах в ожидании данных по запасам.",
+                    flashWire: "⚡ ПРЕБАРКЕТ ФРС • Ставка в 14:00 EST • Живые новостные потоки активны в реальном времени",
                     top10: [
                         { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Оптовая торговля и розничные запасы" },
                         { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и пре-FOMC консолидация" },
-                        { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение 2-летних плавающих нот (FRN)" },
+                        { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "МАКС ВЛИЯНИЕ", text: "⚠️ Решение ФРС по ставке и заявление FOMC" },
                         { time: "14:30", timeStr: "14:30 EST", tag: "МАКС ВЛИЯНИЕ", text: "⚠️ Пресс-конференция председателя ФРС" },
                         { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и волатильное клиринговое движение" }
@@ -760,21 +676,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Day Session",
                     wireUpdated: "Updated: New York Day Session Live",
-                    tickerText: "🚨 FOMC DAY SESSION ACTIVE • US Stock Market Recap, Gold & Oil Recaps Live • Prepare for 14:00 EST Rate Decision",
+                    tickerText: "🚨 FOMC DAY SESSION ACTIVE • Live Streaming News Feeds Active • Prepare for Rate Decision & Press Conference",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC DAY SESSION • Standby for 14:00 EST Rate Decision • US Stock, Gold & Oil Recaps Active",
-                    news1Tag: "High-Impact News", news1Link: "https://finance.yahoo.com/economy/policy/articles",
-                    news1Title: "Global Markets Are on High Alert Ahead of the Fed Meeting", 
-                    news1Desc: "The Federal Open Market Committee (FOMC) concludes its meeting. Investors brace for volatility.",
-                    news2Tag: "US Stock Market Recap", news2Link: "https://www.reuters.com/markets/",
-                    news2Title: "U.S. Stock Market Headlines & Index Futures Recap Today", 
-                    news2Desc: "DJIA, S&P 500 and NASDAQ index futures hold structural levels as investors await the Fed decision.",
-                    news3Tag: "Gold Market Recap", news3Link: "https://www.investing.com/commodities/gold",
-                    news3Title: "Gold Prices & XAUUSD Recap Today: Safe Haven Demand Holds Firm", 
-                    news3Desc: "Gold spot maintains robust posture during cash session hours ahead of Washington announcement.",
-                    news4Tag: "Oil Market Recap", news4Link: "https://www.bloomberg.com/energy",
-                    news4Title: "Crude Oil & Energy Markets Recap Today: WTI and Brent Action", 
-                    news4Desc: "Crude oil and energy futures reflect balanced sentiment across New York trading desks.",
+                    flashWire: "⚡ FOMC DAY SESSION • Standby for Rate Decision • Live Ticker Streams Active",
                     top10: [
                         { time: "09:30", timeStr: "09:30 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-FOMC Range" },
                         { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction" },
@@ -787,21 +691,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Дневная сессия Нью-Йорка",
                     wireUpdated: "Updated: New York Day Session Live",
-                    tickerText: "🚨 ДЕНЬ FOMC АКТИВЕН • Обзоры рынков акций США, золота и нефти • Ждем решение ФРС в 14:00 EST",
+                    tickerText: "🚨 ДЕНЬ FOMC АКТИВЕН • Живые потоковые ленты новостей • Ждем решение ФРС и пресс-конференцию",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ FOMC • Ждем 14:00 EST (ставка) • Обзоры рынков акций, золота и нефти активны",
-                    news1Tag: "Главная новость", news1Link: "https://finance.yahoo.com/economy/policy/articles",
-                    news1Title: "Мировые рынки в состоянии повышенной готовности перед заседанием ФРС", 
-                    news1Desc: "Комитет FOMC завершает заседание. Инвесторам следует готовиться к всплеску волатильности.",
-                    news2Tag: "Рынок акций США (Обзор)", news2Link: "https://www.reuters.com/markets/",
-                    news2Title: "Итоги дня на рынке акций США и обзор фьючерсов на индексы", 
-                    news2Desc: "Фьючерсы на DJIA, S&P 500 и NASDAQ удерживают уровни в ожидании решения регулятора.",
-                    news3Tag: "Рынок золота (Обзор)", news3Link: "https://www.investing.com/commodities/gold",
-                    news3Title: "Цены на золото и обзор XAUUSD: спрос на защитные активы", 
-                    news3Desc: "Спотовое золото сохраняет устойчивость в ходе сессии перед объявлением в Вашингтоне.",
-                    news4Tag: "Рынок нефти (Обзор)", news4Link: "https://www.bloomberg.com/energy",
-                    news4Title: "Обзор нефтяных рынков и энергетики: динамика WTI и Brent", 
-                    news4Desc: "Нефтяные контракты отражают сбалансированный настрой участников на Уолл-стрит.",
+                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ FOMC • Ждем решение ФРС • Потоковые ленты активны в реальном времени",
                     top10: [
                         { time: "09:30", timeStr: "09:30 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и пре-FOMC диапазон" },
                         { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" },
@@ -1048,11 +940,6 @@
                 const mn = estDate.getMinutes().toString().padStart(2, '0');
                 const timeTag = `${hr}:${mn} EST`;
 
-                document.getElementById('news-1-time').innerText = timeTag;
-                document.getElementById('news-2-time').innerText = timeTag;
-                document.getElementById('news-3-time').innerText = timeTag;
-                document.getElementById('news-4-time').innerText = timeTag;
-
                 document.getElementById('wire-update-time').innerText = (currentLang === 'en' ? 'Updated: ' : 'Обновлено: ') + timeTag;
             }, 600);
         }
@@ -1070,34 +957,6 @@
             const flashText = sessObj.flashWire;
             const flashHtml = `<span>${flashText}</span><span class="text-rose-400">|</span><span>${flashText}</span><span class="text-rose-400">|</span>`;
             document.getElementById('flash-wire-content').innerHTML = flashHtml;
-
-            // Card 1: High-Impact News
-            document.getElementById('news-1-time').innerText = "08:10 EST";
-            document.getElementById('news-1-tag').innerText = sessObj.news1Tag;
-            document.getElementById('news-1-link').href = sessObj.news1Link;
-            document.getElementById('news-1-title').innerText = sessObj.news1Title;
-            document.getElementById('news-1-desc').innerText = sessObj.news1Desc;
-
-            // Card 2: US Stock Market Recap
-            document.getElementById('news-2-time').innerText = "08:20 EST";
-            document.getElementById('news-2-tag').innerText = sessObj.news2Tag;
-            document.getElementById('news-2-link').href = sessObj.news2Link;
-            document.getElementById('news-2-title').innerText = sessObj.news2Title;
-            document.getElementById('news-2-desc').innerText = sessObj.news2Desc;
-
-            // Card 3: Gold Market Recap
-            document.getElementById('news-3-time').innerText = "08:30 EST";
-            document.getElementById('news-3-tag').innerText = sessObj.news3Tag;
-            document.getElementById('news-3-link').href = "https://www.investing.com/commodities/gold";
-            document.getElementById('news-3-title').innerText = sessObj.news3Title;
-            document.getElementById('news-3-desc').innerText = sessObj.news3Desc;
-
-            // Card 4: Oil Market Recap
-            document.getElementById('news-4-time').innerText = "08:40 EST";
-            document.getElementById('news-4-tag').innerText = sessObj.news4Tag;
-            document.getElementById('news-4-link').href = "https://www.bloomberg.com/energy";
-            document.getElementById('news-4-title').innerText = sessObj.news4Title;
-            document.getElementById('news-4-desc').innerText = sessObj.news4Desc;
 
             // FOMC ALERT BANNER CHECK
             const fomcBanner = document.getElementById('fomc-alert-banner');
@@ -1196,49 +1055,35 @@
 
             const variationsEn = [
                 {
-                    p1: `FOMC Rate Decision Day Intelligence Update (${timeTag} EST / ${sessTitle}): Markets are preparing for high-impact Fed announcements at 14:00 and 14:30 EST with heightened volatility expectations across US stocks, gold, and oil.`,
-                    p2: `US stock market recap: Index futures hold steady as Wall Street desks position ahead of rate cut probability pricing.`,
-                    p3: `Gold & Oil recaps: Safe-haven demand remains firm in XAUUSD near key technical levels, while crude oil digests inventory data.`,
-                    p4: `For live streaming and chat engagement: Emphasize strict risk management, wider stop-loss parameters, and avoiding over-leveraging prior to the 14:00 EST release.`,
-                    p5: `Stay disciplined, protect your capital, and let the initial FOMC liquidity sweep settle before executing major intraday setups!`
+                    p1: `FOMC Rate Decision Day Intelligence Update (${timeTag} EST / ${sessTitle}): Markets are reacting in real-time to Fed announcements with live streaming ticker feeds active across US stocks, gold, and crude oil.`,
+                    p2: `US stock market live feed: Index futures and institutional order books reflect immediate post-decision price discovery.`,
+                    p3: `Gold & Oil live streams: XAUUSD and crude oil desks process incoming statement data instantly through live exchange feeds.`,
+                    p4: `For live streaming and chat engagement: Emphasize strict risk management and let the live news streams guide your execution.`,
+                    p5: `Stay disciplined, protect your capital, and trade the live market flow with absolute clarity!`
                 },
                 {
-                    p1: `Real-time FOMC session refresh (${timeTag} EST): Order flow analysis indicates defensive positioning across major tech stocks, gold, and energy components.`,
-                    p2: `US stock market & commodities recap: Expect explosive price discovery in ES, MNQ, Gold, and Crude Oil contracts immediately following the statement release.`,
-                    p3: `Currency markets exhibit orderly ranges with USD holding near 103.45 while awaiting Fed Chair press conference cues.`,
-                    p4: `Stream & chat talking point: Remind your community that patience during high-impact news windows separates profitable traders from casual speculators.`,
+                    p1: `Real-time FOMC session refresh (${timeTag} EST): Live news tickers show immediate market reaction across equities, gold, and energy components.`,
+                    p2: `Live market intelligence: Watch the real-time feeds above for instantaneous updates on rate decisions and press conference remarks.`,
+                    p3: `Currency and commodity markets adjust dynamically as live wire feeds process every word from Washington.`,
+                    p4: `Stream & chat talking point: Remind your community that real-time data feeds eliminate guesswork during high-impact news windows.`,
                     p5: `Let's keep our execution razor-sharp. Trade with full clarity and manage every position professionally!`
-                },
-                {
-                    p1: `Automated FOMC intelligence sweep at ${timeTag} EST: Volatility parameters across equities, gold, and crude oil reflect extreme institutional caution.`,
-                    p2: `Macro backdrop: 10-year yields holding at 4.22% provide the baseline framework as market makers prepare for sudden liquidity expansion.`,
-                    p3: `With dollar index steady at 103.45, risk assets and commodities are poised for an aggressive directional move post-14:00 EST.`,
-                    p4: `Key takeaway for your audience: Wait for the initial 5-minute range breakout confirmation rather than guessing the Fed's immediate reaction.`,
-                    p5: `The session is moving into high gear. Execute cleanly and secure your profits safely!`
                 }
             ];
 
             const variationsRu = [
                 {
-                    p1: `Оперативное обновление в день заседания FOMC (${timeTag} EST / ${sessTitle}): Рынки готовятся к ключевым решениям ФРС в 14:00 и 14:30 EST на фоне ожиданий волатильности в акциях США, золоте и нефти.`,
-                    p2: `Обзор рынка акций США: Фьючерсы на индексы удерживают позиции, институционалы позиционируются перед оглашением ставки.`,
-                    p3: `Обзоры золота и нефти: Спрос на золото (XAUUSD) остается сильным, нефтяные площадки следят за запасами.`,
-                    p4: `Тезис для стрима и чата: Подчеркните важность жесткого риск-менеджмента, расширения стоп-лоссов и недопустимости завышенных плечей до релиза в 14:00 EST.`,
-                    p5: `Сохраняйте дисциплину, берегите капитал и дайте первой волне ликвидности отработать перед входом в сделки!`
+                    p1: `Оперативное обновление в реальном времени (${timeTag} EST / ${sessTitle}): Рынки мгновенно реагируют на решения ФРС через живые потоковые ленты по акциям США, золоту и нефти.`,
+                    p2: `Лента новостей акций: Фьючерсы и ордерфлоу отражают динамику сразу после публикации заявления.`,
+                    p3: `Живые потоки золота и нефти: Площадки XAUUSD и сырья обрабатывают данные через официальные биржевые фиды.`,
+                    p4: `Тезис для стрима: Опирайтесь на живые потоковые новости в терминале для принятия решений по риск-менеджменту.`,
+                    p5: `Сохраняйте дисциплину и торгуйте в гармонии с реальным потоком рынка!`
                 },
                 {
-                    p1: `Свежий срез FOMC (${timeTag} EST): Анализ ордерфлоу показывает защитную тактику в акциях технологических компаний, золоте и сырье.`,
-                    p2: `Настрой долгового рынка и сырья предельно собран. Ожидайте взрывного ценообразования по ES, MNQ, золоту и нефти сразу после публикации.`,
-                    p3: `Валютные рынки торгуются в узких коридорах при долларе на 103.45 в ожидании пресс-конференции Пауэлла.`,
-                    p4: `Мысль для трансляции: Напомните зрителям, что выдержка во время новостных штормов отличает профессионалов от любителей.`,
-                    p5: `Держим руку на пульсе. Торгуем осознанно и профессионально управляем рисками!`
-                },
-                {
-                    p1: `Автоматический срез аналитики в ${timeTag} EST: Параметры волатильности в акциях, золоте и нефти отражают крайнюю осторожность игроков.`,
-                    p2: `Макрофон: доходность 10-леток на 4.22% выступает базовым ориентиром перед резким расширением ликвидности.`,
-                    p3: `При индексе доллара на 103.45 активы и сырье готовы к мощному импульсному движению после 14:00 EST.`,
-                    p4: `Главный вывод для аудитории: Дождитесь подтверждения пробоя первого 5-минутного диапазона, а не угадывайте реакцию рынка наугад.`,
-                    p5: `Сессия входит в кульминационную фазу. Работаем четко и хладнокровно!`
+                    p1: `Свежий срез FOMC в реальном времени (${timeTag} EST): Живые тикеры транслируют реакцию рынков на заявления регулятора.`,
+                    p2: `Институциональный поток: используйте встроенные живые ленты для отслеживания моментальных изменений в активах.`,
+                    p3: `Валюты и сырье мгновенно перестраивают диапазоны по мере поступления новых данных из Вашингтона.`,
+                    p4: `Мысль для трансляции: Живые потоковые данные убирают необходимость гадать — вся информация поступает секунда в секунду.`,
+                    p5: `Держим руку на пульсе. Работаем четко и профессионально!`
                 }
             ];
 
@@ -1260,7 +1105,7 @@
 
             btn.disabled = true;
             icon.classList.add('animate-spin');
-            txt.innerText = currentLang === 'en' ? 'Syncing Web...' : 'Синхронизация...';
+            txt.innerText = currentLang === 'en' ? 'Syncing Feeds...' : 'Синхронизация лент...';
 
             setTimeout(() => {
                 btn.disabled = false;
