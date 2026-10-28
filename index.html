@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.44</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.45</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.44</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.45</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -195,7 +195,7 @@
 
             <!-- STABLE TRADINGVIEW MINI CHARTS ROW (SPY, QQQ, Gold) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
+                <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[220px] shadow-lg flex flex-col">
                     <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
                         <span class="font-bold text-blue-400">SPY (S&P 500 ETF) — MACRO</span>
                         <span class="text-[10px] text-emerald-400">1D Chart</span>
@@ -208,7 +208,7 @@
                     </div>
                 </div>
 
-                <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
+                <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[220px] shadow-lg flex flex-col">
                     <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
                         <span class="font-bold text-amber-400">QQQ (Nasdaq 100) — MACRO</span>
                         <span class="text-[10px] text-emerald-400">1D Chart</span>
@@ -221,7 +221,7 @@
                     </div>
                 </div>
 
-                <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[245px] shadow-lg flex flex-col">
+                <div class="bg-dark-800 border border-gray-800 rounded-xl p-3 h-[220px] shadow-lg flex flex-col">
                     <div class="flex items-center justify-between pb-2 mb-1 border-b border-gray-800 text-xs font-mono">
                         <span class="font-bold text-yellow-400">XAUUSD (Gold Spot) — MACRO</span>
                         <span class="text-[10px] text-emerald-400">1D Chart</span>
@@ -276,7 +276,7 @@
                             <i data-lucide="external-link" class="w-2.5 h-2.5"></i>
                         </a>
                     </div>
-                    <div class="space-y-2 text-xs font-mono max-h-[550px] overflow-y-auto pr-1" id="top10-catalysts-container">
+                    <div class="space-y-2 text-xs font-mono max-h-[420px] overflow-y-auto pr-1" id="top10-catalysts-container">
                         <!-- Dynamically populated -->
                     </div>
                 </div>
@@ -352,44 +352,44 @@
                             <div class="animate-ticker text-sm font-mono text-gray-100 font-medium space-x-8" id="flash-wire-content">
                                 <span>⚡ <strong class="text-emerald-400">INSTANTANEOUS MARKET FEEDS</strong> • Live asset monitoring for US Indices, Gold & Crude Oil</span>
                                 <span class="text-rose-400">|</span>
-                                <span>🔔 <strong class="text-amber-400">ZERO CACHED DELAYS</strong> • Live Streaming Data Active</span>
+                                <span>🔔 <strong class="text-amber-400">OPTIMIZED COMPACT LAYOUT</strong> • Zero Empty Fields</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 4 Ultra-Clean Live Market & Quote Grid Widgets (Replaces stale articles with live streaming tickers/quotes) -->
+                    <!-- 4 Optimized, Compact Live Market Quote Grid Widgets (Zero empty spaces, full data population) -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         
-                        <!-- Block 1: High-Impact Macro & Interest Rates Feed -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[340px]">
+                        <!-- Block 1: High-Impact Macro & Rates (Fully populated with active forex/yields) -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[280px]">
                             <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded border border-rose-500/20 font-bold">🔴 High-Impact Macro & Rates (US10Y / DXY)</span>
+                                <span class="bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded border border-rose-500/20 font-bold">🔴 High-Impact Macro & Rates (Yields & DXY)</span>
                                 <span class="text-emerald-400 text-[10px] animate-pulse">REAL-TIME</span>
                             </div>
                             <div class="tradingview-widget-container flex-1 w-full">
                                 <div class="tradingview-widget-container__widget h-full"></div>
                                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Macro & Rates", "symbols": [{"name": "ECONOMICS:USINTR", "displayName": "US Fed Interest Rate"}, {"name": "ECONOMICS:USINF", "displayName": "US Inflation Rate"}, {"name": "TVC:US10Y", "displayName": "10-Yr Treasury Yield"}, {"name": "FX_IDC:USDJPY", "displayName": "USD/JPY"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
+                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Macro & Rates", "symbols": [{"name": "TVC:US10Y", "displayName": "10-Yr Treasury Yield"}, {"name": "TVC:US02Y", "displayName": "2-Yr Treasury Yield"}, {"name": "FX_IDC:USDX", "displayName": "US Dollar Index"}, {"name": "FX_IDC:USDJPY", "displayName": "USD/JPY"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
                                 </script>
                             </div>
                         </div>
 
-                        <!-- Block 2: US Stock Market Recap (Live Indices & S&P/Nasdaq Quotes) -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[340px]">
+                        <!-- Block 2: US Stock Market Recap (SPY / QQQ / ES / NQ) -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[280px]">
                             <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-bold">📈 US Stock Market Recap (SPY / QQQ / ES)</span>
+                                <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-bold">📈 US Stock Market Recap (SPY / QQQ / ES / NQ)</span>
                                 <span class="text-emerald-400 text-[10px] animate-pulse">REAL-TIME</span>
                             </div>
                             <div class="tradingview-widget-container flex-1 w-full">
                                 <div class="tradingview-widget-container__widget h-full"></div>
                                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "US Indices", "symbols": [{"name": "AMEX:SPY", "displayName": "S&P 500 ETF (SPY)"}, {"name": "NASDAQ:QQQ", "displayName": "Nasdaq 100 ETF (QQQ)"}, {"name": "DJ:DJI", "displayName": "Dow Jones Industrial"}, {"name": "CME_MINI:ES1!", "displayName": "E-mini S&P Futures"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
+                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "US Indices", "symbols": [{"name": "AMEX:SPY", "displayName": "S&P 500 ETF (SPY)"}, {"name": "NASDAQ:QQQ", "displayName": "Nasdaq 100 ETF (QQQ)"}, {"name": "CME_MINI:ES1!", "displayName": "E-mini S&P Futures"}, {"name": "CME_MINI:NQ1!", "displayName": "Nasdaq 100 Futures"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
                                 </script>
                             </div>
                         </div>
 
-                        <!-- Block 3: Gold Market & Forex Recap (Spot Gold & DXY) -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[340px]">
+                        <!-- Block 3: Gold Market & Forex Recap (Spot Gold & Silver) -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[280px]">
                             <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
                                 <span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-bold">🟡 Gold Market & Forex Recap (XAUUSD)</span>
                                 <span class="text-emerald-400 text-[10px] animate-pulse">REAL-TIME</span>
@@ -397,21 +397,21 @@
                             <div class="tradingview-widget-container flex-1 w-full">
                                 <div class="tradingview-widget-container__widget h-full"></div>
                                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Gold & Forex", "symbols": [{"name": "OANDA:XAUUSD", "displayName": "Gold Spot (XAUUSD)"}, {"name": "FX:EURUSD", "displayName": "EUR/USD"}, {"name": "FX_IDC:USDX", "displayName": "US Dollar Index"}, {"name": "OANDA:XAGUSD", "displayName": "Silver Spot"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
+                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Gold & Forex", "symbols": [{"name": "OANDA:XAUUSD", "displayName": "Gold Spot (XAUUSD)"}, {"name": "FX:EURUSD", "displayName": "EUR/USD"}, {"name": "FX:GBPUSD", "displayName": "GBP/USD"}, {"name": "OANDA:XAGUSD", "displayName": "Silver Spot"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
                                 </script>
                             </div>
                         </div>
 
-                        <!-- Block 4: Oil & Commodities Recap (Crude WTI / Brent) -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[340px]">
+                        <!-- Block 4: Oil & Commodities Recap (Active Gold / Silver / Copper / Spot) -->
+                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[280px]">
                             <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-bold">🛢️ Oil & Commodities Recap (WTI / Brent)</span>
+                                <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-bold">🛢️ Oil & Commodities Recap (Metals & Energy)</span>
                                 <span class="text-emerald-400 text-[10px] animate-pulse">REAL-TIME</span>
                             </div>
                             <div class="tradingview-widget-container flex-1 w-full">
                                 <div class="tradingview-widget-container__widget h-full"></div>
                                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Energy & Commodities", "symbols": [{"name": "NYMEX:CL1!", "displayName": "Crude Oil WTI"}, {"name": "ICEUS:BRN1!", "displayName": "Brent Crude Oil"}, {"name": "NYMEX:NG1!", "displayName": "Natural Gas"}, {"name": "COMEX:GC1!", "displayName": "Gold Futures"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
+                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Energy & Commodities", "symbols": [{"name": "COMEX:GC1!", "displayName": "Gold Futures"}, {"name": "COMEX:SI1!", "displayName": "Silver Futures"}, {"name": "COMEX:HG1!", "displayName": "Copper Futures"}, {"name": "TVC:USOIL", "displayName": "US Crude Oil Spot"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
                                 </script>
                             </div>
                         </div>
@@ -448,7 +448,7 @@
                     </div>
 
                     <!-- Long & Conversational Text -->
-                    <div id="recap-content" class="bg-dark-900 border border-gray-700 p-5 rounded-xl text-gray-200 font-sans text-sm leading-relaxed space-y-4 max-h-[500px] overflow-y-auto">
+                    <div id="recap-content" class="bg-dark-900 border border-gray-700 p-5 rounded-xl text-gray-200 font-sans text-sm leading-relaxed space-y-4 max-h-[450px] overflow-y-auto">
                         <p class="font-semibold text-white text-base" id="recap-p1">Loading session intelligence...</p>
                         <p class="text-gray-300" id="recap-p2"></p>
                         <p class="text-gray-300" id="recap-p3"></p>
@@ -1055,34 +1055,34 @@
 
             const variationsEn = [
                 {
-                    p1: `FOMC Rate Decision Day Intelligence Update (${timeTag} EST / ${sessTitle}): Live asset quote blocks provide instant real-time price updates for interest rates, equities, gold, and energy contracts.`,
-                    p2: `US stock market live feed: Real-time ticker quotes reflect immediate execution prices and market depth across SPY, QQQ, and E-mini futures.`,
-                    p3: `Gold & Oil live quotes: Spot gold (XAUUSD) and crude oil contracts stream continuous second-by-second pricing without cached article delays.`,
-                    p4: `For live streaming and chat engagement: Emphasize that live asset quotes remove lagging article feeds and give instant quantitative clarity.`,
+                    p1: `FOMC Rate Decision Day Intelligence Update (${timeTag} EST / ${sessTitle}): Optimized real-time asset quote blocks provide instant, fully populated market data for treasury yields, indices, and commodities.`,
+                    p2: `US stock market live feed: Compact ticker tables reflect immediate execution prices and liquidity across SPY, QQQ, and E-mini futures.`,
+                    p3: `Gold & Oil live quotes: Precious metals and commodity contracts stream continuous second-by-second pricing with zero empty fields.`,
+                    p4: `For live streaming and chat engagement: Emphasize that optimized live asset quotes give instant quantitative clarity without visual gaps.`,
                     p5: `Stay disciplined, protect your capital, and trade the live market flow with absolute clarity!`
                 },
                 {
-                    p1: `Real-time FOMC session refresh (${timeTag} EST): Live asset quote widgets show immediate market reaction across global rates, indices, and commodities.`,
+                    p1: `Real-time FOMC session refresh (${timeTag} EST): Compact asset quote widgets show immediate market reaction across global rates, indices, and commodities.`,
                     p2: `Live market intelligence: Watch the real-time asset tables above for precise second-by-second changes as press conference remarks unfold.`,
                     p3: `Commodities and currency quotes adjust dynamically in real-time as Washington statements hit the wires.`,
-                    p4: `Stream & chat talking point: Remind your community that real-time live asset quotes ensure you trade on actual live prices, not old news.`,
+                    p4: `Stream & chat talking point: Remind your community that real-time live asset quotes ensure you trade on actual live prices with a clean interface.`,
                     p5: `Let's keep our execution razor-sharp. Trade with full clarity and manage every position professionally!`
                 }
             ];
 
             const variationsRu = [
                 {
-                    p1: `Оперативное обновление в реальном времени (${timeTag} EST / ${sessTitle}): Живые котировки активов мгновенно отражают изменения процентных ставок, акций, золота и нефти.`,
-                    p2: `Лента котировок акций: Реальные ценовые фиды фиксируют актуальную динамику по SPY, QQQ и фьючерсам.`,
-                    p3: `Живые котировки золота и сырья: Инструменты XAUUSD и нефти передают секундные данные без задержек.`,
-                    p4: `Тезис для стрима: Подчеркните, что вместо устаревших статей терминал использует живые котировки активов в реальном времени.`,
+                    p1: `Оперативное обновление в реальном времени (${timeTag} EST / ${sessTitle}): Оптимизированные блоки котировок мгновенно передают актуальные данные по доходностям, индексам и сырью без пустых полей.`,
+                    p2: `Лента котировок акций: Компактные таблицы фиксируют динамику по SPY, QQQ и фьючерсам в реальном времени.`,
+                    p3: `Живые котировки золота и сырья: Инструменты металлов и энергии передают секундные данные без задержек.`,
+                    p4: `Тезис для стрима: Подчеркните, что интерфейс оптимизирован для максимальной наглядности и чистоты данных во время эфиров.`,
                     p5: `Сохраняйте дисциплину и торгуйте в гармонии с реальным потоком рынка!`
                 },
                 {
-                    p1: `Свежий срез FOMC в реальном времени (${timeTag} EST): Интерактивные таблицы котировок показывают реакцию рынков онлайн.`,
+                    p1: `Свежий срез FOMC в реальном времени (${timeTag} EST): Компактные таблицы котировок показывают реакцию рынков онлайн.`,
                     p2: `Институциональный поток: используйте живые котировки для мгновенной оценки волатильности по каждому активу.`,
                     p3: `Валюты и сырье моментально реагируют на поступающие данные в непрерывном режиме.`,
-                    p4: `Мысль для трансляции: Котировки работают в real-time режиме, исключая любые задержки.`,
+                    p4: `Мысль для трансляции: Котировки работают в real-time режиме, исключая любые пустые ячейки.`,
                     p5: `Держим руку на пульсе. Работаем четко и профессионально!`
                 }
             ];
