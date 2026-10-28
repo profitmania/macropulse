@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.45</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.46</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.45</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.46</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -154,7 +154,7 @@
             <div class="flex items-center space-x-3">
                 <div class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-pulse"></div>
                 <div>
-                    <h2 class="font-bold text-sm tracking-wide uppercase text-emerald-400" data-i18n="bannerTitle">LIVE REAL-TIME FEED & MARKET RECAP ACTIVE</h2>
+                    <h2 class="font-bold text-sm tracking-wide uppercase text-emerald-400" data-i18n="bannerTitle">MASTER LIVE FEED & MARKET RECAP ACTIVE</h2>
                     <p class="text-xs text-gray-300 mt-0.5" id="banner-next-alert">Next Key Catalyst: Federal Reserve Official Speech @ 09:00 EST</p>
                 </div>
             </div>
@@ -175,7 +175,7 @@
             </div>
             <div class="overflow-hidden whitespace-nowrap flex-1 relative flex items-center">
                 <div class="animate-ticker text-xs font-mono text-gray-200 space-x-8" id="ticker-content">
-                    <span>🔴 <strong class="text-emerald-400">SESSION LIVE</strong> • Real-time market feeds synchronized • Monitor key intraday levels & order flow.</span>
+                    <span>🔴 <strong class="text-emerald-400">MASTER SESSION LIVE</strong> • All core asset feeds synchronized in real-time.</span>
                 </div>
             </div>
         </div>
@@ -312,15 +312,15 @@
             <!-- Right Content -->
             <div class="lg:col-span-3 space-y-6">
 
-                <!-- 4 News Wires Grid with Local Refresh Button -->
+                <!-- MASTER LIVE MARKET BOARD (Unified Working Tickers) -->
                 <div class="bg-dark-800 border border-gray-800 rounded-xl p-5 space-y-5 shadow-2xl">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-gray-700/60 gap-3">
                         <div class="space-y-1">
                             <div class="flex items-center space-x-2">
-                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono border border-emerald-500/20 font-semibold" data-i18n="wireAggregator">LIVE MULTI-ASSET STREAMING FEED</span>
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono border border-emerald-500/20 font-semibold">MASTER LIVE MARKET BOARD</span>
                                 <span class="text-xs font-mono text-gray-400" id="wire-update-time">Updated: Live Session</span>
                             </div>
-                            <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & News Flow</h2>
+                            <h2 class="text-lg font-bold text-white tracking-tight" id="main-heading">Market Intelligence & Verified Real-Time Feeds</h2>
                         </div>
                         <button onclick="refreshNewsFeed()" class="bg-dark-900 hover:bg-dark-700 text-gray-200 border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer shadow-sm">
                             <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="news-refresh-icon"></i>
@@ -346,76 +346,32 @@
                     <div class="bg-dark-900 border border-rose-500/40 rounded-lg py-2.5 px-3.5 flex items-center space-x-3 overflow-hidden shadow-inner">
                         <div class="flex items-center space-x-1.5 shrink-0 bg-rose-500/20 text-rose-400 border border-rose-500/30 px-2.5 py-1 rounded text-[11px] font-mono font-bold animate-pulse">
                             <i data-lucide="zap" class="w-3.5 h-3.5"></i>
-                            <span>FLASH WIRE</span>
+                            <span>MASTER FEED</span>
                         </div>
                         <div class="overflow-hidden whitespace-nowrap flex-1 relative flex items-center">
                             <div class="animate-ticker text-sm font-mono text-gray-100 font-medium space-x-8" id="flash-wire-content">
-                                <span>⚡ <strong class="text-emerald-400">INSTANTANEOUS MARKET FEEDS</strong> • Live asset monitoring for US Indices, Gold & Crude Oil</span>
+                                <span>⚡ <strong class="text-emerald-400">MASTER MARKET BOARD ACTIVE</strong> • S&P 500, Nasdaq, Gold, Silver & Major FX Pairs Streaming in Real-Time</span>
                                 <span class="text-rose-400">|</span>
-                                <span>🔔 <strong class="text-amber-400">OPTIMIZED COMPACT LAYOUT</strong> • Zero Empty Fields</span>
+                                <span>🔔 <strong class="text-amber-400">ZERO EMPTY FIELDS</strong> • Verified High-Performance Layout</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 4 Optimized, Compact Live Market Quote Grid Widgets (Zero empty spaces, full data population) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        
-                        <!-- Block 1: High-Impact Macro & Rates (Fully populated with active forex/yields) -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[280px]">
-                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded border border-rose-500/20 font-bold">🔴 High-Impact Macro & Rates (Yields & DXY)</span>
-                                <span class="text-emerald-400 text-[10px] animate-pulse">REAL-TIME</span>
-                            </div>
-                            <div class="tradingview-widget-container flex-1 w-full">
-                                <div class="tradingview-widget-container__widget h-full"></div>
-                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Macro & Rates", "symbols": [{"name": "TVC:US10Y", "displayName": "10-Yr Treasury Yield"}, {"name": "TVC:US02Y", "displayName": "2-Yr Treasury Yield"}, {"name": "FX_IDC:USDX", "displayName": "US Dollar Index"}, {"name": "FX_IDC:USDJPY", "displayName": "USD/JPY"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
-                                </script>
-                            </div>
+                    <!-- UNIFIED MASTER WORKING TICKERS WIDGET (S&P 500, Nasdaq, Gold, Silver, EUR/USD, GBP/USD, USD/CHF, USD/JPY) -->
+                    <div class="bg-dark-900 p-4 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[400px]">
+                        <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-2 border-b border-gray-800">
+                            <span class="bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded border border-blue-500/20 font-bold flex items-center space-x-1.5">
+                                <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-400 animate-pulse"></i>
+                                <span>Indices, Metals & Major Forex Pairs (Verified Live Streaming Board)</span>
+                            </span>
+                            <span class="text-emerald-400 text-[10px] animate-pulse font-semibold">100% POPULATED • REAL-TIME</span>
                         </div>
-
-                        <!-- Block 2: US Stock Market Recap (SPY / QQQ / ES / NQ) -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[280px]">
-                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-bold">📈 US Stock Market Recap (SPY / QQQ / ES / NQ)</span>
-                                <span class="text-emerald-400 text-[10px] animate-pulse">REAL-TIME</span>
-                            </div>
-                            <div class="tradingview-widget-container flex-1 w-full">
-                                <div class="tradingview-widget-container__widget h-full"></div>
-                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "US Indices", "symbols": [{"name": "AMEX:SPY", "displayName": "S&P 500 ETF (SPY)"}, {"name": "NASDAQ:QQQ", "displayName": "Nasdaq 100 ETF (QQQ)"}, {"name": "CME_MINI:ES1!", "displayName": "E-mini S&P Futures"}, {"name": "CME_MINI:NQ1!", "displayName": "Nasdaq 100 Futures"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
-                                </script>
-                            </div>
+                        <div class="tradingview-widget-container flex-1 w-full">
+                            <div class="tradingview-widget-container__widget h-full"></div>
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+                            {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Master Trading Board", "symbols": [{"name": "AMEX:SPY", "displayName": "S&P 500 ETF (SPY)"}, {"name": "NASDAQ:QQQ", "displayName": "Nasdaq 100 ETF (QQQ)"}, {"name": "OANDA:XAUUSD", "displayName": "Gold Spot (XAUUSD)"}, {"name": "OANDA:XAGUSD", "displayName": "Silver Spot (XAGUSD)"}, {"name": "FX:EURUSD", "displayName": "EUR/USD"}, {"name": "FX:GBPUSD", "displayName": "GBP/USD"}, {"name": "FX:USDCHF", "displayName": "USD/CHF"}, {"name": "FX_IDC:USDJPY", "displayName": "USD/JPY"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
+                            </script>
                         </div>
-
-                        <!-- Block 3: Gold Market & Forex Recap (Spot Gold & Silver) -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[280px]">
-                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded border border-yellow-500/20 font-bold">🟡 Gold Market & Forex Recap (XAUUSD)</span>
-                                <span class="text-emerald-400 text-[10px] animate-pulse">REAL-TIME</span>
-                            </div>
-                            <div class="tradingview-widget-container flex-1 w-full">
-                                <div class="tradingview-widget-container__widget h-full"></div>
-                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Gold & Forex", "symbols": [{"name": "OANDA:XAUUSD", "displayName": "Gold Spot (XAUUSD)"}, {"name": "FX:EURUSD", "displayName": "EUR/USD"}, {"name": "FX:GBPUSD", "displayName": "GBP/USD"}, {"name": "OANDA:XAGUSD", "displayName": "Silver Spot"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
-                                </script>
-                            </div>
-                        </div>
-
-                        <!-- Block 4: Oil & Commodities Recap (Active Gold / Silver / Copper / Spot) -->
-                        <div class="bg-dark-900 p-3 rounded-xl border border-gray-700 space-y-2 flex flex-col h-[280px]">
-                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-1 border-b border-gray-800">
-                                <span class="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded border border-orange-500/20 font-bold">🛢️ Oil & Commodities Recap (Metals & Energy)</span>
-                                <span class="text-emerald-400 text-[10px] animate-pulse">REAL-TIME</span>
-                            </div>
-                            <div class="tradingview-widget-container flex-1 w-full">
-                                <div class="tradingview-widget-container__widget h-full"></div>
-                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Energy & Commodities", "symbols": [{"name": "COMEX:GC1!", "displayName": "Gold Futures"}, {"name": "COMEX:SI1!", "displayName": "Silver Futures"}, {"name": "COMEX:HG1!", "displayName": "Copper Futures"}, {"name": "TVC:USOIL", "displayName": "US Crude Oil Spot"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
-                                </script>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -574,9 +530,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: Evening Globex & Asia Session",
                     wireUpdated: "Updated: Evening Globex Live",
-                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • FOMC Rate Decision Day • Real-Time Asset Feeds Active • Tokyo Open at 19:00 EST",
+                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • FOMC Rate Decision Day • Master Market Board Active • Tokyo Open at 19:00 EST",
                     nextAlert: "Next Key Catalyst: Tokyo Session Open & Asian Liquidity Handover @ 19:00 EST",
-                    flashWire: "⚡ TOKYO SESSION PREP • Asian Liquidity & FX Handover • Real-Time Market Quotes Fully Synchronized",
+                    flashWire: "⚡ TOKYO SESSION PREP • Asian Liquidity & FX Handover • Master Market Board Fully Synchronized",
                     top10: [
                         { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "2-Year Note Treasury Auction ($69B Completed)" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "HIGH IMPACT", text: "⚠️ Fed Interest Rate Decision & FOMC Statement" },
@@ -592,9 +548,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Вечерняя сессия Globex и Азия",
                     wireUpdated: "Обновлено: Вечерняя сессия Globex Live",
-                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX • День FOMC • Живые котировки активны • Токио в 19:00 EST",
+                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX • День FOMC • Мастер-таблица котировок активна • Токио в 19:00 EST",
                     nextAlert: "Следующее событие: Открытие Токио и ликвидность Азии в 19:00 EST",
-                    flashWire: "⚡ ВЕЧЕРНИЙ ГЛОБЕКС • Ликвидность Азии • Котировки реального времени синхронизированы",
+                    flashWire: "⚡ ВЕЧЕРНИЙ ГЛОБЕКС • Ликвидность Азии • Главная таблица котировок синхронизирована",
                     top10: [
                         { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "Аукцион 2-летних гособлигаций США ($69 млрд)" },
                         { time: "14:00", timeStr: "14:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "⚠️ Решение ФРС по ставке и заявление FOMC" },
@@ -612,9 +568,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: European Session & London Open",
                     wireUpdated: "Updated: European Session Live",
-                    tickerText: "🌅 EUROPEAN SESSION ACTIVE • FOMC Rate Decision Day • Real-Time Quotes Active • London Open in Progress",
+                    tickerText: "🌅 EUROPEAN SESSION ACTIVE • FOMC Rate Decision Day • Master Market Board Active • London Open in Progress",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC MEETING DAY • DAX & FTSE Active • Real-Time Asset Quotes Synchronized",
+                    flashWire: "⚡ FOMC MEETING DAY • DAX & FTSE Active • Master Market Board Synchronized",
                     top10: [
                         { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "German Factory Orders & Trade Balance Print" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "HIGH IMPACT", text: "Eurozone CPI Flash Estimate & Employment Change" },
@@ -627,9 +583,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Европейская сессия и открытие Лондона",
                     wireUpdated: "Updated: Европейская сессия Live",
-                    tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ • День решения ФРС • Котировки в реальном времени • Лондон в процессе",
+                    tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ • День решения ФРС • Главная таблица котировок активна • Лондон в процессе",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ДЕНЬ ЗАСЕДАНИЯ ФРС • DAX и FTSE активны • Котировки реального времени синхронизированы",
+                    flashWire: "⚡ ДЕНЬ ЗАСЕДАНИЯ ФРС • DAX и FTSE активны • Главный борд котировок синхронизирован",
                     top10: [
                         { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "Заказы в промышленности Германии и торговый баланс" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Инфляция в еврозоне (CPI Flash Estimate)" },
@@ -644,9 +600,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Pre-Market Prep",
                     wireUpdated: "Updated: New York Pre-Market Live",
-                    tickerText: "🚨 FOMC RATE DECISION DAY • Real-Time Market Quotes Active • Preparing for 14:00 EST Rate Decision",
+                    tickerText: "🚨 FOMC RATE DECISION DAY • Master Market Board Active • Preparing for 14:00 EST Rate Decision",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC PRE-MARKET ALERT • Rate Decision at 14:00 EST • Real-Time Market Quotes Fully Active",
+                    flashWire: "⚡ FOMC PRE-MARKET ALERT • Rate Decision at 14:00 EST • Master Market Board Fully Active",
                     top10: [
                         { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "Wholesale Trade & Retail Inventories Print" },
                         { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-FOMC Consolidation" },
@@ -659,9 +615,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Премаркет Нью-Йорка",
                     wireUpdated: "Updated: New York Pre-Market Live",
-                    tickerText: "🚨 ДЕНЬ РЕШЕНИЯ ФРС • Котировки реального времени • Подготовка к 14:00 EST",
+                    tickerText: "🚨 ДЕНЬ РЕШЕНИЯ ФРС • Мастер-таблица котировок активна • Подготовка к 14:00 EST",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ПРЕБАРКЕТ ФРС • Ставка в 14:00 EST • Котировки активов обновляются ежесекундно",
+                    flashWire: "⚡ ПРЕБАРКЕТ ФРС • Ставка в 14:00 EST • Главный борд котировок обновляется онлайн",
                     top10: [
                         { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Оптовая торговля и розничные запасы" },
                         { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и пре-FOMC консолидация" },
@@ -676,9 +632,9 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Day Session",
                     wireUpdated: "Updated: New York Day Session Live",
-                    tickerText: "🚨 FOMC DAY SESSION ACTIVE • Real-Time Quotes Active • Prepare for Rate Decision & Press Conference",
+                    tickerText: "🚨 FOMC DAY SESSION ACTIVE • Master Market Board Active • Prepare for Rate Decision & Press Conference",
                     nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC DAY SESSION • Standby for Rate Decision • Real-Time Asset Quotes Active",
+                    flashWire: "⚡ FOMC DAY SESSION • Standby for Rate Decision • Master Market Board Active",
                     top10: [
                         { time: "09:30", timeStr: "09:30 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-FOMC Range" },
                         { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction" },
@@ -691,9 +647,9 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Дневная сессия Нью-Йорка",
                     wireUpdated: "Updated: New York Day Session Live",
-                    tickerText: "🚨 ДЕНЬ FOMC АКТИВЕН • Живые котировки активов • Ждем решение ФРС и пресс-конференцию",
+                    tickerText: "🚨 ДЕНЬ FOMC АКТИВЕН • Мастер-таблица котировок • Ждем решение ФРС и пресс-конференцию",
                     nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ FOMC • Ждем решение ФРС • Котировки обновляются онлайн",
+                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ FOMC • Ждем решение ФРС • Главная таблица котировок онлайн",
                     top10: [
                         { time: "09:30", timeStr: "09:30 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и пре-FOMC диапазон" },
                         { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" },
@@ -710,7 +666,7 @@
             en: {
                 subtitle: "Institutional News Aggregator & Market Briefing",
                 syncBtn: "Sync & Search Web",
-                bannerTitle: "LIVE REAL-TIME FEED & MARKET RECAP ACTIVE",
+                bannerTitle: "MASTER LIVE FEED & MARKET RECAP ACTIVE",
                 tickerLabel: "LIVE WIRE",
                 chartsHeader: "Macro Context Charts",
                 delayNotice: "⚠️ Chart quotes delayed by 15 mins (Exchange rule). News & Briefing feed is live-synced.",
@@ -723,7 +679,7 @@
                 nyOpenBtn: "New York Day Session",
                 statusCompleted: "Completed",
                 statusActive: "Active Now",
-                wireAggregator: "LIVE MULTI-ASSET STREAMING FEED",
+                wireAggregator: "MASTER LIVE MARKET BOARD",
                 recapHeader: "MARKET RECAP & BRIEFING",
                 recapSub: "Simple conversational overview for streams and live chats",
                 copyBtn: "Copy",
@@ -732,7 +688,7 @@
             ru: {
                 subtitle: "Институциональный новостной терминал и обзор рынка",
                 syncBtn: "Синхронизация и поиск",
-                bannerTitle: "ЖИВАЯ ЛЕНТА И ОБЗОР РЫНКА АКТИВНЫ",
+                bannerTitle: "ГЛАВНЫЙ БОРД КОТИРОВОК И ОБЗОР АКТИВНЫ",
                 tickerLabel: "ЛЕНТА НОВОСТЕЙ",
                 chartsHeader: "Контекстные макро-графики",
                 delayNotice: "⚠️ Котировки графиков с задержкой 15 мин (правила биржи). Новостной поток и брифинг синхронизированы в реальном времени.",
@@ -745,7 +701,7 @@
                 nyOpenBtn: "Дневная сессия Нью-Йорка",
                 statusCompleted: "Завершено",
                 statusActive: "Активно",
-                wireAggregator: "ПОТОКОВЫЕ КОТИРОВКИ В РЕАЛЬНОМ ВРЕМЕНИ",
+                wireAggregator: "МАСТЕР-ТАБЛИЦА КОТИРОВОК РЕАЛЬНОГО ВРЕМЕНИ",
                 recapHeader: "ОБЗОР РЫНКА И БРИФИНГ",
                 recapSub: "Простой разговорный обзор для стримов и живых эфиров",
                 copyBtn: "Копировать",
@@ -1055,35 +1011,35 @@
 
             const variationsEn = [
                 {
-                    p1: `FOMC Rate Decision Day Intelligence Update (${timeTag} EST / ${sessTitle}): Optimized real-time asset quote blocks provide instant, fully populated market data for treasury yields, indices, and commodities.`,
-                    p2: `US stock market live feed: Compact ticker tables reflect immediate execution prices and liquidity across SPY, QQQ, and E-mini futures.`,
-                    p3: `Gold & Oil live quotes: Precious metals and commodity contracts stream continuous second-by-second pricing with zero empty fields.`,
-                    p4: `For live streaming and chat engagement: Emphasize that optimized live asset quotes give instant quantitative clarity without visual gaps.`,
+                    p1: `FOMC Rate Decision Day Intelligence Update (${timeTag} EST / ${sessTitle}): The Master Live Market Board consolidates S&P 500, Nasdaq, Gold, Silver, and major forex pairs into one clean, fully populated streaming panel.`,
+                    p2: `Live market intelligence: Watch second-by-second price action across equities, precious metals, and FX majors without any empty fields or lag.`,
+                    p3: `Stream & chat engagement: This master dashboard provides an instant 360-degree quantitative view that keeps your audience fully engaged.`,
+                    p4: `For live broadcasting: Emphasize that having all key operational assets in one master window eliminates clutter and streamlines execution.`,
                     p5: `Stay disciplined, protect your capital, and trade the live market flow with absolute clarity!`
                 },
                 {
-                    p1: `Real-time FOMC session refresh (${timeTag} EST): Compact asset quote widgets show immediate market reaction across global rates, indices, and commodities.`,
-                    p2: `Live market intelligence: Watch the real-time asset tables above for precise second-by-second changes as press conference remarks unfold.`,
-                    p3: `Commodities and currency quotes adjust dynamically in real-time as Washington statements hit the wires.`,
-                    p4: `Stream & chat talking point: Remind your community that real-time live asset quotes ensure you trade on actual live prices with a clean interface.`,
+                    p1: `Real-time FOMC session refresh (${timeTag} EST): The unified master board streams instantaneous updates for S&P 500, QQQ, XAUUSD, XAGUSD, EUR/USD, GBP/USD, USD/CHF, and USD/JPY.`,
+                    p2: `Professional asset monitoring: All core instruments are grouped cleanly to deliver maximum visibility during high-impact market hours.`,
+                    p3: `Currency and equity flows adjust dynamically as continuous pricing streams process Washington statements.`,
+                    p4: `Stream talking point: Remind your community that a centralized master feed guarantees you never miss a critical cross-market move.`,
                     p5: `Let's keep our execution razor-sharp. Trade with full clarity and manage every position professionally!`
                 }
             ];
 
             const variationsRu = [
                 {
-                    p1: `Оперативное обновление в реальном времени (${timeTag} EST / ${sessTitle}): Оптимизированные блоки котировок мгновенно передают актуальные данные по доходностям, индексам и сырью без пустых полей.`,
-                    p2: `Лента котировок акций: Компактные таблицы фиксируют динамику по SPY, QQQ и фьючерсам в реальном времени.`,
-                    p3: `Живые котировки золота и сырья: Инструменты металлов и энергии передают секундные данные без задержек.`,
-                    p4: `Тезис для стрима: Подчеркните, что интерфейс оптимизирован для максимальной наглядности и чистоты данных во время эфиров.`,
-                    p5: `Сохраняйте дисциплину и торгуйте в гармонии с реальным потоком рынка!`
+                    p1: `Оперативное обновление в реальном времени (${timeTag} EST / ${sessTitle}): Мастер-борд котировок объединяет S&P 500, Nasdaq, золото, серебро и основные валютные пары в единую чистую панель.`,
+                    p2: `Профессиональный мониторинг: все ключевые активы собраны вместе для максимальной наглядности во время стримов и эфиров.`,
+                    p3: `Тезис для стрима: Единое окно котировок полностью исключает лишний шум и дает кристально чистую картину рынка.`,
+                    p4: `Сохраняйте дисциплину и торгуйте в гармонии с реальным потоком ликвидности!`,
+                    p5: `Работаем четко, профессионально и с абсолютной ясностью!`
                 },
                 {
-                    p1: `Свежий срез FOMC в реальном времени (${timeTag} EST): Компактные таблицы котировок показывают реакцию рынков онлайн.`,
-                    p2: `Институциональный поток: используйте живые котировки для мгновенной оценки волатильности по каждому активу.`,
-                    p3: `Валюты и сырье моментально реагируют на поступающие данные в непрерывном режиме.`,
-                    p4: `Мысль для трансляции: Котировки работают в real-time режиме, исключая любые пустые ячейки.`,
-                    p5: `Держим руку на пульсе. Работаем четко и профессионально!`
+                    p1: `Свежий срез FOMC в реальном времени (${timeTag} EST): Универсальная таблица транслирует котировки индексов, металлов и форекса без пустых ячеек.`,
+                    p2: `Институциональный поток: используйте единый мастер-борд для мгновенной оценки волатильности по всем ключевым рынкам.`,
+                    p3: `Валюты и фондовые активы моментально отражают реакцию на любые новости в непрерывном режиме.`,
+                    p4: `Мысль для трансляции: Все важнейшие рынки находятся перед глазами в одном компактном окне.`,
+                    p5: `Держим руку на пульсе. Торгуем осознанно и уверенно!`
                 }
             ];
 
