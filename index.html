@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.52</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.53</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.52</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.53</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -155,7 +155,7 @@
                 <div class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-pulse"></div>
                 <div>
                     <h2 class="font-bold text-sm tracking-wide uppercase text-emerald-400" data-i18n="bannerTitle">MASTER LIVE FEED & MULTI-RSS RECAP ACTIVE</h2>
-                    <p class="text-xs text-gray-300 mt-0.5" id="banner-next-alert">Next Key Catalyst: Asian Session Liquidity Handover @ 19:00 EST</p>
+                    <p class="text-xs text-gray-300 mt-0.5" id="banner-next-alert">Next Key Catalyst: Australian Retail Sales & Employment Index Flash @ 20:00 EST</p>
                 </div>
             </div>
             <div class="flex items-center space-x-3 text-xs font-mono">
@@ -264,21 +264,21 @@
                     </div>
                 </div>
 
-                <!-- TOP 10 CATALYSTS & RADAR -->
+                <!-- TOP 10 CATALYSTS & RADAR (INTERACTIVE & REORDERED) -->
                 <div class="bg-dark-800 border border-blue-500/30 rounded-xl p-4 space-y-3 shadow-lg shadow-blue-500/5">
                     <div class="flex items-center justify-between">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-blue-400 font-mono flex items-center space-x-1.5">
+                        <a href="https://finviz.com/calendar/economic" target="_blank" class="text-xs font-bold uppercase tracking-wider text-blue-400 font-mono flex items-center space-x-1.5 hover:underline">
                             <i data-lucide="zap" class="w-3.5 h-3.5"></i>
-                            <span>Top 10 Catalysts & Radar</span>
-                        </h3>
+                            <span>Top 10 Catalysts & Radar ↗</span>
+                        </a>
                         <a href="https://finviz.com/calendar/economic" target="_blank" class="text-[10px] bg-blue-500/10 text-blue-400 hover:underline px-1.5 py-0.5 rounded font-mono flex items-center space-x-1">
                             <span>Finviz</span>
                             <i data-lucide="external-link" class="w-2.5 h-2.5"></i>
                         </a>
                     </div>
-                    <!-- Auto-Scrollable Container -->
+                    <!-- Auto-Sorted Container -->
                     <div class="space-y-2 text-xs font-mono max-h-[420px] overflow-y-auto pr-1" id="top10-catalysts-container">
-                        <!-- Dynamically populated -->
+                        <!-- Dynamically populated & sorted -->
                     </div>
                 </div>
 
@@ -329,8 +329,8 @@
                         </button>
                     </div>
 
-                    <!-- SMART NEXT NEWS / CATALYST BANNER (DYNAMIC MAX IMPACT VS NEXT NEWS) -->
-                    <div id="fomc-alert-banner" class="hidden rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg">
+                    <!-- SMART NEXT NEWS / CATALYST BANNER (INTERACTIVE LINK) -->
+                    <a id="fomc-alert-banner" href="https://finviz.com/calendar/economic" target="_blank" class="hidden rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg transition-all hover:opacity-90 cursor-pointer">
                         <div class="flex items-center space-x-3">
                             <div id="banner-icon-box" class="p-2 rounded-lg font-bold shrink-0">
                                 <i data-lucide="bell" class="w-5 h-5"></i>
@@ -340,8 +340,11 @@
                                 <p class="text-xs text-gray-200 mt-0.5" id="fomc-alert-text"></p>
                             </div>
                         </div>
-                        <span id="banner-badge-tag" class="text-[11px] font-mono px-2.5 py-1 rounded shrink-0"></span>
-                    </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span id="banner-badge-tag" class="text-[11px] font-mono px-2.5 py-1 rounded shrink-0"></span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-blue-300"></i>
+                        </div>
+                    </a>
 
                     <!-- FLASH WIRE TICKER BANNER -->
                     <div class="bg-dark-900 border border-rose-500/40 rounded-lg py-2.5 px-3.5 flex items-center space-x-3 overflow-hidden shadow-inner">
@@ -353,7 +356,7 @@
                             <div class="animate-ticker text-sm font-mono text-gray-100 font-medium space-x-8" id="flash-wire-content">
                                 <span>⚡ <strong class="text-emerald-400">MASTER MARKET BOARD ACTIVE</strong> • S&P 500, Nasdaq, Gold, Silver, USD/CHF & USD/JPY Streaming in Real-Time</span>
                                 <span class="text-rose-400">|</span>
-                                <span>🔔 <strong class="text-amber-400">ZERO EMPTY FIELDS</strong> • Perfect Height & Layout</span>
+                                <span>🔔 <strong class="text-amber-400">EQUITY QUOTES SESSION CLOSE</strong> • Forex & Gold Live</span>
                             </div>
                         </div>
                     </div>
@@ -363,14 +366,14 @@
                         <div class="flex items-center justify-between text-xs font-mono text-gray-400 pb-2 border-b border-gray-800">
                             <span class="bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded border border-blue-500/20 font-bold flex items-center space-x-1.5">
                                 <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-400 animate-pulse"></i>
-                                <span>Indices, Metals & Verified USD Forex Pairs (USD/CHF & USD/JPY)</span>
+                                <span>Indices & Metals (Session Close), Forex Pairs (Live)</span>
                             </span>
-                            <span class="text-emerald-400 text-[10px] animate-pulse font-semibold">100% POPULATED • REAL-TIME</span>
+                            <span class="text-amber-400 text-[10px] font-semibold">EQUITIES: CLOSED (SESSION FIX)</span>
                         </div>
                         <div class="tradingview-widget-container flex-1 w-full">
                             <div class="tradingview-widget-container__widget h-full"></div>
                             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                            {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Master Trading Board", "symbols": [{"name": "AMEX:SPY", "displayName": "S&P 500 ETF (SPY)"}, {"name": "NASDAQ:QQQ", "displayName": "Nasdaq 100 ETF (QQQ)"}, {"name": "OANDA:XAUUSD", "displayName": "Gold Spot (XAUUSD)"}, {"name": "OANDA:XAGUSD", "displayName": "Silver Spot (XAGUSD)"}, {"name": "FX:USDCHF", "displayName": "USD/CHF"}, {"name": "FX_IDC:USDJPY", "displayName": "USD/JPY"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
+                            {"width": "100%", "height": "100%", "symbolsGroups": [{"name": "Master Trading Board", "symbols": [{"name": "AMEX:SPY", "displayName": "S&P 500 ETF (SPY) [Closed]"}, {"name": "NASDAQ:QQQ", "displayName": "Nasdaq 100 ETF (QQQ) [Closed]"}, {"name": "OANDA:XAUUSD", "displayName": "Gold Spot (XAUUSD)"}, {"name": "OANDA:XAGUSD", "displayName": "Silver Spot (XAGUSD)"}, {"name": "FX:USDCHF", "displayName": "USD/CHF"}, {"name": "FX_IDC:USDJPY", "displayName": "USD/JPY"}]}], "colorTheme": "dark", "isTransparent": true, "locale": "en"}
                             </script>
                         </div>
                     </div>
@@ -533,36 +536,36 @@
                 name: "CNBC Markets Top News",
                 url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",
                 bulletins: [
-                    { title: "Wall Street Index Futures Advance Ahead of Federal Reserve Rate Decision", desc: "S&P 500 and Nasdaq 100 futures gain momentum as institutional desks position for key monetary policy statements and liquidity sweeps." },
-                    { title: "Tech Sector Rotation Drives S&P 500 and QQQ Higher in Pre-Market Action", desc: "Mega-cap equities show relative strength, supporting overnight Micro NASDAQ (MNQ) upward continuation patterns." },
-                    { title: "Bond Yields Stabilize Near 4.22% as Treasury Auctions Clear Successfully", desc: "Fixed income markets digest short-term note demand, easing immediate pressure on equity valuations." }
+                    { title: "Wall Street Index Futures Advance Ahead of Federal Reserve Rate Decision", desc: "S&P 500 and Nasdaq 100 futures gain momentum as institutional desks position for key monetary policy statements and liquidity sweeps.", link: "https://www.cnbc.com/markets/" },
+                    { title: "Tech Sector Rotation Drives S&P 500 and QQQ Higher in Pre-Market Action", desc: "Mega-cap equities show relative strength, supporting overnight Micro NASDAQ (MNQ) upward continuation patterns.", link: "https://www.cnbc.com/markets/" },
+                    { title: "Bond Yields Stabilize Near 4.22% as Treasury Auctions Clear Successfully", desc: "Fixed income markets digest short-term note demand, easing immediate pressure on equity valuations.", link: "https://www.cnbc.com/bonds/" }
                 ]
             },
             {
                 name: "Reuters Global Markets & Economy",
                 url: "https://www.reutersagency.com/feed/?best-topics=business-finance&post_type=best",
                 bulletins: [
-                    { title: "Global Central Banks Signal Data-Dependent Stance on Interest Rates", desc: "International monetary authorities emphasize flexibility as inflation metrics and labor data show mixed regional trends." },
-                    { title: "Energy Markets and Crude Oil Futures React to Middle East Supply Updates", desc: "Commodity desks monitor geopolitical risk premiums impacting global inflation expectations and currency flows." },
-                    { title: "European Indices Close Mixed as Investors Weigh German Industrial Data", desc: "DAX and FTSE 100 experience intraday rotation ahead of North American market opening bells." }
+                    { title: "Global Central Banks Signal Data-Dependent Stance on Interest Rates", desc: "International monetary authorities emphasize flexibility as inflation metrics and labor data show mixed regional trends.", link: "https://www.reuters.com/markets/" },
+                    { title: "Energy Markets and Crude Oil Futures React to Middle East Supply Updates", desc: "Commodity desks monitor geopolitical risk premiums impacting global inflation expectations and currency flows.", link: "https://www.reuters.com/markets/commodities/" },
+                    { title: "European Indices Close Mixed as Investors Weigh German Industrial Data", desc: "DAX and FTSE 100 experience intraday rotation ahead of North American market opening bells.", link: "https://www.reuters.com/markets/europe/" }
                 ]
             },
             {
                 name: "MarketWatch Top Financial Stories",
                 url: "https://feeds.content.dowjones.io/public/rss/mw_topstories",
                 bulletins: [
-                    { title: "S&P 500 E-mini (ES) and Nasdaq (NQ) Approach Critical Resistance Levels", desc: "Day traders and prop firms watch overnight fair value gaps and 55-level liquidity pools for high-probability reversal setups." },
-                    { title: "Gold Spot (XAUUSD) Maintains Safe-Haven Bid Amid Currency Fluctuations", desc: "Precious metals hold strong intraday ranges as dollar index wobbles near key psychological support." },
-                    { title: "Corporate Earnings Reports Beat Consensus Estimates Across Major Sectors", desc: "Strong balance sheets provide a cushion against macroeconomic headwinds and interest rate uncertainty." }
+                    { title: "S&P 500 E-mini (ES) and Nasdaq (NQ) Approach Critical Resistance Levels", desc: "Day traders and prop firms watch overnight fair value gaps and 55-level liquidity pools for high-probability reversal setups.", link: "https://www.marketwatch.com/" },
+                    { title: "Gold Spot (XAUUSD) Maintains Safe-Haven Bid Amid Currency Fluctuations", desc: "Precious metals hold strong intraday ranges as dollar index wobbles near key psychological support.", link: "https://www.marketwatch.com/" },
+                    { title: "Corporate Earnings Reports Beat Consensus Estimates Across Major Sectors", desc: "Strong balance sheets provide a cushion against macroeconomic headwinds and interest rate uncertainty.", link: "https://www.marketwatch.com/" }
                 ]
             },
             {
                 name: "Investing.com Economic & Forex News",
                 url: "https://www.investing.com/rss/news.rss",
                 bulletins: [
-                    { title: "USD/JPY and USD/CHF Currency Pairs Volatility Surge During Session Handovers", desc: "Forex majors deliver clean technical rejection levels as London liquidity hands over to New York afternoon trading." },
-                    { title: "US Dollar Index (DXY) Tests Key Moving Averages Ahead of Press Conference", desc: "Currency traders rebalance portfolios as Federal Reserve policy outlook shifts market pricing for upcoming quarters." },
-                    { title: "Asian Equities Close Higher Led by Semiconductor and Export Sectors", desc: "Tokyo and Hong Kong sessions set a constructive tone for global risk assets during the overnight Globex handover." }
+                    { title: "USD/JPY and USD/CHF Currency Pairs Volatility Surge During Session Handovers", desc: "Forex majors deliver clean technical rejection levels as London liquidity hands over to New York afternoon trading.", link: "https://www.investing.com/news/forex-news" },
+                    { title: "US Dollar Index (DXY) Tests Key Moving Averages Ahead of Press Conference", desc: "Currency traders rebalance portfolios as Federal Reserve policy outlook shifts market pricing for upcoming quarters.", link: "https://www.investing.com/news/forex-news" },
+                    { title: "Asian Equities Close Higher Led by Semiconductor and Export Sectors", desc: "Tokyo and Hong Kong sessions set a constructive tone for global risk assets during the overnight Globex handover.", link: "https://www.investing.com/news/stock-market-news" }
                 ]
             }
         ];
@@ -576,12 +579,12 @@
                     nextAlert: "Next Key Catalyst: Australian Retail Sales & Employment Index Flash @ 20:00 EST",
                     flashWire: "⚡ TOKYO SESSION LIVE • Asian Liquidity Handover • USD/JPY & USD/CHF Active Streams",
                     top10: [
-                        { time: "19:00", timeStr: "19:00 EST", tag: "TOKYO OPEN", text: "Asian Session Liquidity & USD/JPY Handover" },
-                        { time: "20:00", timeStr: "20:00 EST", tag: "Macro Flow", text: "Australian Retail Sales & Employment Index Flash" },
-                        { time: "21:00", timeStr: "21:00 EST", tag: "Bond Watch", text: "Overnight Treasury Futures & Yield Curve Tracking" },
-                        { time: "23:30", timeStr: "23:30 EST", tag: "JP Morgan", text: "Global Liquidity & Institutional Flow Briefing" },
-                        { time: "01:00", timeStr: "01:00 EST", tag: "PBOC FIX", text: "People's Bank of China Yuan Central Parity Fixing" },
-                        { time: "03:00", timeStr: "03:00 EST", tag: "LONDON PREP", text: "European Pre-Open Index Futures & DAX Action" }
+                        { time: "19:00", timeStr: "19:00 EST", tag: "TOKYO OPEN", text: "Asian Session Liquidity & USD/JPY Handover", url: "https://finviz.com/calendar/economic" },
+                        { time: "20:00", timeStr: "20:00 EST", tag: "Macro Flow", text: "Australian Retail Sales & Employment Index Flash", url: "https://finviz.com/calendar/economic" },
+                        { time: "21:00", timeStr: "21:00 EST", tag: "Bond Watch", text: "Overnight Treasury Futures & Yield Curve Tracking", url: "https://finviz.com/calendar/economic" },
+                        { time: "23:30", timeStr: "23:30 EST", tag: "JP Morgan", text: "Global Liquidity & Institutional Flow Briefing", url: "https://finviz.com/calendar/economic" },
+                        { time: "01:00", timeStr: "01:00 EST", tag: "PBOC FIX", text: "People's Bank of China Yuan Central Parity Fixing", url: "https://finviz.com/calendar/economic" },
+                        { time: "03:00", timeStr: "03:00 EST", tag: "LONDON PREP", text: "European Pre-Open Index Futures & DAX Action", url: "https://finviz.com/calendar/economic" }
                     ]
                 },
                 ru: {
@@ -591,12 +594,12 @@
                     nextAlert: "Следующее событие: Розничные продажи в Австралии и индекс занятости в 20:00 EST",
                     flashWire: "⚡ ТОКИО LIVE • Ликвидность Азии • Активные потоки USD/JPY и USD/CHF",
                     top10: [
-                        { time: "19:00", timeStr: "19:00 EST", tag: "ТОКИО ОТКРЫТИЕ", text: "Ликвидность Азии и сессия USD/JPY" },
-                        { time: "20:00", timeStr: "20:00 EST", tag: "Макроданные", text: "Розничные продажи в Австралии и индекс занятости" },
-                        { time: "21:00", timeStr: "21:00 EST", tag: "Бонды", text: "Ночные фьючерсы на трежерис и кривая доходности" },
-                        { time: "23:30", timeStr: "23:30 EST", tag: "JP Morgan", text: "Обзор глобальной ликвидности и институциональных потоков" },
-                        { time: "01:00", timeStr: "01:00 EST", tag: "ФИКСИНГ НБК", text: "Установление центрального паритета юаня НБК" },
-                        { time: "03:00", timeStr: "03:00 EST", tag: "ЛОНДОН ПРЕП", text: "Премаркет фьючерсов на евро-индексы и DAX" }
+                        { time: "19:00", timeStr: "19:00 EST", tag: "ТОКИО ОТКРЫТИЕ", text: "Ликвидность Азии и сессия USD/JPY", url: "https://finviz.com/calendar/economic" },
+                        { time: "20:00", timeStr: "20:00 EST", tag: "Макроданные", text: "Розничные продажи в Австралии и индекс занятости", url: "https://finviz.com/calendar/economic" },
+                        { time: "21:00", timeStr: "21:00 EST", tag: "Бонды", text: "Ночные фьючерсы на трежерис и кривая доходности", url: "https://finviz.com/calendar/economic" },
+                        { time: "23:30", timeStr: "23:30 EST", tag: "JP Morgan", text: "Обзор глобальной ликвидности и институциональных потоков", url: "https://finviz.com/calendar/economic" },
+                        { time: "01:00", timeStr: "01:00 EST", tag: "ФИКСИНГ НБК", text: "Установление центрального паритета юаня НБК", url: "https://finviz.com/calendar/economic" },
+                        { time: "03:00", timeStr: "03:00 EST", tag: "ЛОНДОН ПРЕП", text: "Премаркет фьючерсов на евро-индексы и DAX", url: "https://finviz.com/calendar/economic" }
                     ]
                 }
             },
@@ -608,9 +611,9 @@
                     nextAlert: "Next Key Catalyst: Eurozone CPI Flash Estimate & Employment Change @ 05:00 EST",
                     flashWire: "⚡ EUROPEAN SESSION • DAX & USD/CHF Active • Master Market Board Synchronized",
                     top10: [
-                        { time: "04:00", timeStr: "04:00 EST", tag: "LONDON OPEN", text: "German Factory Orders & Trade Balance Print" },
-                        { time: "05:00", timeStr: "05:00 EST", tag: "HIGH IMPACT", text: "Eurozone CPI Flash Estimate & Employment Change" },
-                        { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "US Retail Inventories & Trade Balance Data" }
+                        { time: "04:00", timeStr: "04:00 EST", tag: "LONDON OPEN", text: "German Factory Orders & Trade Balance Print", url: "https://finviz.com/calendar/economic" },
+                        { time: "05:00", timeStr: "05:00 EST", tag: "HIGH IMPACT", text: "Eurozone CPI Flash Estimate & Employment Change", url: "https://finviz.com/calendar/economic" },
+                        { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "US Retail Inventories & Trade Balance Data", url: "https://finviz.com/calendar/economic" }
                     ]
                 },
                 ru: {
@@ -620,9 +623,9 @@
                     nextAlert: "Следующее событие: Инфляция в еврозоне (CPI Flash Estimate) в 05:00 EST",
                     flashWire: "⚡ ЕВРОПЕЙСКАЯ СЕССИЯ • DAX и USD/CHF активны • Главный борд котировок синхронизирован",
                     top10: [
-                        { time: "04:00", timeStr: "04:00 EST", tag: "ЛОНДОН ОТКРЫТИЕ", text: "Заказы в промышленности Германии и торговый баланс" },
-                        { time: "05:00", timeStr: "05:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Инфляция в еврозоне (CPI Flash Estimate)" },
-                        { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Розничные запасы и торговый баланс США" }
+                        { time: "04:00", timeStr: "04:00 EST", tag: "ЛОНДОН ОТКРЫТИЕ", text: "Заказы в промышленности Германии и торговый баланс", url: "https://finviz.com/calendar/economic" },
+                        { time: "05:00", timeStr: "05:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Инфляция в еврозоне (CPI Flash Estimate)", url: "https://finviz.com/calendar/economic" },
+                        { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Розничные запасы и торговый баланс США", url: "https://finviz.com/calendar/economic" }
                     ]
                 }
             },
@@ -634,9 +637,9 @@
                     nextAlert: "Next Key Catalyst: Cash Session Opening Bell & Pre-Market Range @ 09:30 EST",
                     flashWire: "⚡ NY PRE-MARKET ALERT • Order Book Spreads & Liquidity Prep • Master Market Board Fully Active",
                     top10: [
-                        { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "Wholesale Trade & Retail Inventories Print" },
-                        { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-Market Range" },
-                        { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction" }
+                        { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "Wholesale Trade & Retail Inventories Print", url: "https://finviz.com/calendar/economic" },
+                        { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-Market Range", url: "https://finviz.com/calendar/economic" },
+                        { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction", url: "https://finviz.com/calendar/economic" }
                     ]
                 },
                 ru: {
@@ -646,9 +649,9 @@
                     nextAlert: "Следующее событие: Звонок открытия сессии и премаркет-диапазон в 09:30 EST",
                     flashWire: "⚡ ПРЕБАРКЕТ НЬЮ-ЙОРКА • Анализ спредов и ликвидности • Главный борд котировок онлайн",
                     top10: [
-                        { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Оптовая торговля и розничные запасы" },
-                        { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и премаркет-диапазон" },
-                        { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" }
+                        { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Оптовая торговля и розничные запасы", url: "https://finviz.com/calendar/economic" },
+                        { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и премаркет-диапазон", url: "https://finviz.com/calendar/economic" },
+                        { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)", url: "https://finviz.com/calendar/economic" }
                     ]
                 }
             },
@@ -660,9 +663,9 @@
                     nextAlert: "Next Key Catalyst: Cash Session Closing Bell & Settlement Spike @ 16:00 EST",
                     flashWire: "⚡ NY DAY SESSION • Standby for Price Action • Master Market Board Active",
                     top10: [
-                        { time: "09:30", timeStr: "09:30 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Opening Range Formation" },
-                        { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction" },
-                        { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Spike" }
+                        { time: "09:30", timeStr: "09:30 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Opening Range Formation", url: "https://finviz.com/calendar/economic" },
+                        { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction", url: "https://finviz.com/calendar/economic" },
+                        { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Spike", url: "https://finviz.com/calendar/economic" }
                     ]
                 },
                 ru: {
@@ -672,9 +675,9 @@
                     nextAlert: "Следующее событие: Звонок закрытия сессии и клиринговое движение в 16:00 EST",
                     flashWire: "⚡ ДНЕВНАЯ СЕССИЯ • Ожидание ценовых импульсов • Главная таблица котировок онлайн",
                     top10: [
-                        { time: "09:30", timeStr: "09:30 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и формирование диапазона" },
-                        { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" },
-                        { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и волатильный клиринг" }
+                        { time: "09:30", timeStr: "09:30 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и формирование диапазона", url: "https://finviz.com/calendar/economic" },
+                        { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)", url: "https://finviz.com/calendar/economic" },
+                        { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и волатильный клиринг", url: "https://finviz.com/calendar/economic" }
                     ]
                 }
             }
@@ -933,7 +936,7 @@
             const flashHtml = `<span>${flashText}</span><span class="text-rose-400">|</span><span>${flashText}</span><span class="text-rose-400">|</span>`;
             document.getElementById('flash-wire-content').innerHTML = flashHtml;
 
-            // SMART NEXT NEWS / CATALYST BANNER LOGIC (DYNAMIC MAX IMPACT VS NEXT NEWS)
+            // SMART NEXT NEWS / CATALYST BANNER LOGIC
             const bannerContainer = document.getElementById('fomc-alert-banner');
             const bannerIconBox = document.getElementById('banner-icon-box');
             const bannerTitleText = document.getElementById('banner-title-text');
@@ -944,19 +947,19 @@
 
             bannerContainer.classList.remove('hidden');
             if (hasHighImpactNow) {
-                bannerContainer.className = "bg-rose-950/40 border border-rose-500/70 rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg animate-pulse";
+                bannerContainer.className = "bg-rose-950/40 border border-rose-500/70 rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg animate-pulse hover:opacity-90 cursor-pointer";
                 bannerIconBox.className = "bg-rose-500 text-gray-950 p-2 rounded-lg font-bold shrink-0";
                 bannerTitleText.className = "font-bold text-xs font-mono text-rose-400 uppercase tracking-wide";
                 bannerTitleText.innerText = currentLang === 'en' ? "⚠️ HIGH-IMPACT CATALYST EVENT" : "⚠️ СОБЫТИЕ ВЫСОКОГО ВЛИЯНИЯ";
                 bannerBadgeTag.className = "text-[11px] font-mono bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-1 rounded shrink-0";
                 bannerBadgeTag.innerText = "MAX IMPACT";
             } else {
-                bannerContainer.className = "bg-blue-950/30 border border-blue-500/50 rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg";
+                bannerContainer.className = "bg-blue-950/30 border border-blue-500/50 rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg hover:opacity-90 cursor-pointer";
                 bannerIconBox.className = "bg-blue-600 text-white p-2 rounded-lg font-bold shrink-0";
                 bannerTitleText.className = "font-bold text-xs font-mono text-blue-400 uppercase tracking-wide";
-                bannerTitleText.innerText = currentLang === 'en' ? "🔔 NEXT SESSION CATALYST & RADAR" : "🔔 БЛИЖАЙШЕЕ СОБЫТИЕ СЕССИИ";
+                bannerTitleText.innerText = currentLang === 'en' ? "🔔 NEXT SESSION CATALYST & RADAR (FINVIZ)" : "🔔 БЛИЖАЙШЕЕ СОБЫТИЕ СЕССИИ (FINVIZ)";
                 bannerBadgeTag.className = "text-[11px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2.5 py-1 rounded shrink-0";
-                bannerBadgeTag.innerText = "NEXT NEWS";
+                bannerBadgeTag.innerText = "NEXT NEWS ↗";
             }
             fomcText.innerText = sessObj.nextAlert;
 
@@ -968,37 +971,61 @@
             const top10Container = document.getElementById('top10-catalysts-container');
             top10Container.innerHTML = '';
             
-            let foundNextActive = false;
-            let liveFocusElement = null;
-
-            sessObj.top10.forEach((item, index) => {
+            // PROCESS & REORDER: FIND LIVE FOCUS AND PUT IT ON TOP
+            let itemsWithStatus = sessObj.top10.map(item => {
                 const [itemHr, itemMn] = item.time.split(':').map(Number);
                 const itemTotalMins = itemHr * 60 + itemMn;
-
-                let isDone = false;
-                let isPulse = false;
-                let isHighImpact = item.tag.includes('IMPACT') || item.tag.includes('ВЛИЯНИЕ') || item.text.includes('Fed') || item.text.includes('ФРС');
+                let status = 'future';
                 let tagText = item.tag;
 
                 if (itemTotalMins < currentTotalMins) {
-                    isDone = true;
+                    status = 'done';
                     tagText = currentLang === 'en' ? 'RELEASED' : 'ВЫШЛО';
-                } else if (!foundNextActive) {
-                    isPulse = true;
-                    foundNextActive = true;
-                    tagText = currentLang === 'en' ? 'LIVE FOCUS' : 'В ФОКУСЕ';
                 }
+                return { ...item, itemTotalMins, status, tagText };
+            });
 
-                const div = document.createElement('div');
+            // Find first non-done item as LIVE FOCUS, or the last one if all done
+            let liveFocusIdx = itemsWithStatus.findIndex(item => item.status === 'future');
+            if (liveFocusIdx === -1 && itemsWithStatus.length > 0) {
+                liveFocusIdx = 0; // If all passed, bring the first of next day / session to top
+            }
+
+            if (liveFocusIdx !== -1) {
+                itemsWithStatus[liveFocusIdx].status = 'live';
+                itemsWithStatus[liveFocusIdx].tagText = currentLang === 'en' ? 'LIVE FOCUS' : 'В ФОКУСЕ';
+            }
+
+            // Sort: LIVE first, then FUTURE, then DONE (or chronological with LIVE on top)
+            // User requested: "live focus был максимально наверху сейчас в топ-10 catalyst radar"
+            itemsWithStatus.sort((a, b) => {
+                if (a.status === 'live') return -1;
+                if (b.status === 'live') return 1;
+                if (a.status === 'future' && b.status === 'done') return -1;
+                if (a.status === 'done' && b.status === 'future') return 1;
+                return a.itemTotalMins - b.itemTotalMins;
+            });
+
+            let liveFocusElement = null;
+
+            itemsWithStatus.forEach((item) => {
+                const isDone = item.status === 'done';
+                const isPulse = item.status === 'live';
+                const isHighImpact = item.tag.includes('IMPACT') || item.tag.includes('ВЛИЯНИЕ') || item.text.includes('Fed') || item.text.includes('ФРС');
+
+                const div = document.createElement('a');
+                div.href = item.url || "https://finviz.com/calendar/economic";
+                div.target = "_blank";
+
                 if (isDone) {
-                    div.className = 'bg-dark-900/80 p-2.5 rounded border border-gray-800 opacity-65 space-y-1';
+                    div.className = 'block bg-dark-900/80 p-2.5 rounded border border-gray-800 opacity-65 space-y-1 hover:opacity-90 transition-all';
                 } else if (isHighImpact) {
-                    div.className = 'bg-rose-950/40 p-2.5 rounded border border-rose-500/80 animate-pulse space-y-1 shadow-md';
+                    div.className = 'block bg-rose-950/40 p-2.5 rounded border border-rose-500/80 animate-pulse space-y-1 shadow-md hover:border-rose-400 transition-all';
                 } else if (isPulse) {
-                    div.className = 'bg-blue-950/40 p-2.5 rounded border border-blue-500/60 space-y-1 shadow-md';
-                    liveFocusElement = div; // Mark for auto-scroll
+                    div.className = 'block bg-blue-950/40 p-2.5 rounded border border-blue-500/60 space-y-1 shadow-md hover:border-blue-400 transition-all ring-1 ring-blue-500/30';
+                    liveFocusElement = div;
                 } else {
-                    div.className = 'bg-dark-900 p-2.5 rounded border border-gray-700/90 space-y-1 hover:border-blue-500/50 transition-all';
+                    div.className = 'block bg-dark-900 p-2.5 rounded border border-gray-700/90 space-y-1 hover:border-blue-500/50 transition-all';
                 }
 
                 let tagClass = isDone ? 'text-gray-500' : (isHighImpact ? 'text-rose-400 font-bold' : (isPulse ? 'text-blue-400 font-bold' : 'text-blue-400'));
@@ -1006,23 +1033,21 @@
 
                 div.innerHTML = `
                     <div class="flex justify-between text-[10px]">
-                        <span class="${timeClass}">${item.timeStr}</span>
-                        <span class="${tagClass}">${tagText}</span>
+                        <span class="${timeClass}">${item.timeStr} ↗</span>
+                        <span class="${tagClass}">${item.tagText}</span>
                     </div>
                     <p class="${isDone ? 'text-gray-400 text-[11px]' : (isHighImpact ? 'text-white font-bold text-[11px]' : 'text-gray-200 text-[11px]')} font-sans font-medium">${item.text}</p>
                 `;
                 top10Container.appendChild(div);
             });
 
-            // AUTOMATIC SCROLL TO LIVE FOCUS ITEM
-            if (liveFocusElement) {
-                setTimeout(() => {
-                    top10Container.scrollTop = liveFocusElement.offsetTop - top10Container.offsetTop;
-                }, 50);
+            // AUTOMATIC SCROLL TO TOP (SINCE LIVE FOCUS IS NOW FIRST)
+            if (top10Container) {
+                top10Container.scrollTop = 0;
             }
         }
 
-        // MULTI-SOURCE RSS ROTATION & RENDER (LIMITED TO 3 BLOCKS)
+        // MULTI-SOURCE RSS ROTATION & RENDER WITH LINKS & TIMESTAMP
         async function refreshMultiRssFeed() {
             const icon = document.getElementById('recap-refresh-icon');
             const contentBox = document.getElementById('recap-content');
@@ -1033,7 +1058,10 @@
             const currentFeed = rssFeedsPool[currentRssSourceIndex];
             currentRssSourceIndex = (currentRssSourceIndex + 1) % rssFeedsPool.length;
 
-            subTitle.innerHTML = `Active Source: <strong class="text-white">${currentFeed.name}</strong> (Cycling 4 major financial feeds)`;
+            const now = new Date();
+            const timeTag = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+            subTitle.innerHTML = `Active Source: <strong class="text-white">${currentFeed.name}</strong> (Updated: ${timeTag} EST)`;
 
             const rssUrl = encodeURIComponent(currentFeed.url);
             const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
@@ -1043,7 +1071,12 @@
                 const data = await response.json();
 
                 if (data.status === 'ok' && data.items && data.items.length > 0) {
-                    let htmlContent = '';
+                    let htmlContent = `
+                        <div class="border-b border-gray-800 pb-2 flex items-center justify-between text-xs font-mono text-emerald-400">
+                            <span>SOURCE: ${currentFeed.name}</span>
+                            <span>● Live Feed Synchronized (${timeTag} EST)</span>
+                        </div>
+                    `;
                     const articles = data.items.slice(0, 3);
                     
                     articles.forEach((item, idx) => {
@@ -1051,10 +1084,10 @@
                         htmlContent += `
                             <div class="border-b border-gray-800 pb-3 last:border-b-0 space-y-1">
                                 <div class="flex items-center justify-between text-[11px] font-mono text-blue-400">
-                                    <span>${currentFeed.name} • ${pubDate} EST</span>
-                                    <a href="${item.link}" target="_blank" class="hover:underline text-emerald-400 flex items-center space-x-1"><span>Read Article</span> ↗</a>
+                                    <span>Institutional Bulletin #${idx + 1} • Published: ${pubDate} EST</span>
+                                    <a href="${item.link}" target="_blank" class="hover:underline text-emerald-400 flex items-center space-x-1 font-semibold"><span>Read Article</span> ↗</a>
                                 </div>
-                                <h4 class="font-bold text-white text-sm">${item.title}</h4>
+                                <h4 class="font-bold text-white text-sm"><a href="${item.link}" target="_blank" class="hover:text-blue-400">${item.title}</a></h4>
                                 <p class="text-xs text-gray-300 leading-relaxed">${item.description ? item.description.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...' : ''}</p>
                             </div>
                         `;
@@ -1065,21 +1098,21 @@
                     throw new Error("RSS data empty");
                 }
             } catch (err) {
-                const now = new Date();
-                const timeTag = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-                
                 let html = `
                     <div class="border-b border-gray-800 pb-2 flex items-center justify-between text-xs font-mono text-amber-400">
-                        <span>SOURCE: ${currentFeed.name} (${timeTag} EST)</span>
-                        <span>● Multi-Feed Rotating Active (Top 3)</span>
+                        <span>SOURCE: ${currentFeed.name}</span>
+                        <span>● Last Updated: ${timeTag} EST (Multi-Feed Active)</span>
                     </div>
                 `;
 
                 currentFeed.bulletins.forEach((item, idx) => {
                     html += `
                         <div class="border-b border-gray-800 pb-3 last:border-b-0 space-y-1">
-                            <div class="text-[10px] font-mono text-blue-400">Institutional Flash Bulletin #${idx + 1}</div>
-                            <h4 class="font-bold text-white text-sm">${item.title}</h4>
+                            <div class="flex items-center justify-between text-[11px] font-mono text-blue-400">
+                                <span>Institutional Flash Bulletin #${idx + 1}</span>
+                                <a href="${item.link}" target="_blank" class="hover:underline text-emerald-400 flex items-center space-x-1 font-semibold"><span>Read Article</span> ↗</a>
+                            </div>
+                            <h4 class="font-bold text-white text-sm"><a href="${item.link}" target="_blank" class="hover:text-blue-400">${item.title}</a></h4>
                             <p class="text-xs text-gray-300 leading-relaxed">${item.desc}</p>
                         </div>
                     `;
@@ -1181,6 +1214,7 @@
                     </body>
                     </html>
                 `);
+                newWindow.document.write(textHTML);
                 newWindow.document.close();
             } else {
                 alert("Popup blocked by browser! Please allow popups for this site.");
