@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacroPulse — Institutional News & Market Terminal v3.51</title>
+    <title>MacroPulse — Institutional News & Market Terminal v3.52</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -106,7 +106,7 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="font-bold text-lg tracking-tight text-white">MacroPulse</h1>
-                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.51</span>
+                    <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-semibold">TERMINAL v3.52</span>
                 </div>
                 <p class="text-xs text-gray-400" data-i18n="subtitle">Institutional News Aggregator & Market Briefing</p>
             </div>
@@ -149,13 +149,13 @@
     <!-- Main Workspace -->
     <main class="flex-1 p-4 md:p-6 max-w-[1600px] w-full mx-auto space-y-6">
 
-        <!-- Status Banner with Live Upcoming Catalyst Alert -->
+        <!-- Status Banner with Smart Next News / Catalyst Alert -->
         <div class="bg-dark-800 border border-gray-800 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg">
             <div class="flex items-center space-x-3">
                 <div class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-pulse"></div>
                 <div>
                     <h2 class="font-bold text-sm tracking-wide uppercase text-emerald-400" data-i18n="bannerTitle">MASTER LIVE FEED & MULTI-RSS RECAP ACTIVE</h2>
-                    <p class="text-xs text-gray-300 mt-0.5" id="banner-next-alert">Next Key Catalyst: Federal Reserve Official Speech @ 09:00 EST</p>
+                    <p class="text-xs text-gray-300 mt-0.5" id="banner-next-alert">Next Key Catalyst: Asian Session Liquidity Handover @ 19:00 EST</p>
                 </div>
             </div>
             <div class="flex items-center space-x-3 text-xs font-mono">
@@ -276,6 +276,7 @@
                             <i data-lucide="external-link" class="w-2.5 h-2.5"></i>
                         </a>
                     </div>
+                    <!-- Auto-Scrollable Container -->
                     <div class="space-y-2 text-xs font-mono max-h-[420px] overflow-y-auto pr-1" id="top10-catalysts-container">
                         <!-- Dynamically populated -->
                     </div>
@@ -328,18 +329,18 @@
                         </button>
                     </div>
 
-                    <!-- HIGH-IMPACT FOMC / RED ALERT BANNER -->
-                    <div id="fomc-alert-banner" class="hidden bg-rose-950/40 border border-rose-500/70 rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg animate-pulse">
+                    <!-- SMART NEXT NEWS / CATALYST BANNER (DYNAMIC MAX IMPACT VS NEXT NEWS) -->
+                    <div id="fomc-alert-banner" class="hidden rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg">
                         <div class="flex items-center space-x-3">
-                            <div class="bg-rose-500 text-gray-950 p-2 rounded-lg font-bold shrink-0">
-                                <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                            <div id="banner-icon-box" class="p-2 rounded-lg font-bold shrink-0">
+                                <i data-lucide="bell" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-xs font-mono text-rose-400 uppercase tracking-wide">⚠️ HIGH-IMPACT FOMC RATE DECISION DAY AHEAD</h3>
-                                <p class="text-xs text-gray-200 mt-0.5" id="fomc-alert-text">Today at 14:00 EST: Fed Interest Rate Decision & FOMC Statement, followed by Press Conference at 14:30 EST.</p>
+                                <h3 id="banner-title-text" class="font-bold text-xs font-mono uppercase tracking-wide"></h3>
+                                <p class="text-xs text-gray-200 mt-0.5" id="fomc-alert-text"></p>
                             </div>
                         </div>
-                        <span class="text-[11px] font-mono bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-1 rounded shrink-0">MAX IMPACT</span>
+                        <span id="banner-badge-tag" class="text-[11px] font-mono px-2.5 py-1 rounded shrink-0"></span>
                     </div>
 
                     <!-- FLASH WIRE TICKER BANNER -->
@@ -527,7 +528,6 @@
         let activeSessionKey = 'nypremkt'; 
         let currentRssSourceIndex = 0;
 
-        // MULTI-SOURCE UNIQUE POOLS (LIMITED TO EXACTLY 3 TOP BULLETINS PER SOURCE)
         const rssFeedsPool = [
             {
                 name: "CNBC Markets Top News",
@@ -572,13 +572,10 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: Evening Globex & Asia Session",
                     wireUpdated: "Updated: Evening Globex Live",
-                    tickerText: "🔴 GLOBEX EVENING SESSION ACTIVE • FOMC Rate Decision Day • Master Market Board Active • Tokyo Open at 19:00 EST",
-                    nextAlert: "Next Key Catalyst: Tokyo Session Open & Asian Liquidity Handover @ 19:00 EST",
-                    flashWire: "⚡ TOKYO SESSION PREP • Asian Liquidity & USD/JPY Handover • Master Market Board Fully Synchronized",
+                    tickerText: "🌙 TOKYO & GLOBEX EVENING SESSION ACTIVE • Asian Liquidity & USD/JPY Handover • Master Market Board Active",
+                    nextAlert: "Next Key Catalyst: Australian Retail Sales & Employment Index Flash @ 20:00 EST",
+                    flashWire: "⚡ TOKYO SESSION LIVE • Asian Liquidity Handover • USD/JPY & USD/CHF Active Streams",
                     top10: [
-                        { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "2-Year Note Treasury Auction ($69B Completed)" },
-                        { time: "14:00", timeStr: "14:00 EST", tag: "HIGH IMPACT", text: "⚠️ Fed Interest Rate Decision & FOMC Statement" },
-                        { time: "14:30", timeStr: "14:30 EST", tag: "HIGH IMPACT", text: "⚠️ Fed Chair Press Conference & Rate Outlook" },
                         { time: "19:00", timeStr: "19:00 EST", tag: "TOKYO OPEN", text: "Asian Session Liquidity & USD/JPY Handover" },
                         { time: "20:00", timeStr: "20:00 EST", tag: "Macro Flow", text: "Australian Retail Sales & Employment Index Flash" },
                         { time: "21:00", timeStr: "21:00 EST", tag: "Bond Watch", text: "Overnight Treasury Futures & Yield Curve Tracking" },
@@ -590,13 +587,10 @@
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Вечерняя сессия Globex и Азия",
                     wireUpdated: "Обновлено: Вечерняя сессия Globex Live",
-                    tickerText: "🔴 ВЕЧЕРНЯЯ СЕССИЯ GLOBEX • День FOMC • Мастер-таблица котировок активна • Токио в 19:00 EST",
-                    nextAlert: "Следующее событие: Открытие Токио и ликвидность Азии в 19:00 EST",
-                    flashWire: "⚡ ВЕЧЕРНИЙ ГЛОБЕКС • Ликвидность Азии и USD/JPY • Главная таблица котировок синхронизирована",
+                    tickerText: "🌙 ВЕЧЕРНЯЯ СЕССИЯ ТОКИО И GLOBEX • Ликвидность Азии и USD/JPY • Мастер-таблица котировок активна",
+                    nextAlert: "Следующее событие: Розничные продажи в Австралии и индекс занятости в 20:00 EST",
+                    flashWire: "⚡ ТОКИО LIVE • Ликвидность Азии • Активные потоки USD/JPY и USD/CHF",
                     top10: [
-                        { time: "13:00", timeStr: "13:00 EST", tag: "RELEASED", text: "Аукцион 2-летних гособлигаций США ($69 млрд)" },
-                        { time: "14:00", timeStr: "14:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "⚠️ Решение ФРС по ставке и заявление FOMC" },
-                        { time: "14:30", timeStr: "14:30 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "⚠️ Пресс-конференция председателя ФРС Пауэлла" },
                         { time: "19:00", timeStr: "19:00 EST", tag: "ТОКИО ОТКРЫТИЕ", text: "Ликвидность Азии и сессия USD/JPY" },
                         { time: "20:00", timeStr: "20:00 EST", tag: "Макроданные", text: "Розничные продажи в Австралии и индекс занятости" },
                         { time: "21:00", timeStr: "21:00 EST", tag: "Бонды", text: "Ночные фьючерсы на трежерис и кривая доходности" },
@@ -610,31 +604,25 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: European Session & London Open",
                     wireUpdated: "Updated: European Session Live",
-                    tickerText: "🌅 EUROPEAN SESSION ACTIVE • FOMC Rate Decision Day • Master Market Board Active • London Open in Progress",
-                    nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC MEETING DAY • DAX & USD/CHF Active • Master Market Board Synchronized",
+                    tickerText: "🌅 EUROPEAN SESSION ACTIVE • Master Market Board Active • London Open in Progress",
+                    nextAlert: "Next Key Catalyst: Eurozone CPI Flash Estimate & Employment Change @ 05:00 EST",
+                    flashWire: "⚡ EUROPEAN SESSION • DAX & USD/CHF Active • Master Market Board Synchronized",
                     top10: [
-                        { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "German Factory Orders & Trade Balance Print" },
+                        { time: "04:00", timeStr: "04:00 EST", tag: "LONDON OPEN", text: "German Factory Orders & Trade Balance Print" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "HIGH IMPACT", text: "Eurozone CPI Flash Estimate & Employment Change" },
-                        { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "US Retail Inventories & Trade Balance Data" },
-                        { time: "14:00", timeStr: "14:00 EST", tag: "MAX IMPACT", text: "⚠️ Fed Interest Rate Decision & FOMC Statement" },
-                        { time: "14:30", timeStr: "14:30 EST", tag: "MAX IMPACT", text: "⚠️ Fed Chair Press Conference & Guidance" },
-                        { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & FOMC Settlement Flow" }
+                        { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "US Retail Inventories & Trade Balance Data" }
                     ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Европейская сессия и открытие Лондона",
                     wireUpdated: "Updated: Европейская сессия Live",
-                    tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ • День решения ФРС • Главная таблица котировок активна • Лондон в процессе",
-                    nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ДЕНЬ ЗАСЕДАНИЯ ФРС • DAX и USD/CHF активны • Главный борд котировок синхронизирован",
+                    tickerText: "🌅 ЕВРОПЕЙСКАЯ СЕССИЯ • Главная таблица котировок активна • Лондон в процессе",
+                    nextAlert: "Следующее событие: Инфляция в еврозоне (CPI Flash Estimate) в 05:00 EST",
+                    flashWire: "⚡ ЕВРОПЕЙСКАЯ СЕССИЯ • DAX и USD/CHF активны • Главный борд котировок синхронизирован",
                     top10: [
-                        { time: "04:00", timeStr: "04:00 EST", tag: "RELEASED", text: "Заказы в промышленности Германии и торговый баланс" },
+                        { time: "04:00", timeStr: "04:00 EST", tag: "ЛОНДОН ОТКРЫТИЕ", text: "Заказы в промышленности Германии и торговый баланс" },
                         { time: "05:00", timeStr: "05:00 EST", tag: "ВЫСОКОЕ ВЛИЯНИЕ", text: "Инфляция в еврозоне (CPI Flash Estimate)" },
-                        { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Розничные запасы и торговый баланс США" },
-                        { time: "14:00", timeStr: "14:00 EST", tag: "МАКС ВЛИЯНИЕ", text: "⚠️ Решение ФРС по ставке и заявление FOMC" },
-                        { time: "14:30", timeStr: "14:30 EST", tag: "МАКС ВЛИЯНИЕ", text: "⚠️ Пресс-конференция председателя ФРС" },
-                        { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и расчетные потоки FOMC" }
+                        { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Розничные запасы и торговый баланс США" }
                     ]
                 }
             },
@@ -642,31 +630,25 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Pre-Market Prep",
                     wireUpdated: "Updated: New York Pre-Market Live",
-                    tickerText: "🚨 FOMC RATE DECISION DAY • Master Market Board Active • Preparing for 14:00 EST Rate Decision",
-                    nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC PRE-MARKET ALERT • Rate Decision at 14:00 EST • Master Market Board Fully Active",
+                    tickerText: "🔔 NEW YORK PRE-MARKET SESSION • Master Market Board Active • Preparing for Cash Session Open",
+                    nextAlert: "Next Key Catalyst: Cash Session Opening Bell & Pre-Market Range @ 09:30 EST",
+                    flashWire: "⚡ NY PRE-MARKET ALERT • Order Book Spreads & Liquidity Prep • Master Market Board Fully Active",
                     top10: [
                         { time: "08:30", timeStr: "08:30 EST", tag: "US Data", text: "Wholesale Trade & Retail Inventories Print" },
-                        { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-FOMC Consolidation" },
-                        { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction" },
-                        { time: "14:00", timeStr: "14:00 EST", tag: "MAX IMPACT", text: "⚠️ Fed Interest Rate Decision & FOMC Statement" },
-                        { time: "14:30", timeStr: "14:30 EST", tag: "MAX IMPACT", text: "⚠️ Fed Chair Press Conference & Live Q&A" },
-                        { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Spike" }
+                        { time: "09:29", timeStr: "09:29 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-Market Range" },
+                        { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction" }
                     ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Премаркет Нью-Йорка",
                     wireUpdated: "Updated: New York Pre-Market Live",
-                    tickerText: "🚨 ДЕНЬ РЕШЕНИЯ ФРС • Мастер-таблица котировок активна • Подготовка к 14:00 EST",
-                    nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ПРЕБАРКЕТ ФРС • Ставка в 14:00 EST • Главный борд котировок обновляется онлайн",
+                    tickerText: "🔔 ПРЕБАРКЕТ НЬЮ-ЙОРКА • Мастер-таблица котировок активна • Подготовка к открытию сессии",
+                    nextAlert: "Следующее событие: Звонок открытия сессии и премаркет-диапазон в 09:30 EST",
+                    flashWire: "⚡ ПРЕБАРКЕТ НЬЮ-ЙОРКА • Анализ спредов и ликвидности • Главный борд котировок онлайн",
                     top10: [
                         { time: "08:30", timeStr: "08:30 EST", tag: "Данные США", text: "Оптовая торговля и розничные запасы" },
-                        { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и пре-FOMC консолидация" },
-                        { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" },
-                        { time: "14:00", timeStr: "14:00 EST", tag: "МАКС ВЛИЯНИЕ", text: "⚠️ Решение ФРС по ставке и заявление FOMC" },
-                        { time: "14:30", timeStr: "14:30 EST", tag: "МАКС ВЛИЯНИЕ", text: "⚠️ Пресс-конференция председателя ФРС" },
-                        { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и волатильное клиринговое движение" }
+                        { time: "09:29", timeStr: "09:29 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и премаркет-диапазон" },
+                        { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" }
                     ]
                 }
             },
@@ -674,30 +656,24 @@
                 en: {
                     mainHeading: "Market Intelligence & News Flow: New York Day Session",
                     wireUpdated: "Updated: New York Day Session Live",
-                    tickerText: "🚨 FOMC DAY SESSION ACTIVE • Master Market Board Active • Prepare for Rate Decision & Press Conference",
-                    nextAlert: "Next Key Catalyst: Fed Interest Rate Decision & FOMC Statement @ 14:00 EST",
-                    flashWire: "⚡ FOMC DAY SESSION • Standby for Rate Decision • Master Market Board Active",
+                    tickerText: "🚨 NEW YORK DAY SESSION ACTIVE • Master Market Board Active • Live Price Discovery in Progress",
+                    nextAlert: "Next Key Catalyst: Cash Session Closing Bell & Settlement Spike @ 16:00 EST",
+                    flashWire: "⚡ NY DAY SESSION • Standby for Price Action • Master Market Board Active",
                     top10: [
-                        { time: "09:30", timeStr: "09:30 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Pre-FOMC Range" },
+                        { time: "09:30", timeStr: "09:30 EST", tag: "OPENING BELL", text: "Cash Session Opening Bell & Opening Range Formation" },
                         { time: "11:30", timeStr: "11:30 EST", tag: "Bond Auction", text: "2-Year Floating Rate Note (FRN) Auction" },
-                        { time: "13:45", timeStr: "13:45 EST", tag: "LOCKDOWN", text: "Pre-FOMC Order Book Spreads & Liquidity Prep" },
-                        { time: "14:00", timeStr: "14:00 EST", tag: "MAX IMPACT", text: "⚠️ Fed Interest Rate Decision & FOMC Statement" },
-                        { time: "14:30", timeStr: "14:30 EST", tag: "MAX IMPACT", text: "⚠️ Fed Chair Press Conference & Guidance" },
                         { time: "16:00", timeStr: "16:00 EST", tag: "CLOSE BELL", text: "Cash Session Closing Bell & Settlement Spike" }
                     ]
                 },
                 ru: {
                     mainHeading: "Рыночная разведка и новости: Дневная сессия Нью-Йорка",
                     wireUpdated: "Updated: New York Day Session Live",
-                    tickerText: "🚨 ДЕНЬ FOMC АКТИВЕН • Мастер-таблица котировок • Ждем решение ФРС и пресс-конференцию",
-                    nextAlert: "Следующее событие: Решение ФРС по ставке и заявление FOMC в 14:00 EST",
-                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ FOMC • Ждем решение ФРС • Главная таблица котировок онлайн",
+                    tickerText: "🚨 ДНЕВНАЯ СЕССИЯ НЬЮ-ЙОРКА • Мастер-таблица котировок • Идет активное ценообразование",
+                    nextAlert: "Следующее событие: Звонок закрытия сессии и клиринговое движение в 16:00 EST",
+                    flashWire: "⚡ ДНЕВНАЯ СЕССИЯ • Ожидание ценовых импульсов • Главная таблица котировок онлайн",
                     top10: [
-                        { time: "09:30", timeStr: "09:30 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и пре-FOMC диапазон" },
+                        { time: "09:30", timeStr: "09:30 EST", tag: "ЗВОНОК ОТКРЫТИЯ", text: "Открытие сессии и формирование диапазона" },
                         { time: "11:30", timeStr: "11:30 EST", tag: "Аукцион долга", text: "Размещение плавающих нот (FRN)" },
-                        { time: "13:45", timeStr: "13:45 EST", tag: "ПОДГОТОВКА", text: "Сужение позиций и расширение спредов в стаканах" },
-                        { time: "14:00", timeStr: "14:00 EST", tag: "МАКС ВЛИЯНИЕ", text: "⚠️ Решение ФРС по ставке и заявление FOMC" },
-                        { time: "14:30", timeStr: "14:30 EST", tag: "МАКС ВЛИЯНИЕ", text: "⚠️ Пресс-конференция председателя ФРС" },
                         { time: "16:00", timeStr: "16:00 EST", tag: "ЗВОНОК ЗАКРЫТИЯ", text: "Закрытие сессии и волатильный клиринг" }
                     ]
                 }
@@ -783,7 +759,6 @@
             activeSessionKey = detectSessionByEstTime(estDate);
             switchSessionManual(activeSessionKey);
 
-            // Fetch initial multi-source RSS
             refreshMultiRssFeed();
 
             setInterval(() => {
@@ -958,19 +933,32 @@
             const flashHtml = `<span>${flashText}</span><span class="text-rose-400">|</span><span>${flashText}</span><span class="text-rose-400">|</span>`;
             document.getElementById('flash-wire-content').innerHTML = flashHtml;
 
-            // FOMC ALERT BANNER CHECK
-            const fomcBanner = document.getElementById('fomc-alert-banner');
+            // SMART NEXT NEWS / CATALYST BANNER LOGIC (DYNAMIC MAX IMPACT VS NEXT NEWS)
+            const bannerContainer = document.getElementById('fomc-alert-banner');
+            const bannerIconBox = document.getElementById('banner-icon-box');
+            const bannerTitleText = document.getElementById('banner-title-text');
             const fomcText = document.getElementById('fomc-alert-text');
-            const hasFomcToday = sessObj.top10.some(item => item.text.includes('Fed') || item.text.includes('ФРС') || item.tag.includes('IMPACT') || item.tag.includes('ВЛИЯНИЕ'));
+            const bannerBadgeTag = document.getElementById('banner-badge-tag');
 
-            if (hasFomcToday) {
-                fomcBanner.classList.remove('hidden');
-                fomcText.innerText = currentLang === 'en' 
-                    ? "Today at 14:00 EST: Fed Interest Rate Decision & FOMC Statement, followed by Press Conference at 14:30 EST. Expect major liquidity sweeps."
-                    : "Сегодня в 14:00 EST: Решение ФРС по ставке и заявление FOMC, в 14:30 — пресс-конференция Пауэлла. Ожидайте мощный всплеск волатильности.";
+            const hasHighImpactNow = sessObj.top10.some(item => item.tag.includes('IMPACT') || item.tag.includes('ВЛИЯНИЕ') || item.text.includes('Fed') || item.text.includes('ФРС'));
+
+            bannerContainer.classList.remove('hidden');
+            if (hasHighImpactNow) {
+                bannerContainer.className = "bg-rose-950/40 border border-rose-500/70 rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg animate-pulse";
+                bannerIconBox.className = "bg-rose-500 text-gray-950 p-2 rounded-lg font-bold shrink-0";
+                bannerTitleText.className = "font-bold text-xs font-mono text-rose-400 uppercase tracking-wide";
+                bannerTitleText.innerText = currentLang === 'en' ? "⚠️ HIGH-IMPACT CATALYST EVENT" : "⚠️ СОБЫТИЕ ВЫСОКОГО ВЛИЯНИЯ";
+                bannerBadgeTag.className = "text-[11px] font-mono bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-1 rounded shrink-0";
+                bannerBadgeTag.innerText = "MAX IMPACT";
             } else {
-                fomcBanner.classList.add('hidden');
+                bannerContainer.className = "bg-blue-950/30 border border-blue-500/50 rounded-lg p-3.5 flex items-center justify-between gap-3 shadow-lg";
+                bannerIconBox.className = "bg-blue-600 text-white p-2 rounded-lg font-bold shrink-0";
+                bannerTitleText.className = "font-bold text-xs font-mono text-blue-400 uppercase tracking-wide";
+                bannerTitleText.innerText = currentLang === 'en' ? "🔔 NEXT SESSION CATALYST & RADAR" : "🔔 БЛИЖАЙШЕЕ СОБЫТИЕ СЕССИИ";
+                bannerBadgeTag.className = "text-[11px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2.5 py-1 rounded shrink-0";
+                bannerBadgeTag.innerText = "NEXT NEWS";
             }
+            fomcText.innerText = sessObj.nextAlert;
 
             const now = new Date();
             const estStr = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
@@ -981,6 +969,7 @@
             top10Container.innerHTML = '';
             
             let foundNextActive = false;
+            let liveFocusElement = null;
 
             sessObj.top10.forEach((item, index) => {
                 const [itemHr, itemMn] = item.time.split(':').map(Number);
@@ -1007,6 +996,7 @@
                     div.className = 'bg-rose-950/40 p-2.5 rounded border border-rose-500/80 animate-pulse space-y-1 shadow-md';
                 } else if (isPulse) {
                     div.className = 'bg-blue-950/40 p-2.5 rounded border border-blue-500/60 space-y-1 shadow-md';
+                    liveFocusElement = div; // Mark for auto-scroll
                 } else {
                     div.className = 'bg-dark-900 p-2.5 rounded border border-gray-700/90 space-y-1 hover:border-blue-500/50 transition-all';
                 }
@@ -1023,6 +1013,13 @@
                 `;
                 top10Container.appendChild(div);
             });
+
+            // AUTOMATIC SCROLL TO LIVE FOCUS ITEM
+            if (liveFocusElement) {
+                setTimeout(() => {
+                    top10Container.scrollTop = liveFocusElement.offsetTop - top10Container.offsetTop;
+                }, 50);
+            }
         }
 
         // MULTI-SOURCE RSS ROTATION & RENDER (LIMITED TO 3 BLOCKS)
@@ -1033,7 +1030,6 @@
             
             icon.classList.add('animate-spin');
 
-            // Select current feed from pool and advance index for next click
             const currentFeed = rssFeedsPool[currentRssSourceIndex];
             currentRssSourceIndex = (currentRssSourceIndex + 1) % rssFeedsPool.length;
 
@@ -1048,7 +1044,7 @@
 
                 if (data.status === 'ok' && data.items && data.items.length > 0) {
                     let htmlContent = '';
-                    const articles = data.items.slice(0, 3); // Exactly 3 items
+                    const articles = data.items.slice(0, 3);
                     
                     articles.forEach((item, idx) => {
                         const pubDate = new Date(item.pubDate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
@@ -1069,7 +1065,6 @@
                     throw new Error("RSS data empty");
                 }
             } catch (err) {
-                // Use exactly 3 pre-configured bulletins for the selected source
                 const now = new Date();
                 const timeTag = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
                 
